@@ -1,12 +1,13 @@
 # RMIT SEPT 2021 Major Project
 
-# Group Day-Time
+# Group 6 - Friday 3:30-5:30
 
 ## Members
-* xxxxx
-* xxxxx
-* xxxxx
-* xxxxx
+* Dhruv Bachani     - s3808392
+* Aditya Vadgama    - s3845898
+* Linda Vu          - s3842580
+* Harshita Kumar    - s3845841 
+* David Nguyen      - s3843540
 
 ## Records
 
