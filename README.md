@@ -23,9 +23,8 @@
   
 
 To run the application locally:
-First ensure that you have  
-An 
-- IDE preferably IntelliJ to re-enact this readme as close as possible, 
+First ensure that you have:
+- An IDE preferably IntelliJ to re-enact this readme as close as possible, 
 - NodeJS (https://nodejs.org/en/download/)
 - Configure JAVA_HOME onto your local machine - to check, go to command prompt and type echo %JAVA_HOME% and javac -version. 
 - 	In the case of Windows 10, to do this, we go to Windows searchbar -> Advanced System Setting -> System Properties Window -> Environment Variables -> New System Variable
@@ -41,3 +40,7 @@ Once this is all downloaded:
 	- cd FrontEnd/myfirstapp
 	- npm install
 	- npm start
+
+Note: 
+- Project may not have downloaded spring.boot.framework properly. To do so, add a version (2.4.0) and download dependancies/restart IntelliJ again
+- 
