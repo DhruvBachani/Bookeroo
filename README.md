@@ -24,7 +24,7 @@ To run the application locally:
 First ensure that you have:
 - An IDE preferably IntelliJ to re-enact this readme as close as possible, 
 - NodeJS (https://nodejs.org/en/download/)
-- Configure JAVA_HOME onto your local machine - to check, go to command prompt and type echo %JAVA_HOME% and javac -version. 
+- Configure JAVA_HOME onto your local machine (Java 8 or 11) - to check, go to command prompt and type echo %JAVA_HOME% and javac -version. 
 - 	In the case of Windows 10, to do this, we go to Windows searchbar -> Advanced System Setting -> System Properties Window -> Environment Variables -> New System Variable
 - 	From there you enter the name JAVA_HOME and the variable value is your JDK Directory.
 - 	Once done, edit your System Path Variable to add new "%JAVA_HOME%\bin" and check again on the command prompt.
@@ -41,4 +41,4 @@ Once this is all downloaded:
 
 Note: 
 - Project may not have downloaded spring.boot.framework properly. To do so, add a version (2.4.0) and download dependancies/restart IntelliJ again.
-- H2-console was not shown, the configure method on the SecurityConfig file was modified to get it working. 
+- H2-console was not shown at the beginning, the configure method on the SecurityConfig file was modified to get it working. 
