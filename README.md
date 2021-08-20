@@ -12,14 +12,12 @@
 ## Records
 
 * Github repository: https://github.com/DhruvBachani/Bookeroo/
-* Jira Board : https://xxxx
-* Google Docs : https://drive.google.com/xxxx
+* Jira Board: https://bookeroogroup6.atlassian.net/jira/software/projects/BG6/boards/1/backlog
+* Google Docs: https://drive.google.com/xxxx
 
 	
 ## Code documentation - Release 0.1.0 - date
-* feature 1
-* feature 2
-* feature 3
+*
   
 
 To run the application locally:
@@ -42,5 +40,5 @@ Once this is all downloaded:
 	- npm start
 
 Note: 
-- Project may not have downloaded spring.boot.framework properly. To do so, add a version (2.4.0) and download dependancies/restart IntelliJ again
-- 
+- Project may not have downloaded spring.boot.framework properly. To do so, add a version (2.4.0) and download dependancies/restart IntelliJ again.
+- H2-console was not shown, the configure method on the SecurityConfig file was modified to get it working. 
