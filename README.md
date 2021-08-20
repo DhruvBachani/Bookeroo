@@ -23,7 +23,7 @@
   
 
 To run the application locally:
-First ensure that you have 
+First ensure that you have  
 An 
 - IDE preferably IntelliJ to re-enact this readme as close as possible, 
 - NodeJS (https://nodejs.org/en/download/)
