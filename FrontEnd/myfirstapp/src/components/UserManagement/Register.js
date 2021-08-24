@@ -52,7 +52,7 @@ class Register extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">Create your Account</p>
-              <form action="create-profile.html">
+              <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -60,8 +60,9 @@ class Register extends Component {
                         "is-invalid": errors.name
                     }) }
                     placeholder="Name"
-                    name="name"
-                    value= {this.state.name}
+                    name="fullName"
+                    value= {this.state.fullName}
+                    onChange={this.onChange}
                     required
                   />
                   {errors.name && (
@@ -73,7 +74,9 @@ class Register extends Component {
                     type="email"
                     className="form-control form-control-lg"
                     placeholder="Email Address"
-                    name="email"
+                    name="username"
+                    value= {this.state.username}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -82,6 +85,8 @@ class Register extends Component {
                     className="form-control form-control-lg"
                     placeholder="Password"
                     name="password"
+                    value= {this.state.password}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -89,7 +94,9 @@ class Register extends Component {
                     type="password"
                     className="form-control form-control-lg"
                     placeholder="Confirm Password"
-                    name="password2"
+                    name="confirmPassword"
+                    value= {this.state.confirmPassword}
+                    onChange={this.onChange}
                   />
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
@@ -101,4 +108,7 @@ class Register extends Component {
     );
   }
 }
-export default Register;
+export default connect(
+    null,
+    { createNewUser }
+)(Register);
