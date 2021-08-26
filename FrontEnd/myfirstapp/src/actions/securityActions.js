@@ -29,7 +29,11 @@ export const createNewUser = (newUser, history) => async dispatch => {
 
 export const login = LoginRequest => async dispatch => {
     try {
-
+        await axios.post("http://localhost:8080/api/users/login", LoginRequest).then((response) => console.log(response.data.token));
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
         //post => login request
 
         //extract token from res.data
