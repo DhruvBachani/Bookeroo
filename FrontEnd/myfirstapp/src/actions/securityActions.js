@@ -16,6 +16,7 @@ export const createNewUser = (newUser, history) => async dispatch => {
         });
     }
     catch (err){
+
         dispatch ({
             type: GET_ERRORS,
             payload: err.response.data
@@ -27,29 +28,41 @@ export const createNewUser = (newUser, history) => async dispatch => {
 
 };
 
-export const login = LoginRequest => async dispatch => {
+export const login = (LoginRequest, history) => async dispatch => {
+
+
     try {
-        await axios.post("http://localhost:8080/api/users/login", LoginRequest).then((response) => console.log(response.data.token));
-        dispatch({
-            type: GET_ERRORS,
-            payload: {}
-        });
+        await axios.post("http://localhost:8080/api/users/login", LoginRequest).then((response) => {
+            console.log(response.data.token);
+            let token= response.data.token
         //post => login request
 
         //extract token from res.data
-
+            localStorage.setItem("token", token[1]);
         //set our token in the local storage
+            axios.defaults.headers["Authorization"] = token;
 
-        // set our token in header 
+        // set our token in header
 
         //decode the token on React
-
+            let user = jwt_decode(token);
         // dispatch to our securityReducer
+            dispatch({
+                type: SET_CURRENT_USER,
+                payload: user
+            });
+        });
+        history.push("/dashboard");
+
 
     }
     catch (err)
     {
-
+        console.log(err.response)
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
     }
 
 }

@@ -46,7 +46,9 @@ class Register extends Component {
   render() {
       const { errors } = this.state;
     return (
+
       <div className="register">
+          <h1>{errors.name}</h1>
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
