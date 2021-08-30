@@ -71,29 +71,29 @@ export const login = (LoginRequest, history) => async dispatch => {
 
 
 
-// export const catalog = (showBooks, history) => async dispatch => {
+export const catalog = (books, history) => async dispatch => {
 
-//     try {
-//         await axios.post("http://localhost:8081/api/users/login", showBooks);
+    try {
+        await axios.get("http://localhost:8081/api/users/bookCatalog", books);
 
-//         dispatch({
-//             type: GET_ERRORS,
-//             payload: {}
-//         });
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
         
-//         history.push("/dashboard");
+        history.push("/bookCatalog");
 
-//     }
-//     catch (err)
-//     {
-//         console.log(err.response)
-//         dispatch({
-//             type: GET_ERRORS,
-//             payload: err.response.data
-//         });
-//     }
+    }
+    catch (err)
+    {
+        console.log(err.response)
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
 
-// }
+}
 
 
 
