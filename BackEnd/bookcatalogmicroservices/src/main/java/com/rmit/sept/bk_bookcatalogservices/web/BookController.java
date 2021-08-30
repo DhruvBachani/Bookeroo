@@ -5,15 +5,23 @@ import com.rmit.sept.bk_bookcatalogservices.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/catalog")
 public class BookController {
+
     @Autowired
     BookService bookservice;
-    @GetMapping("/books")
+
+    @RequestMapping("/allBooks")
     private List<Book> getAllBooks() {
-        return bookservice.getAllBooks();
+        // return bookservice.getAllBooks();
+        return Collections.singletonList(
+            new Book("Persuader", "Lee Child", "Thriller", 123)
+        );
     }
 
     @GetMapping("/books/{id}")

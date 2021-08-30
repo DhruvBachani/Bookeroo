@@ -13,8 +13,11 @@ public class Book {
     private String category;
     private int isbn;
 
-    public Book() {
-
+    public Book(String name, String author, String category, int isbn) {
+        this.name = name;
+        this.author = author;
+        this.category = category;
+        this.isbn = isbn;
     }
 
     public long getId() { return this.id; }

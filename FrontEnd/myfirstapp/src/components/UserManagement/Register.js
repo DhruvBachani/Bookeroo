@@ -37,7 +37,7 @@ class Register extends Component {
       confirmPassword: this.state.confirmPassword
     };
 
-    this.props.createNewUser(newUser, this.props.history);
+    this.props.createNewUser(newUser, this.props.history.push("/bookCatalog"));
   }
 
   onChange(e) {

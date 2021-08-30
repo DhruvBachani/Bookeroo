@@ -12,6 +12,9 @@ import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
 
+import BookCatalog from "./components/Catalog/BookCatalog";
+
+
 class App extends Component {
   render() {
     return (
@@ -26,6 +29,8 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+
+            <Route exact path="/bookCatalog" component={BookCatalog} />
 
             {
               //Private Routes
