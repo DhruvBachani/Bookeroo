@@ -9,7 +9,7 @@ export const createNewUser = (newUser, history) => async dispatch => {
     try{
 
         await axios.post("http://localhost:8080/api/users/register", newUser);
-        history.push("/login");
+        history.push("/dashboard");
         dispatch({
             type: GET_ERRORS,
             payload: {}
@@ -71,29 +71,38 @@ export const login = (LoginRequest, history) => async dispatch => {
 
 
 
-export const catalog = (books, history) => async dispatch => {
 
-    try {
-        await axios.get("http://localhost:8081/api/users/bookCatalog", books);
 
-        dispatch({
-            type: GET_ERRORS,
-            payload: {}
-        });
+
+
+
+
+
+
+
+// export const catalog = (books, history) => async dispatch => {
+
+//     try {
+//         await axios.get("http://localhost:8081/api/users/bookCatalog", books);
+
+//         dispatch({
+//             type: GET_ERRORS,
+//             payload: {}
+//         });
         
-        history.push("/bookCatalog");
+//         history.push("/bookCatalog");
 
-    }
-    catch (err)
-    {
-        console.log(err.response)
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        });
-    }
+//     }
+//     catch (err)
+//     {
+//         console.log(err.response)
+//         dispatch({
+//             type: GET_ERRORS,
+//             payload: err.response.data
+//         });
+//     }
 
-}
+// }
 
 
 

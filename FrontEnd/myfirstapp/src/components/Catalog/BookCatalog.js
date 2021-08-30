@@ -1,6 +1,25 @@
 import React, { Component } from "react";
+import bookCatalogActions from "../../actions/bookCatalogActions";
 
 class BookCatalog extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      allBooks: []
+    }
+    
+  }
+
+  componentDidMount(res) {
+
+    bookCatalogActions.getAllBooks().then((res) => {
+      console.log(res.data);
+      this.setState({ allBooks: res.data });
+    })
+
+  }
+
   render() {
     return (
       <div className="bookCatalog">
@@ -11,6 +30,18 @@ class BookCatalog extends Component {
                 <h1 className="display-3 mb-4">
                   New Books
                 </h1>
+                {
+                  this.state.allBooks.map(key =>
+                    <div>
+                      <h5>
+                        Book name: {key.name} <br></br>
+                        Book author: {key.author} <br></br>
+                        Book category: {key.category} <br></br>
+                        Book ISBN: {key.isbn}
+                      </h5>
+                    </div>
+                  )
+                }
               </div>
             </div>
           </div>
