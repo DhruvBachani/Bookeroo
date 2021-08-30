@@ -9,7 +9,7 @@ export const createNewUser = (newUser, history) => async dispatch => {
     try{
 
         await axios.post("http://localhost:8080/api/users/register", newUser);
-        history.push("/login");
+        // history.push("/login");
         dispatch({
             type: GET_ERRORS,
             payload: {}
@@ -55,6 +55,15 @@ export const login = (LoginRequest, history) => async dispatch => {
         history.push("/dashboard");
 
 
+
+        // await axios.post("http://localhost:8080/api/users/login", LoginRequest).then((response) => console.log(response));
+
+        // dispatch({
+        //     type: GET_ERRORS,
+        //     payload: {}
+        // });
+
+
     }
     catch (err)
     {
@@ -66,3 +75,17 @@ export const login = (LoginRequest, history) => async dispatch => {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
