@@ -31,7 +31,7 @@ class Login extends Component {
 
     };
 
-    this.props.login(loginRequest, this.props.history.push("/bookCatalog"));
+    this.props.login(loginRequest, this.props.history);
   }
 
   onChange(e) {

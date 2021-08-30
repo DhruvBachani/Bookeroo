@@ -28,6 +28,8 @@ export const createNewUser = (newUser, history) => async dispatch => {
 
 };
 
+
+
 export const login = (LoginRequest, history) => async dispatch => {
 
 
@@ -55,15 +57,6 @@ export const login = (LoginRequest, history) => async dispatch => {
         history.push("/dashboard");
 
 
-
-        // await axios.post("http://localhost:8080/api/users/login", LoginRequest).then((response) => console.log(response));
-
-        // dispatch({
-        //     type: GET_ERRORS,
-        //     payload: {}
-        // });
-
-
     }
     catch (err)
     {
@@ -78,73 +71,29 @@ export const login = (LoginRequest, history) => async dispatch => {
 
 
 
+// export const catalog = (showBooks, history) => async dispatch => {
 
-export const catalog = (books, history) => async dispatch => {
-
-    try {
-        await axios.get("http://localhost:8081/api/catalog/allBooks", books);
-
-        dispatch({
-            type: GET_ERRORS,
-            payload: {}
-        });
-        
-        history.push("/dashboard");
-
-    }
-    catch (err)
-    {
-        console.log(err.response)
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        });
-    }
-
-}
-
-
-
-
-
-
-
-// export const login = LoginRequest => async dispatch => {
 //     try {
-//       // post => Login Request
-//       const res = await axios.post("/api/users/login", LoginRequest);
-//       // extract token from res.data
-//       const { token } = res.data;
-//       // store the token in the localStorage
-//       localStorage.setItem("jwtToken", token);
-//       // set our token in header ***
-//       setJWTToken(token);
-//       // decode token on React
-//       const decoded = jwt_decode(token);
-//       // dispatch to our securityReducer
-//       dispatch({
-//         type: SET_CURRENT_USER,
-//         payload: decoded
-//       });
-//     } catch (err) {
-//       dispatch({
-//         type: GET_ERRORS,
-//         payload: err.response.data
-//       });
+//         await axios.post("http://localhost:8081/api/users/login", showBooks);
+
+//         dispatch({
+//             type: GET_ERRORS,
+//             payload: {}
+//         });
+        
+//         history.push("/dashboard");
+
 //     }
-//   };
+//     catch (err)
+//     {
+//         console.log(err.response)
+//         dispatch({
+//             type: GET_ERRORS,
+//             payload: err.response.data
+//         });
+//     }
 
-//   export const logout = () => dispatch => {
-//     localStorage.removeItem("jwtToken");
-//     setJWTToken(false);
-//     dispatch({
-//       type: SET_CURRENT_USER,
-//       payload: {}
-//     });
-//   };
-
-
-
+// }
 
 
 
