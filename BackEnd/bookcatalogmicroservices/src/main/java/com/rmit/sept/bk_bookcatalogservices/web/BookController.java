@@ -11,17 +11,17 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/catalog")
+@RequestMapping("/api/books")
 public class BookController {
 
     @Autowired
     BookService bookservice;
 
-    @RequestMapping("/allBooks")
+    @RequestMapping("/bookCatalog")
     private List<Book> getAllBooks() {
         // return bookservice.getAllBooks();
         return Collections.singletonList(
-            new Book("Persuader", "Lee Child", "Thriller", 123)
+            new Book("Persuader", "Lee Child", "Thriller", "Description", 123)
         );
     }
 

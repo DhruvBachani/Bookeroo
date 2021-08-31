@@ -3,7 +3,7 @@ import { GET_ERRORS, GET_BOOKS, GET_BOOK } from "./types";
 
 export const createBook = (book, history) => async dispatch => {
     try {
-        const res = await axios.post(`http://localhost:8080/api/book/${id}`, book);
+        const res = await axios.post(`http://localhost:8080/api/book/${this.props.name}`, book);
         history.push("/dashboard");
     } catch (err) {
         dispatch({

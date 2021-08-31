@@ -24,7 +24,12 @@ import React, { Component } from 'react'
     
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <a className="nav-link " href="/register">
+                            <a className="nav-link" href="/bookCatalog">
+                                Book Catalog
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/register">
                                 Sign Up
                             </a>
                         </li>

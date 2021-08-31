@@ -13,6 +13,7 @@ import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
 
 import BookCatalog from "./components/Catalog/BookCatalog";
+import AddBook from "./components/Books/AddBook";
 
 import jwt_decode from "jwt-decode";
 import setJWTToken from "./securityUtils/setJWTToken";
@@ -59,7 +60,7 @@ class App extends Component {
             }
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/addPerson" component={AddPerson} />
-          
+            <Route exact path="/addBook" component={AddBook}/>
           </div>
         </Router>
       </Provider>

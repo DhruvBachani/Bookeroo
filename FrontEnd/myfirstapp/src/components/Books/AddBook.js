@@ -21,7 +21,7 @@ class AddBook extends Component {
     }
     onSubmit(e){
         e.preventDefault();
-        const newPerson = {
+        const newBook = {
             name: this.state.name
         }
 

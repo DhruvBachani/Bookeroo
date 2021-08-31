@@ -37,6 +37,7 @@ class BookCatalog extends Component {
                         Book name: {key.name} <br></br>
                         Book author: {key.author} <br></br>
                         Book category: {key.category} <br></br>
+                        Book description: {key.description} <br></br>
                         Book ISBN: {key.isbn}
                       </h5>
                     </div>
