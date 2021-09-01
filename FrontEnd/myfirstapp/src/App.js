@@ -12,30 +12,68 @@ import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
 
-class App extends Component {
+import jwt_decode from "jwt-decode";
+import setJWTToken from "./securityUtils/setJWTToken";
+import { SET_CURRENT_USER } from "./actions/types";
+import { logout } from "./actions/securityActions";
+import SecuredRoute from "./securityUtils/SecureRoute";
+import PayPalCheckout from "./components/Order/PayPalCheckout";
+
+
+const jwtToken = localStorage.jwtToken;
+
+
+if (jwtToken) {
+  setJWTToken(jwtToken);
+  const decoded_jwtToken = jwt_decode(jwtToken);
+  store.dispatch({
+    type: SET_CURRENT_USER,
+    payload: decoded_jwtToken
+  });
+
+  const currentTime = Date.now() / 1000;
+  if (decoded_jwtToken.exp < currentTime) {
+    store.dispatch(logout());
+    window.location.href = "/";
+  }
+}
+
+class App extends Component{
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <div className="App">
-            <Header />
-            {
-              //Public Routes
-            }
-           
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
+    <Provider store={store}>
+          <Router>
+            <div className="App">
+              <Header />
 
-            {
-              //Private Routes
-            }
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/addPerson" component={AddPerson} />
-          
-          </div>
-        </Router>
-      </Provider>
+              {
+                //Public Routes
+              }
+
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+
+              {
+                //Private Routes
+              }
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/addPerson" component={AddPerson} />
+
+
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12 text-center">
+                        {
+                            // Not to be confused, v1 paypal has NOT been integrated with the frontend
+                        }
+                        <PayPalCheckout />
+                    </div>
+                </div>
+            </div>
+            </div>
+          </Router>
+        </Provider>
     );
   }
 }

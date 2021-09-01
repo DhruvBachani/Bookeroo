@@ -36,7 +36,6 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
-    @CrossOrigin
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result){
         // Validate passwords match
@@ -58,7 +57,7 @@ public class UserController {
     private AuthenticationManager authenticationManager;
 
 
-
+    @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
