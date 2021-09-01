@@ -16,7 +16,6 @@ export const createNewUser = (newUser, history) => async dispatch => {
         });
     }
     catch (err){
-        console.log(err)
         dispatch ({
             type: GET_ERRORS,
             payload: err.response.data
@@ -31,7 +30,6 @@ export const createNewUser = (newUser, history) => async dispatch => {
 export const login = LoginRequest => async dispatch => {
     try {
       // post => Login Request
-        console.log(LoginRequest)
       const res = await axios.post("http://localhost:8080/api/users/login", LoginRequest);
       // extract token from res.data
       const { token } = res.data;
