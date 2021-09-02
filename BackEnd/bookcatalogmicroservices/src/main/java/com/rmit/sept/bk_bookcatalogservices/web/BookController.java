@@ -5,6 +5,7 @@ import com.rmit.sept.bk_bookcatalogservices.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -19,10 +20,20 @@ public class BookController {
 
     @RequestMapping("/allBooks")
     private List<Book> getAllBooks() {
-        // return bookservice.getAllBooks();
-        return Collections.singletonList(
-            new Book("Persuader", "Lee Child", "Thriller", 123)
+        // return bookservice.getAllBooks();        
+
+        return Arrays.asList(
+            new Book("Persuader", "Lee Child", "Thriller", 123),
+            new Book("If Tomorrow Comes", "Sydney Sheldon", "Thriller", 456),
+            new Book("Murder on the Orient Express", "Agatha Christie", "Mystery", 2244),
+            new Book("The Martian", "Andy Weir", "Adventure", 765),
+            new Book("NYPD Red", "James Patterson", "Thriller", 014),
+            new Book("The Recruit", "Robert Muchamore", "Action", 775)
         );
+
+        // return Collections.singletonList(
+        //     new Book("Persuader", "Lee Child", "Thriller", 123)
+        // );
     }
 
     @GetMapping("/books/{id}")

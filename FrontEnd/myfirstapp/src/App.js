@@ -12,7 +12,7 @@ import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
 
-import BookCatalog from "./components/Catalog/BookCatalog";
+import BookCatalog from "./components/BookManagement/BookCatalog";
 
 import jwt_decode from "jwt-decode";
 import setJWTToken from "./securityUtils/setJWTToken";
