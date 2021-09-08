@@ -15,6 +15,7 @@ import Login from "./components/UserManagement/Login";
 import BookCatalog from "./components/BookManagement/BookCatalog";
 import BookPage from "./components/BookManagement/BookPage";
 import ManageBooks from "./components/Books/ManageBooks";
+import AddBook from "./components/Books/AddBook";
 
 
 import jwt_decode from "jwt-decode";
@@ -58,6 +59,7 @@ class App extends Component {
             <Route exact path="/bookCatalog" component={BookCatalog} />
             <Route exact path="/bookPage" component={BookPage} />
             <Route exact path="/manageBooks" component={ManageBooks} />
+            <Route exact path="/addBook" component={AddBook}/>
 
 
             {
@@ -65,7 +67,7 @@ class App extends Component {
             }
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/addPerson" component={AddPerson} />
-          
+            
           </div>
         </Router>
       </Provider>

@@ -5,7 +5,7 @@ import { GET_ERRORS, GET_PERSONS, GET_PERSON } from "./types";
 class BookCatalogService {
 
     getAllBooks() {
-        return axios.get("http://localhost:8081/api/catalog/allBooks");
+        return axios.get("http://localhost:8081/api/books/bookCatalog");
     }
 
 }

@@ -11,12 +11,14 @@ public class Book {
     private String name;
     private String author;
     private String category;
+    private String description;
     private int isbn;
 
-    public Book(String name, String author, String category, int isbn) {
+    public Book(String name, String author, String category, String description, int isbn) {
         this.name = name;
         this.author = author;
         this.category = category;
+        this.description = description;
         this.isbn = isbn;
     }
 
@@ -32,9 +34,13 @@ public class Book {
 
     public void setAuthor(String author) { this.author = author; }
 
-    public String getCategory() { return category; }
+    public String getCategory() { return this.category; }
 
     public void setCategory(String category) { this.category = category; }
+
+    public String getDescription() { return this.description; }
+
+    public void setDescription(String description) { this.description = description; }
 
     public int getIsbn() { return isbn; }
 
