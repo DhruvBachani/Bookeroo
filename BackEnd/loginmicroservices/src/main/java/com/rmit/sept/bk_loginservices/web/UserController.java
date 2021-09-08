@@ -22,7 +22,7 @@ import javax.validation.Valid;
 
 import static com.rmit.sept.bk_loginservices.security.SecurityConstant.TOKEN_PREFIX;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -36,14 +36,13 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
-    @CrossOrigin
+
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result){
         // Validate passwords match
         userValidator.validate(user,result);
 
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-
         if(errorMap != null)return errorMap;
 
         User newUser = userService.saveUser(user);
@@ -59,7 +58,7 @@ public class UserController {
     private AuthenticationManager authenticationManager;
 
 
-    @CrossOrigin
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
