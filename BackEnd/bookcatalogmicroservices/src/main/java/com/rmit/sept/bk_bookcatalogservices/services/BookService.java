@@ -3,6 +3,7 @@ package com.rmit.sept.bk_bookcatalogservices.services;
 import com.rmit.sept.bk_bookcatalogservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,8 +20,19 @@ public class BookService {
         return books;
     }
 
-    public void saveBook(Book book) {
-        bookrepository.save(book);
+    // public void saveBook(Book book) {
+    //     bookrepository.save(book);
+    // }
+
+    public Book saveBook (Book newBook){
+
+        newBook.setName(newBook.getName());
+        newBook.setAuthor(newBook.getAuthor());
+        newBook.setCategory(newBook.getCategory());
+        newBook.setDescription(newBook.getDescription());
+        newBook.setIsbn(newBook.getIsbn());
+
+        return bookrepository.save(newBook);
     }
 
     public Book getBookById(long id) {

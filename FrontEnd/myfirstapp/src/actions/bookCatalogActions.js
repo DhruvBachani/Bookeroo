@@ -15,8 +15,8 @@ export default new BookCatalogService();
 export const createBook = (newBook, history) => async (dispatch) => {
 
     try {
-        const res = await axios.post("http://localhost:8081/api/", newBook);
-        history.push("/dashboard");
+        await axios.post("http://localhost:8081/api/books/create", newBook);
+        history.push("/manageBooks");
     } catch (err) {
         dispatch({
         type: GET_ERRORS,

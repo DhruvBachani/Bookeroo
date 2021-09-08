@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
     private String author;
@@ -14,17 +14,20 @@ public class Book {
     private String description;
     private int isbn;
 
-    public Book(String name, String author, String category, String description, int isbn) {
-        this.name = name;
-        this.author = author;
-        this.category = category;
-        this.description = description;
-        this.isbn = isbn;
+    public Book() {
     }
 
-    public long getId() { return this.id; }
+    // public Book(String name, String author, String category, String description, int isbn) {
+    //     this.name = name;
+    //     this.author = author;
+    //     this.category = category;
+    //     this.description = description;
+    //     this.isbn = isbn;
+    // }
 
-    public void setId(long id) { this.id = id; }
+    public Long getId() { return this.id; }
+
+    public void setId(Long id) { this.id = id; }
 
     public String getName() { return name; }
 

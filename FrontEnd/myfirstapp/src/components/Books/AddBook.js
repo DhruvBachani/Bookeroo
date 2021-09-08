@@ -9,10 +9,10 @@ class AddBook extends Component {
 
     this.state = {
       name: "",
-      personIdentifier: "",
-      desc: "",
-      start_date: "",
-      end_date: "",
+      author: "",
+      category: "",
+      description: "",
+      isbn: "",
     };
 
     this.onChange = this.onChange.bind(this);
@@ -27,11 +27,13 @@ class AddBook extends Component {
     e.preventDefault();
     const newBook = {
       name: this.state.name,
-      personIdentifier: this.state.personIdentifier,
-      desc: this.state.desc,
-      start_date: this.state.start_date,
-      end_date: this.state.end_date,
+      author: this.state.author,
+      category: this.state.category,
+      description: this.state.description,
+      isbn: this.state.isbn,
     };
+
+    console.log(newBook);
 
     this.props.createBook(newBook, this.props.history);
   }
@@ -42,16 +44,14 @@ class AddBook extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h5 className="display-4 text-center">
-                Create New Book
-              </h5>
+              <h5 className="display-4 text-center">Create New Book</h5>
               <hr />
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
                     className="form-control form-control-lg "
-                    placeholder="Person Name"
+                    placeholder="Name"
                     name="name"
                     value={this.state.name}
                     onChange={this.onChange}
@@ -61,39 +61,36 @@ class AddBook extends Component {
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Unique Person ID"
-                    name="personIdentifier"
-                    value={this.state.personIdentifier}
+                    placeholder="Author"
+                    name="author"
+                    value={this.state.author}
                     onChange={this.onChange}
                   />
                 </div>
-
+                <div className="form-group">
+                  <input
+                    className="form-control form-control-lg"
+                    placeholder="Category"
+                    name="category"
+                    value={this.state.category}
+                    onChange={this.onChange}
+                  />
+                </div>
                 <div className="form-group">
                   <textarea
                     className="form-control form-control-lg"
-                    placeholder="Person Description"
-                    name="desc"
-                    value={this.state.desc}
+                    placeholder="Description"
+                    name="description"
+                    value={this.state.description}
                     onChange={this.onChange}
                   />
                 </div>
-                <h6>Start Date</h6>
                 <div className="form-group">
                   <input
-                    type="date"
                     className="form-control form-control-lg"
-                    name="start_date"
-                    value={this.state.start_date}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <h6>Estimated End Date</h6>
-                <div className="form-group">
-                  <input
-                    type="date"
-                    className="form-control form-control-lg"
-                    name="end_date"
-                    value={this.state.end_date}
+                    placeholder="ISBN Number"
+                    name="isbn"
+                    value={this.state.isbn}
                     onChange={this.onChange}
                   />
                 </div>
@@ -112,6 +109,11 @@ class AddBook extends Component {
 }
 AddBook.propTypes = {
   createProject: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
-export default connect(null, { createBook })(AddBook);
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { createBook })(AddBook);

@@ -3,12 +3,17 @@ package com.rmit.sept.bk_bookcatalogservices.web;
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
 import com.rmit.sept.bk_bookcatalogservices.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
@@ -20,16 +25,16 @@ public class BookController {
 
     @RequestMapping("/bookCatalog")
     private List<Book> getAllBooks() {
-        // return bookservice.getAllBooks();        
+        return bookservice.getAllBooks();        
 
-        return Arrays.asList(
-            new Book("Persuader", "Lee Child", "Thriller", "No desc", 123),
-            new Book("If Tomorrow Comes", "Sydney Sheldon", "Thriller", "No desc", 456),
-            new Book("Murder on the Orient Express", "Agatha Christie", "Mystery", "No desc", 2244),
-            new Book("The Martian", "Andy Weir", "Adventure", "No desc", 765),
-            new Book("NYPD Red", "James Patterson", "Thriller", "No desc", 014),
-            new Book("The Recruit", "Robert Muchamore", "Action", "No desc", 775)
-        );
+        // return Arrays.asList(
+        //     new Book("Persuader", "Lee Child", "Thriller", "No desc", 123),
+        //     new Book("If Tomorrow Comes", "Sydney Sheldon", "Thriller", "No desc", 456),
+        //     new Book("Murder on the Orient Express", "Agatha Christie", "Mystery", "No desc", 2244),
+        //     new Book("The Martian", "Andy Weir", "Adventure", "No desc", 765),
+        //     new Book("NYPD Red", "James Patterson", "Thriller", "No desc", 014),
+        //     new Book("The Recruit", "Robert Muchamore", "Action", "No desc", 775)
+        // );
 
         // return Collections.singletonList(
         //     new Book("Persuader", "Lee Child", "Thriller", 123)
@@ -45,12 +50,21 @@ public class BookController {
     private void deleteBook(@PathVariable("id") long id) {
         bookservice.deleteBook(id);
     }
-
-    @PostMapping("/books")
-    private long saveBook(@RequestBody Book book) {
+    
+// @RequestMapping(value = "/create", method = RequestMethod.GET)
+    // @PostMapping("/create")
+    @RequestMapping(value = "/create")
+    public Long saveBook(@RequestBody Book book) {
         bookservice.saveBook(book);
         return book.getId();
     }
+
+    // @RequestMapping(value = "/create")
+    // public ResponseEntity<?> saveBook(@Valid @RequestBody Book book, BindingResult result){
+    //     Book newBook = bookservice.saveBook(book);
+
+    //     return  new ResponseEntity<Book>(newBook, HttpStatus.CREATED);
+    // }
 
     @PutMapping("/books")
     private Book updateBook(@RequestBody Book book) {

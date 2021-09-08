@@ -9,10 +9,13 @@ class ManageBooks extends Component {
           <div className="row">
             <div className="col-md-12">
               <br />
-              <h2 className="display-5 text-center">BOOKEROO Book Catalog Management</h2>
+              <h2 className="display-5 text-center">
+                BOOKEROO Book Catalog Management
+              </h2>
               <br />
-              <CreateBookButton />
-              <br />
+              <div className="display-5 text-center">
+                <CreateBookButton />
+              </div>
             </div>
           </div>
         </div>
