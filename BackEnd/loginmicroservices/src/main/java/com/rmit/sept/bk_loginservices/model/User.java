@@ -23,8 +23,17 @@ public class User implements UserDetails {
     private String username;
     @NotBlank(message = "Please enter your full name")
     private String fullName;
+
+    private String address;
+
+    private int phoneNumber;
+
+    private String userType;
+
     @NotBlank(message = "Password field is required")
     private String password;
+
+    private int abnNumber;
     @Transient
     private String confirmPassword;
     private Date create_At;
@@ -58,6 +67,26 @@ public class User implements UserDetails {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
+    public int getPhoneNumber() { return phoneNumber; }
+
+    public void setPhoneNumber(int phoneNumber) { this.phoneNumber = phoneNumber; }
+
+    public int getAbnNumber() {
+        return abnNumber;
+    }
+
+    public void setAbn_number(int abn_number) {
+        this.abnNumber = abnNumber;
+    }
+
+    public String getAddress(){ return address;}
+
+    public void setAddress(String address){ this.address = address;}
+
+    public String getUserType() { return userType; }
+
+    public void setUserType(String userType) { this.userType = userType; }
 
     public String getPassword() {
         return password;
