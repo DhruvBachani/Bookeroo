@@ -82,6 +82,10 @@ img {
   padding: 5px 11px;
 }
 
+.book-title-text {
+  color: white;
+}
+
 /* .sliderContainer:hover .book {
   transform: translateX(-25%);
 } */

@@ -4,9 +4,11 @@ class BookCard extends Component {
   render() {
     return (
       <div className="book">
-        <h5>
-          {this.props.arr.name} <br />
-        </h5>
+        <a className="book-title-text" href="/bookPage">
+          <h5>
+            {this.props.arr.name} <br />
+          </h5>
+        </a>
       </div>
     );
   }

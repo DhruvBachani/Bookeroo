@@ -13,6 +13,9 @@ import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
 
 import BookCatalog from "./components/BookManagement/BookCatalog";
+import BookPage from "./components/BookManagement/BookPage";
+import ManageBooks from "./components/Books/ManageBooks";
+
 
 import jwt_decode from "jwt-decode";
 import setJWTToken from "./securityUtils/setJWTToken";
@@ -53,6 +56,9 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
 
             <Route exact path="/bookCatalog" component={BookCatalog} />
+            <Route exact path="/bookPage" component={BookPage} />
+            <Route exact path="/manageBooks" component={ManageBooks} />
+
 
             {
               //Private Routes
