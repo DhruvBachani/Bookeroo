@@ -97,3 +97,9 @@ img {
 .book:hover {
   transform: scale(1.25) !important;
 }
+
+.book-cover-image-container {
+  height: 640px;
+  width: 400px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
