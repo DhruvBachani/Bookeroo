@@ -24,8 +24,7 @@ public class BookService {
     //     bookrepository.save(book);
     // }
 
-    public Book saveBook (Book newBook){
-
+    public Book saveBook (Book newBook) {
         newBook.setName(newBook.getName());
         newBook.setAuthor(newBook.getAuthor());
         newBook.setCategory(newBook.getCategory());

@@ -1,6 +1,23 @@
 import React, { Component } from "react";
+import bookCatalogActions from "../../actions/bookCatalogActions";
 
 class BookPage extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      allBooks: [],
+      arr: [],
+    };
+  }
+
+  componentDidMount(res) {
+    bookCatalogActions.getAllBooks().then((res) => {
+      console.log(res.data);
+      this.setState({ allBooks: res.data });
+    });
+  }
+
   render() {
     return (
       <div className="bookCatalog">

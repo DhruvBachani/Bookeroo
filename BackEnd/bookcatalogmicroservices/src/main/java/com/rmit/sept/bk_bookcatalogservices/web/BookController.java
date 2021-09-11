@@ -51,20 +51,11 @@ public class BookController {
         bookservice.deleteBook(id);
     }
     
-// @RequestMapping(value = "/create", method = RequestMethod.GET)
-    // @PostMapping("/create")
     @RequestMapping(value = "/create")
     public Long saveBook(@RequestBody Book book) {
         bookservice.saveBook(book);
         return book.getId();
     }
-
-    // @RequestMapping(value = "/create")
-    // public ResponseEntity<?> saveBook(@Valid @RequestBody Book book, BindingResult result){
-    //     Book newBook = bookservice.saveBook(book);
-
-    //     return  new ResponseEntity<Book>(newBook, HttpStatus.CREATED);
-    // }
 
     @PutMapping("/books")
     private Book updateBook(@RequestBody Book book) {
