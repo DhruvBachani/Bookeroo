@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import bookCatalogActions from "../../actions/bookCatalogActions";
 import ProductDetails from "./ProductDetails";
+import ProductReviews from "./ProductReviews";
 
 class BookPage extends Component {
   constructor() {
@@ -25,6 +26,8 @@ class BookPage extends Component {
             <div className="row">
               <div className="col-md-12">
                 <ProductDetails book={this.state.book} />
+                <br />
+                <ProductReviews book={this.state.book} />
               </div>
             </div>
           </div>

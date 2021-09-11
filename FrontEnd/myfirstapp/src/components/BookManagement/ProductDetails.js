@@ -7,7 +7,7 @@ class ProductDetails extends Component {
         <div className="light-overlay landing-inner text-dark">
           <div className="container">
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-md-4">
                 <div className="book-cover-image-container">
                   <img
                     src=""
@@ -18,9 +18,22 @@ class ProductDetails extends Component {
                     }}
                   />
                 </div>
-                <h4>{this.props.book.name}</h4>
+              </div>
+              <div className="col-md-4">
+                <h4>Title: {this.props.book.name}</h4> <br />
+                <h4>Author: {this.props.book.author}</h4> <br />
+                <h4>ISBN: {this.props.book.isbn}</h4> <br />
+                <h4>Category: {this.props.book.category}</h4> <br />
+              </div>
+              <div className="col-md-4 text-align-center">
+                <h4>Price: $</h4>
               </div>
             </div>
+            <br/> <br/>
+            <div className="row>">
+              <h4>Description: {this.props.book.description}</h4>
+            </div>
+            <br/> <hr/>
           </div>
         </div>
       </div>

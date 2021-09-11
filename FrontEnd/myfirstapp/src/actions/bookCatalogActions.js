@@ -8,7 +8,7 @@ class BookCatalogService {
     }
 
     getBook(bookId) {
-        return axios.get(`http://localhost:8081/api/books/getBook/${bookId}`);
+        return axios.get(`http://localhost:8081/api/books/book_by_id/${bookId}`);
     }
 }
 export default new BookCatalogService();
