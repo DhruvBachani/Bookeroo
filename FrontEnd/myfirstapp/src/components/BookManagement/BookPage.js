@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import bookCatalogActions from "../../actions/bookCatalogActions";
+import ProductDetails from "./ProductDetails";
 
 class BookPage extends Component {
   constructor() {
     super();
 
     this.state = {
-      allBooks: [],
-      arr: [],
+      book: [],
     };
   }
 
   componentDidMount(res) {
-    bookCatalogActions.getAllBooks().then((res) => {
-      console.log(res.data);
-      this.setState({ allBooks: res.data });
+    bookCatalogActions.getBook(this.props.match.params.bookId).then((res) => {
+      this.setState({ book: res.data });
     });
   }
 
@@ -25,11 +24,7 @@ class BookPage extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <div className="book-cover-image-container">
-                  <img src="" alt="Image not found" onError={
-                    (e)=>{e.target.onerror = null; e.target.src="/default.jpg"}
-                  }/>
-                </div>
+                <ProductDetails book={this.state.book} />
               </div>
             </div>
           </div>

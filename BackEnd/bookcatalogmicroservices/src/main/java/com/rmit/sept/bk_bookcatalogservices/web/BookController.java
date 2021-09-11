@@ -41,7 +41,7 @@ public class BookController {
         // );
     }
 
-    @GetMapping("/books/{id}")
+    @GetMapping("/getBook/{id}")
     private Book getBook(@PathVariable("id") long id) {
         return bookservice.getBookById(id);
     }

@@ -34,15 +34,15 @@ public class BookService {
         return bookrepository.save(newBook);
     }
 
-    public Book getBookById(long id) {
+    public Book getBookById(Long id) {
         return bookrepository.findById(id).get();
     }
 
-    public void updateBook(Book book, long id) {
+    public void updateBook(Book book, Long id) {
         bookrepository.save(book);
     }
 
-    public void deleteBook(long id) {
+    public void deleteBook(Long id) {
         bookrepository.deleteById(id);
     }
 }

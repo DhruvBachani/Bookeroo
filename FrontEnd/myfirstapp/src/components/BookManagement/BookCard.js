@@ -1,20 +1,30 @@
 import React, { Component } from "react";
+import { link, Link } from "react-router-dom";
+
 
 class BookCard extends Component {
   render() {
     return (
       <div className="book">
-        <a className="book-title-text" href="/bookPage">
-          <h5>
-            {this.props.arr.name} <br />
-          </h5>
-        </a>
+          <React.Fragment>
+            <Link to={`/bookPage/${this.props.arr.id}`} className="book-title-text">
+              <h5>
+                {this.props.arr.name} <br />
+              </h5>
+            </Link>
+          </React.Fragment>
       </div>
     );
   }
 }
 
 export default BookCard;
+
+// <a className="book-title-text" href="/bookPage">
+// <h5>
+//   {this.props.arr.name} <br />
+// </h5>
+// </a>;
 
 // {this.state.allBooks.map((key) => (
 //   <div key={key.isbn}>
