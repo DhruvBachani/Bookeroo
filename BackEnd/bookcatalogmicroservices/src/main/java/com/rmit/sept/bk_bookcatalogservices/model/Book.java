@@ -1,6 +1,7 @@
 package com.rmit.sept.bk_bookcatalogservices.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 public class Book {
@@ -12,6 +13,7 @@ public class Book {
     private String author;
     private String category;
     private String description;
+    private BigDecimal price;
     private int isbn;
 
     public Book() {
@@ -26,8 +28,6 @@ public class Book {
     // }
 
     public Long getId() { return this.id; }
-
-    public void setId(Long id) { this.id = id; }
 
     public String getName() { return name; }
 
@@ -44,6 +44,10 @@ public class Book {
     public String getDescription() { return this.description; }
 
     public void setDescription(String description) { this.description = description; }
+
+    public BigDecimal getPrice() { return this.price; }
+
+    public void setPrice(BigDecimal price) { this.price = price; }
 
     public int getIsbn() { return isbn; }
 

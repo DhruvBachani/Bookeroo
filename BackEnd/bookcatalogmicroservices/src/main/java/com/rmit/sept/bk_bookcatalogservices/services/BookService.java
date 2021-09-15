@@ -30,6 +30,7 @@ public class BookService {
         newBook.setCategory(newBook.getCategory());
         newBook.setDescription(newBook.getDescription());
         newBook.setIsbn(newBook.getIsbn());
+        newBook.setPrice(newBook.getPrice());
 
         return bookrepository.save(newBook);
     }
