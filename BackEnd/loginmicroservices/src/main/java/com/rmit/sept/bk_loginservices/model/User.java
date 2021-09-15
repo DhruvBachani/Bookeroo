@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Collection;
 
@@ -32,7 +33,7 @@ public class User implements UserDetails {
 
     @NotBlank(message = "Password field is required")
     private String password;
-
+    @NotNull(message = "username is required")
     private int abnNumber;
     @Transient
     private String confirmPassword;

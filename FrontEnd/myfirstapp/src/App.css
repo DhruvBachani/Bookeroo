@@ -63,3 +63,9 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+.display-6{
+  font-size:20px;
+  font-weight: bold;
+
+}
