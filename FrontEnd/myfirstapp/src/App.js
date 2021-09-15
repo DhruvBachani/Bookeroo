@@ -16,6 +16,7 @@ import BookCatalog from "./components/BookManagement/BookCatalog";
 import BookPage from "./components/BookManagement/BookPage";
 import ManageBooks from "./components/Books/ManageBooks";
 import AddBook from "./components/Books/AddBook";
+import AddReview from "./components/Books/AddReview"
 
 
 import jwt_decode from "jwt-decode";
@@ -61,7 +62,10 @@ class App extends Component {
             <Route exact path="/manageBooks" component={ManageBooks} />
             <Route exact path="/addBook" component={AddBook}/>
 
-
+            <Route exact path="/addReview" render={props => (
+                <AddReview {...props}/>
+            )}>
+            </Route>
             {
               //Private Routes
             }
