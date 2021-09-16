@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_BOOK } from "./types";
+import { GET_ERRORS, GET_BOOK, GET_REVIEWS } from "./types";
 
 
 class BookCatalogService {
@@ -9,6 +9,10 @@ class BookCatalogService {
 
     getBook(bookId) {
         return axios.get(`http://localhost:8081/api/books/book_by_id/${bookId}`);
+    }
+
+    getReviews(bookId) {
+        return axios.get(`http://localhost:8082/api/reviews/review_by_id/${bookId}`);
     }
 }
 export default new BookCatalogService();
@@ -26,4 +30,12 @@ export const createBook = (newBook, history) => async (dispatch) => {
         });
     }
 
+};
+
+export const getBookReviews = (bookId) => async dispatch => {
+    const res = await axios.get(`http://localhost:8082/api/reviews/review_by_id/${bookId}`);
+    dispatch({
+        type: GET_REVIEWS,
+        payload: res.data
+    });
 };

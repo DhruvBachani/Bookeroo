@@ -26,7 +26,7 @@ class ProductDetails extends Component {
                 <h4>Category: {this.props.book.category}</h4> <br />
               </div>
               <div className="col-md-4 text-align-center">
-                <h4>Price: $</h4>
+                <h4>Price: ${this.props.book.price}</h4>
               </div>
             </div>
             <br/> <br/>

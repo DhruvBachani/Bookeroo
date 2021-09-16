@@ -23,7 +23,12 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
-    @GetMapping("/books/{BookId}")
+    @GetMapping("/all_reviews")
+    private List<Review> getAllReviews() {
+        return reviewService.getAllReviews();
+    }
+
+    @GetMapping("/review_by_id/{BookId}")
     private List<Review> getReviewsByBookId(@PathVariable("BookId") long id) {
         return reviewService.getAllReviewsByBookId(id);
     }

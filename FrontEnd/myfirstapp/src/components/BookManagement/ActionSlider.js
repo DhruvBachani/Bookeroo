@@ -14,7 +14,6 @@ class ActionSlider extends Component {
 
   componentDidMount(res) {
     bookCatalogActions.getAllBooks().then((res) => {
-      console.log(res.data);
       this.setState({ allBooks: res.data });
     });
   }

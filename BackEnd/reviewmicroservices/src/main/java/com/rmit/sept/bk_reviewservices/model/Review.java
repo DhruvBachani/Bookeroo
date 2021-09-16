@@ -9,8 +9,8 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
-    private Long bookId;
+    private Long userid;
+    private Long bookid;
     private String review;
     private String rating;
 
@@ -20,13 +20,13 @@ public class Review {
 
     public Long getId() { return id; }
 
-    public Long getUserId() { return userId; }
+    public Long getUserId() { return userid; }
 
-    public void setUserId(Long userId) { this.userId = userId; }
+    public void setUserId(Long userid) { this.userid = userid; }
 
-    public Long getBookId() { return bookId; }
+    public Long getBookId() { return bookid; }
 
-    public void setBookId(Long bookId) { this.bookId = bookId; }
+    public void setBookId(Long bookid) { this.bookid = bookid; }
 
     public String getReview() { return review; }
 
