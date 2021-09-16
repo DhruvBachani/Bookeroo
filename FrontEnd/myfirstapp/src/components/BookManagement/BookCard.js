@@ -5,14 +5,15 @@ import { link, Link } from "react-router-dom";
 class BookCard extends Component {
   render() {
     return (
-          <div className="book">
-
+      <div className="book">
+          <React.Fragment>
+            <Link to={`/bookPage/${this.props.book.id}`} className="book-title-text">
               <h5>
                 {this.props.book.name} <br />
               </h5>
-
-          </div>
-
+            </Link>
+          </React.Fragment>
+      </div>
     );
   }
 }
@@ -23,7 +24,7 @@ export default BookCard;
 // <h5>
 //   {this.props.arr.name} <br />
 // </h5>
-// </a>;
+// </a>
 
 // {this.state.allBooks.map((key) => (
 //   <div key={key.isbn}>

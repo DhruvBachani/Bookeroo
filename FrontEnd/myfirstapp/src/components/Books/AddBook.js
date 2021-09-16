@@ -90,6 +90,7 @@ class AddBook extends Component {
                     className="form-control form-control-lg"
                     placeholder="ISBN Number"
                     name="isbn"
+                    type="number"
                     value={this.state.isbn}
                     onChange={this.onChange}
                   />

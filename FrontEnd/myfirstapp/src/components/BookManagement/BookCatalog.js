@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import BookCarousal from "./BookCarousal";
+// import BookCarousal from "./BookCarousal";
 import {connect} from "react-redux";
 import {login} from "../../actions/securityActions";
 import {getAllBooks} from "../../actions/bookActions";
+import ActionSlider from "./ActionSlider";
 
 class BookCatalog extends Component {
   componentDidMount() {
@@ -22,7 +23,7 @@ class BookCatalog extends Component {
             <div className="col-md-12 align-left">
               <h3>Thriller</h3>
               <br />
-              <BookCarousal books={this.props.books}/>
+              <ActionSlider allBooks={this.props.books}/>
               <hr />
               <h3>Sci-Fi</h3>
 \            </div>
@@ -33,7 +34,6 @@ class BookCatalog extends Component {
 }
 
 const mapStateToProps = (state) => {
-
   return{
     books: state.book.books
   }
@@ -44,3 +44,4 @@ export default connect(
     { getAllBooks }
 )(BookCatalog);
 
+// <BookCarousal books={this.props.books}/>
