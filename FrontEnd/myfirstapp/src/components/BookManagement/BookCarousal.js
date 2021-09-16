@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import BookCard from "./BookCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import {AiFillCaretLeft, AiFillCaretRight} from "react-icons/all";
 
 const responsive = {
     desktop: {
