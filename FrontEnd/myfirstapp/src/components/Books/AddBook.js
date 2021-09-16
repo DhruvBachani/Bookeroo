@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createBook } from "../../actions/bookCatalogActions";
+import { createBook } from "../../actions/bookActions";
 
 class AddBook extends Component {
   constructor() {
@@ -12,6 +12,7 @@ class AddBook extends Component {
       author: "",
       category: "",
       description: "",
+      price: "",
       isbn: "",
     };
 
@@ -30,6 +31,7 @@ class AddBook extends Component {
       author: this.state.author,
       category: this.state.category,
       description: this.state.description,
+      price: this.state.price,
       isbn: this.state.isbn,
     };
 
@@ -82,6 +84,15 @@ class AddBook extends Component {
                     placeholder="Description"
                     name="description"
                     value={this.state.description}
+                    onChange={this.onChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    className="form-control form-control-lg"
+                    placeholder="Price"
+                    name="price"
+                    value={this.state.price}
                     onChange={this.onChange}
                   />
                 </div>

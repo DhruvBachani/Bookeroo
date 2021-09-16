@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import bookCatalogActions from "../../actions/bookCatalogActions";
 import ProductDetails from "./ProductDetails";
 import ProductReviews from "./ProductReviews";
+import { getBookReviews } from "../../actions/bookCatalogActions";
 
 class BookPage extends Component {
   constructor() {
@@ -9,14 +11,28 @@ class BookPage extends Component {
 
     this.state = {
       book: [],
+      reviews: [],
     };
   }
 
-  componentDidMount(res) {
-    bookCatalogActions.getBook(this.props.match.params.bookId).then((res) => {
+  componentDidMount(res, res2) {
+    const bookID = this.props.match.params.bookId;
+    bookCatalogActions.getBook(bookID).then((res) => {
       this.setState({ book: res.data });
+
+      bookCatalogActions.getReviews(bookID).then((res2) => {
+        this.setState({ reviews: res2.data });
+      });
+
+      this.props.getBookReviews(bookID);
+    
     });
   }
+  // componentDidMount(res) {
+  //   bookCatalogActions.getBook(this.props.match.params.bookId).then((res) => {
+  //     this.setState({ book: res.data });
+  //   });
+  // }
 
   render() {
     return (
@@ -27,7 +43,7 @@ class BookPage extends Component {
               <div className="col-md-12">
                 <ProductDetails book={this.state.book} />
                 <br />
-                <ProductReviews book={this.state.book} />
+                <ProductReviews reviews={this.state.reviews} />
               </div>
             </div>
           </div>
@@ -37,4 +53,11 @@ class BookPage extends Component {
   }
 }
 
-export default BookPage;
+const mapStateToProps = state => ({
+});
+
+export default connect(
+  mapStateToProps,
+  { getBookReviews }
+)(BookPage);
+// export default BookPage;

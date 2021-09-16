@@ -1,6 +1,7 @@
 package com.rmit.sept.bk_bookcatalogservices.web;
 
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
+import com.rmit.sept.bk_bookcatalogservices.model.SearchForm;
 import com.rmit.sept.bk_bookcatalogservices.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,5 +62,11 @@ public class BookController {
     private Book updateBook(@RequestBody Book book) {
         bookservice.updateBook(book, book.getId());
         return book;
+    }
+
+    @PostMapping("/search")
+    private List<Book> searchFor(@Valid @RequestBody SearchForm searchForm){
+//        System.out.println
+        return bookservice.searchBooks(searchForm);
     }
 }
