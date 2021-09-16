@@ -44,7 +44,7 @@ class BookCarousal extends Component{
 
         >
             {this.props.books.map((value)=>{
-                        return <BookCard book={value}/>})}
+                return <BookCard book={value}/>})}
 
         </Carousel>
 

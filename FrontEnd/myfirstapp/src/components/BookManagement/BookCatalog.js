@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import BookCarousal from "./BookCarousal";
+// import BookCarousal from "./BookCarousal";
 import {connect} from "react-redux";
 import {login} from "../../actions/securityActions";
 import {getAllBooks} from "../../actions/bookActions";
+import ActionSlider from "./ActionSlider";
+import BookCarousal from "./BookCarousal";
 
 class BookCatalog extends Component {
   componentDidMount() {
@@ -33,7 +35,6 @@ class BookCatalog extends Component {
 }
 
 const mapStateToProps = (state) => {
-
   return{
     books: state.book.books
   }
@@ -44,3 +45,4 @@ export default connect(
     { getAllBooks }
 )(BookCatalog);
 
+// <BookCarousal books={this.props.books}/>

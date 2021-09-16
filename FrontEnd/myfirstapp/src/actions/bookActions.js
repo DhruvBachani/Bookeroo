@@ -1,11 +1,10 @@
 import axios from "axios";
-import {GET_ERRORS, GET_BOOKS, GET_BOOK, SET_CURRENT_USER, GET_CATEGORIES} from "./types";
-import setJWTToken from "../securityUtils/setJWTToken";
-import jwt_decode from "jwt-decode";
+import {GET_ERRORS, GET_BOOKS, GET_BOOK, SET_CURRENT_USER, GET_REVIEWS, GET_CATEGORIES} from "./types";
 
-export const createBook = (book, history) => async dispatch => {
+
+export const createBook = (newBook, history) => async dispatch => {
     try {
-        const res = await axios.post(`http://localhost:8081/api/books/${this.props.name}`, book);
+        const res = await axios.post("http://localhost:8081/api/books/create", newBook);
         history.push("/dashboard");
     } catch (err) {
         dispatch({
@@ -65,4 +64,12 @@ export const search = (searchForm, history) => async dispatch => {
     } catch (error) {
 
     }
+};
+
+export const getBookReviews = (bookId) => async dispatch => {
+    const res = await axios.get(`http://localhost:8082/api/reviews/review_by_id/${bookId}`);
+    dispatch({
+        type: GET_REVIEWS,
+        payload: res.data
+    });
 };

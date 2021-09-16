@@ -2,7 +2,8 @@ import {GET_BOOKS, GET_CATEGORIES} from "../actions/types";
 
 const initialState = {
     books: [],
-    allCategories: []
+    allCategories: [],
+    book: []
 };
 
 export default function(state = initialState, action) {
@@ -17,6 +18,12 @@ export default function(state = initialState, action) {
                 ...state,
                 allCategories: action.payload
             };
+        case GET_BOOK:
+            return {
+                ...state,
+                book: action.payload
+            }
+
         default:
             return state;
     }
