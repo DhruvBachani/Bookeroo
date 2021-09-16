@@ -21,17 +21,8 @@ public class BookService {
         return books;
     }
 
-    // public void saveBook(Book book) {
-    //     bookrepository.save(book);
-    // }
 
     public Book saveBook (Book newBook) {
-        newBook.setName(newBook.getName());
-        newBook.setAuthor(newBook.getAuthor());
-        newBook.setCategory(newBook.getCategory());
-        newBook.setDescription(newBook.getDescription());
-        newBook.setIsbn(newBook.getIsbn());
-
         return bookrepository.save(newBook);
     }
 
@@ -55,5 +46,9 @@ public class BookService {
             }
         });
         return searchResults;
+    }
+
+    public boolean containsByIsbn(Long isbn){
+        return bookrepository.existsByIsbn(isbn);
     }
 }

@@ -12,7 +12,7 @@ public class Book {
     private String author;
     private String category;
     private String description;
-    private int isbn;
+    private Long isbn;
 
     public Book() {
     }
@@ -45,7 +45,7 @@ public class Book {
 
     public void setDescription(String description) { this.description = description; }
 
-    public int getIsbn() { return isbn; }
+    public Long getIsbn() { return isbn; }
 
-    public void setIsbn(int isbn) { this.isbn = isbn; }
+    public void setIsbn(Long isbn) { this.isbn = isbn; }
 }
