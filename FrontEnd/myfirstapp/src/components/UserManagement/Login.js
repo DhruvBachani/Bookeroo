@@ -63,6 +63,7 @@ class Login extends Component {
                     })}
                     placeholder="Email Address"
                     name="username"
+                    type="email"
                     value={this.state.username}
                     onChange={this.onChange}
                   />

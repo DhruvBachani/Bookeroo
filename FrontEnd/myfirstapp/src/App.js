@@ -65,7 +65,7 @@ class App extends Component {
             {
               //Private Routes
             }
-            <Route exact path="/dashboard" component={Dashboard} />
+            <SecuredRoute exact path="/dashboard" component={Dashboard} />
             <Route exact path="/addPerson" component={AddPerson} />
             
           </div>

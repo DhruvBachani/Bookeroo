@@ -64,42 +64,8 @@ img {
   color: #bbb !important;
 }
 
+.display-6{
+  font-size:20px;
+  font-weight: bold;
 
-/* Book slider */
-
-.sliderContainer {
-  display: flex;
-  padding: 9px 0px 70px;
-  overflow: hidden;
-}
-
-.book {
-  background: cornflowerblue;
-  flex: 0 0 19.7%;
-  text-align: center;
-  margin: 0 13px;
-  transition: transform 300ms ease 100ms;
-  padding: 5px 11px;
-}
-
-.book-title-text {
-  color: white;
-}
-
-/* .sliderContainer:hover .book {
-  transform: translateX(-25%);
-} */
-
-.book:hover ~ .book {
-  transform: translateX(25%);
-}
-
-.book:hover {
-  transform: scale(1.25) !important;
-}
-
-.book-cover-image-container {
-  height: 100%;
-  width: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
