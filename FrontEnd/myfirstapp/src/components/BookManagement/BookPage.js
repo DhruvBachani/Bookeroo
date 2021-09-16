@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ProductDetails from "./ProductDetails";
 import ProductReviews from "./ProductReviews";
 import { getBook, getBookReviews } from "../../actions/bookActions";
+import {Link} from "react-router-dom";
 
 class BookPage extends Component {
   componentDidMount() {
