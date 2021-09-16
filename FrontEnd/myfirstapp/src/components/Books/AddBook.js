@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createBook } from "../../actions/bookCatalogActions";
+import { createBook } from "../../actions/bookActions";
 
 class AddBook extends Component {
   constructor() {

@@ -5,15 +5,14 @@ import { link, Link } from "react-router-dom";
 class BookCard extends Component {
   render() {
     return (
-      <div className="book">
-          <React.Fragment>
-            <Link to={`/bookPage/${this.props.arr.id}`} className="book-title-text">
+          <div className="book">
+
               <h5>
-                {this.props.arr.name} <br />
+                {this.props.book.name} <br />
               </h5>
-            </Link>
-          </React.Fragment>
-      </div>
+
+          </div>
+
     );
   }
 }
