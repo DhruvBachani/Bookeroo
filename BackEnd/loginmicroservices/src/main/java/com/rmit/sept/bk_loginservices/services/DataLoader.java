@@ -25,6 +25,7 @@ public class DataLoader implements ApplicationRunner {
     public  void run(ApplicationArguments args) {
         User admin = new User();
         admin.setFullName("Admin");
+        admin.setUserType("Admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin123"));
         admin.setUsername("admin@gmail.com");
 

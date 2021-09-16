@@ -27,15 +27,13 @@ class Register extends Component {
 
   chooseUser=(e)=> {
       const value = e.target.value;
-      if(value == "User"){
-          this.setState({showABN: false}) }
-
-          else if(value == "Publisher"){
-              this.setState({showABN: true})}
-
-              else if(value == "Shop owner"){
-                  this.setState({showABN: true})  }
-
+      if(value == "User") {
+        this.setState({showABN: false})
+      } else if(value == "Publisher") {
+        this.setState({showABN: true})
+      } else if(value == "Shop owner") {
+        this.setState({showABN: true})
+      }
   }
 
   onChange(e) {
@@ -73,6 +71,10 @@ class Register extends Component {
       userType: this.state.userType
     };
 
+    if (this.state.userType == "Publisher" || this.state.userType == "Shop owner") {
+      alert("Request is sent in! Please wait for your admin approval email before you log in")
+    }
+
     this.props.createNewUser(newUser, this.props.history);
   }
 
@@ -99,7 +101,7 @@ class Register extends Component {
                       value="User"
                       onChange={this.onChange}
                   />
-                  <label> &nbsp;Publisher &nbsp;</label>
+                  <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Publisher &nbsp;</label>
                   <input
                       type="radio"
                       onClick = {this.chooseUser}
@@ -107,7 +109,7 @@ class Register extends Component {
                       value="Publisher"
                       onChange={this.onChange}
                   />
-                  <label> &nbsp;Shop Owner&nbsp; </label>
+                  <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shop Owner&nbsp; </label>
                   <input
                       type="radio"
                       onClick = {this.chooseUser}
@@ -140,6 +142,7 @@ class Register extends Component {
                 </div>
                   <div className="form-group">
                       {this.state.showABN && <input
+                          required={true}
                           type="number"
                           // className="form-control form-control-lg popup"
                           className="form-control form-control-lg"

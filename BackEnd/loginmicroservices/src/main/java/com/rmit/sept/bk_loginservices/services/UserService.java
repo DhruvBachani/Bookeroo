@@ -38,6 +38,13 @@ public class UserService {
             // Make sure that password and confirmPassword match
             // We don't persist or show the confirmPassword
             newUser.setConfirmPassword("");
+
+            // Setting the user to get approval for admin if they are a publisher or shop publisher
+            if (newUser.getUserType().equals("Publisher") || newUser.getUserType().equals("Shop owner")) {
+                newUser.setApproved(false);
+            } else {
+                newUser.setApproved(true);
+            }
             return userRepository.save(newUser);
 
         }catch (Exception e){
@@ -45,6 +52,22 @@ public class UserService {
         }
 
     }
+
+    public User retreiveUserbyUsername(String username) {
+        return  userRepository.findByUsername(username);
+    }
+
+    public boolean setApproval(String username) {
+
+        User user = retreiveUserbyUsername(username);
+        if (user == null) {
+            return false;
+        } else if (user.getApproved() == false) {
+            user.setApproved(true);
+        }
+        return true;
+    }
+
 
 
 }

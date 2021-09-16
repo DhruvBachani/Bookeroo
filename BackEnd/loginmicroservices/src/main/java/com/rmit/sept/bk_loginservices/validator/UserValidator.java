@@ -27,8 +27,7 @@ public class UserValidator implements Validator {
 
         }
 
-        //confirmPassword
-
+       // TODO PHONE NUMBER AND ABN MUST HAVE MIN AND MAX OF 10/11 DIGITS (STRINGS)
 
 
     }
