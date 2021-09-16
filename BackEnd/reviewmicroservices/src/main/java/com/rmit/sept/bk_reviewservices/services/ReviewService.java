@@ -34,7 +34,7 @@ public class ReviewService {
     public Review saveReview(Review newReview) {
         newReview.setReview(newReview.getReview());
         newReview.setBookId(newReview.getBookId());
-        newReview.setUserId(newReview.getUserId());
+        newReview.setUserName(newReview.getUserName());
         newReview.setRating(newReview.getRating());
 
         return reviewrepository.save(newReview);

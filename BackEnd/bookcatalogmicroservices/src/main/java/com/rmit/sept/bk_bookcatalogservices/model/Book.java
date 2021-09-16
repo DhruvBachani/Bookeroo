@@ -13,7 +13,6 @@ public class Book {
     private String author;
     private String category;
     private String description;
-    private BigDecimal price;
     private int isbn;
 
     public Book() {
@@ -44,10 +43,6 @@ public class Book {
     public String getDescription() { return this.description; }
 
     public void setDescription(String description) { this.description = description; }
-
-    public BigDecimal getPrice() { return this.price; }
-
-    public void setPrice(BigDecimal price) { this.price = price; }
 
     public int getIsbn() { return isbn; }
 

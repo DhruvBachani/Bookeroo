@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import BookCard from "./BookCard";
 import bookCatalogActions from "../../actions/bookCatalogActions";
+import {getAllBooks} from "../../actions/bookActions";
 
 class ActionSlider extends Component {
   constructor() {
@@ -8,23 +10,29 @@ class ActionSlider extends Component {
 
     this.state = {
       allBooks: [],
-      arr: [],
+      book: [],
     };
   }
 
-  componentDidMount(res) {
-    bookCatalogActions.getAllBooks().then((res) => {
-      this.setState({ allBooks: res.data });
-    });
-  }
+  // componentDidMount(res) {
+    // this.props.getAllBooks().then((res) => {
+    //   this.setState({ allBooks: res.data });
+    // });
+  // }
+
+  // componentDidMount(res) {
+  //   bookCatalogActions.getAllBooks().then((res) => {
+  //     this.setState({ allBooks: res.data });
+  //   });
+  // }
 
   render() {
     return (
       <div className="bookCatalog">
         <div className="sliderContainer">
-          {this.state.allBooks.map((book) => (
+          {this.props.allBooks.map((book) => (
             <div key={book.isbn}>
-              <BookCard arr={book} />
+              <BookCard book={book} />
             </div>
           ))}
         </div>
@@ -33,7 +41,18 @@ class ActionSlider extends Component {
   }
 }
 
-export default ActionSlider;
+const mapStateToProps = (state) => {
+  return {
+    books: state.book.books,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getAllBooks }
+)(ActionSlider);
+
+// export default ActionSlider;
 
 // {this.state.allBooks.map((book) => (
 //   <div key={book.isbn}>

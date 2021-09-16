@@ -23,7 +23,7 @@ class BookCatalog extends Component {
             <div className="col-md-12 align-left">
               <h3>Thriller</h3>
               <br />
-              <ActionSlider />
+              <ActionSlider allBooks={this.props.books}/>
               <hr />
               <h3>Sci-Fi</h3>
 \            </div>

@@ -2,31 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class ProductReviews extends Component {
-  // constructor() {
-  //   super();
-  // }
-
-  // componentDidMount() {
-    // if (this.props.bookReview.bookReviews) {
-      // console.log(this.props.bookReview.bookReviews);
-      // this.props.bookReview.bookReviews.map((review) => (
-      //   console.log(review)
-      // ))
-    // }
-  // }
-
   render() {
     return (
       <div className="bookCatalog">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h3>Reviews</h3>
+              <h2>Reviews</h2>
               {this.props.reviews.map((review) => (
                 <div key={review.id}>
-                  <h4>
-                    {review.rating} <br/>
-                  </h4>
+                  <h5>
+                    {review.userName} <br/>
+                  </h5>
+                  <p>{review.review} <br/></p>
                 </div>
               ))}
             </div>
@@ -37,12 +25,10 @@ class ProductReviews extends Component {
   }
 }
 
-// export default ProductReviews;
+const mapStateToProps = (state) => {
+  return {
+    user: state.review.user
+  };
+};
 
-const mapStateToProps = state => ({
-  bookReview: state.bookReview
-});
-
-export default connect(
-  mapStateToProps
-)(ProductReviews);
+export default connect(mapStateToProps)(ProductReviews);

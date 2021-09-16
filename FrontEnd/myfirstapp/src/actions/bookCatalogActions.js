@@ -31,11 +31,3 @@ export const createBook = (newBook, history) => async (dispatch) => {
     }
 
 };
-
-export const getBookReviews = (bookId) => async dispatch => {
-    const res = await axios.get(`http://localhost:8082/api/reviews/review_by_id/${bookId}`);
-    dispatch({
-        type: GET_REVIEWS,
-        payload: res.data
-    });
-};

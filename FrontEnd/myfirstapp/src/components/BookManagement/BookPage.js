@@ -1,50 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import bookCatalogActions from "../../actions/bookCatalogActions";
 import ProductDetails from "./ProductDetails";
 import ProductReviews from "./ProductReviews";
-import { getBookReviews } from "../../actions/bookCatalogActions";
+import { getBook, getBookReviews } from "../../actions/bookActions";
 
 class BookPage extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      book: [],
-      reviews: [],
-    };
-  }
-
-  componentDidMount(res, res2) {
+  componentDidMount() {
     const bookID = this.props.match.params.bookId;
-    bookCatalogActions.getBook(bookID).then((res) => {
-      this.setState({ book: res.data });
-
-      bookCatalogActions.getReviews(bookID).then((res2) => {
-        this.setState({ reviews: res2.data });
-      });
-
-      this.props.getBookReviews(bookID);
-    
-    });
+    this.props.getBook(bookID);
+    this.props.getBookReviews(bookID);
   }
-  // componentDidMount(res) {
-  //   bookCatalogActions.getBook(this.props.match.params.bookId).then((res) => {
-  //     this.setState({ book: res.data });
-  //   });
-  // }
 
   render() {
     return (
       <div className="bookCatalog">
-        <div className="light-overlay landing-inner text-dark">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <ProductDetails book={this.state.book} />
-                <br />
-                <ProductReviews reviews={this.state.reviews} />
-              </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <ProductDetails book={this.props.book} />
+              <br />
+              <ProductReviews reviews={this.props.reviews} />
             </div>
           </div>
         </div>
@@ -53,11 +28,30 @@ class BookPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-});
+const mapStateToProps = (state) => {
+  return {
+    book: state.book.book,
+    reviews: state.review.bookReviews,
+  };
+};
 
-export default connect(
-  mapStateToProps,
-  { getBookReviews }
-)(BookPage);
-// export default BookPage;
+export default connect(mapStateToProps, { getBook, getBookReviews })(BookPage);
+
+// componentDidMount(res, res2) {
+//   const bookID = this.props.match.params.bookId;
+// bookCatalogActions.getBook(bookID).then((res) => {
+//   this.setState({ book: res.data });
+
+//   bookCatalogActions.getReviews(bookID).then((res2) => {
+//     this.setState({ reviews: res2.data });
+//   });
+
+//     this.props.getBookReviews(bookID);
+
+//   });
+// }
+// componentDidMount(res) {
+//   bookCatalogActions.getBook(this.props.match.params.bookId).then((res) => {
+//     this.setState({ book: res.data });
+//   });
+// }
