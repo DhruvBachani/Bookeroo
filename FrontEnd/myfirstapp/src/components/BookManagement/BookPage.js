@@ -28,6 +28,11 @@ class BookPage extends Component {
     
     });
   }
+  // componentDidMount(res) {
+  //   bookCatalogActions.getBook(this.props.match.params.bookId).then((res) => {
+  //     this.setState({ book: res.data });
+  //   });
+  // }
 
   render() {
     return (

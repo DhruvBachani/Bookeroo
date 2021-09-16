@@ -2,6 +2,7 @@ package com.rmit.sept.bk_bookcatalogservices.services;
 
 import com.rmit.sept.bk_bookcatalogservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
+import com.rmit.sept.bk_bookcatalogservices.model.SearchForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,15 @@ public class BookService {
 
     public void deleteBook(Long id) {
         bookrepository.deleteById(id);
+    }
+
+    public List<Book> searchBooks(SearchForm searchForm){
+        List<Book> searchResults = new ArrayList<Book>();
+        bookrepository.findAll().forEach(book-> {
+            if(book.getName().replaceAll(" ","").toLowerCase().contains(searchForm.searchFor.replaceAll(" ","").toLowerCase())){
+                searchResults.add(book);
+            }
+        });
+        return searchResults;
     }
 }
