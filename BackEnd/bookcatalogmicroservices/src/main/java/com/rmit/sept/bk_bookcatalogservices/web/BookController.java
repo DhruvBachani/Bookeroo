@@ -1,9 +1,6 @@
 package com.rmit.sept.bk_bookcatalogservices.web;
 
-import com.rmit.sept.bk_bookcatalogservices.model.Ad;
-import com.rmit.sept.bk_bookcatalogservices.model.Book;
-import com.rmit.sept.bk_bookcatalogservices.model.Category;
-import com.rmit.sept.bk_bookcatalogservices.model.SearchForm;
+import com.rmit.sept.bk_bookcatalogservices.model.*;
 import com.rmit.sept.bk_bookcatalogservices.services.AdService;
 import com.rmit.sept.bk_bookcatalogservices.services.BookService;
 import com.rmit.sept.bk_bookcatalogservices.services.MapValidationErrorService;
@@ -49,6 +46,11 @@ public class BookController {
         return Arrays.asList(Category.values());
     }
 
+    @GetMapping("/allAds")
+    private List<Ad> getAllAds(@RequestParam String condition){
+        return adService.getAllAds(condition);
+    }
+
     @GetMapping("/book_by_id/{id}")
     private Book getBook(@PathVariable("id") long id) {
         return bookservice.getBookById(id);
@@ -84,7 +86,7 @@ public class BookController {
 
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap != null)return errorMap;
-
+        ad.setCondition(Condition.valueOf(ad.getCondition().toUpperCase()).toString());
         Ad newAd = adService.saveAd(ad);
 
         return  new ResponseEntity<Ad>(newAd, HttpStatus.CREATED);

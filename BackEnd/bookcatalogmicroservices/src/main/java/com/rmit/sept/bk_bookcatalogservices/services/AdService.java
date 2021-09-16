@@ -6,6 +6,9 @@ import com.rmit.sept.bk_bookcatalogservices.model.Ad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Locale;
+
 
 @Service
 public class AdService {
@@ -14,6 +17,10 @@ public class AdService {
 
     public Ad saveAd(Ad newAd) {
         return adRepository.save(newAd);
+    }
+
+    public List<Ad> getAllAds(String condition){
+        return adRepository.findAllByCondition(condition.toUpperCase(Locale.ROOT));
     }
 
 

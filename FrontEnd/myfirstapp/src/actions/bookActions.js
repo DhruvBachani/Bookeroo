@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 
 export const createBook = (book, history) => async dispatch => {
     try {
-        const res = await axios.post(`http://localhost:8081/api/book/${this.props.name}`, book);
+        const res = await axios.post(`http://localhost:8081/api/books/${this.props.name}`, book);
         history.push("/dashboard");
     } catch (err) {
         dispatch({
@@ -17,7 +17,7 @@ export const createBook = (book, history) => async dispatch => {
 
 export const postAd = (AdRequest, history) => async dispatch => {
     try {
-        const res = await axios.post(`http://localhost:8081/api/book/postAd`, AdRequest);
+        const res = await axios.post(`http://localhost:8081/api/books/postAd`, AdRequest);
         history.push("/bookCatalog");
     } catch (err) {
         dispatch({

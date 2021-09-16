@@ -3,6 +3,7 @@ package com.rmit.sept.bk_bookcatalogservices.model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 
 @Entity
@@ -17,6 +18,17 @@ public class Ad {
     private Long user_id;
     @NotNull
     private BigDecimal price;
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    @NotBlank
+    private String condition;
 
 
     public Long getId() {
