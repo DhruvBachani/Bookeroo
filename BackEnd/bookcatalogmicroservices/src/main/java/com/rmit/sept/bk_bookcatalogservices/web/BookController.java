@@ -46,19 +46,19 @@ public class BookController {
         return Arrays.asList(Category.values());
     }
 
-    @GetMapping("/allAds")
-    private List<Ad> getAllAds(@RequestParam String condition){
-        return adService.getAllAds(condition);
+    @GetMapping("{isbn}/allAds")
+    private List<Ad> getAllAds(@RequestParam String condition, @PathVariable("isbn") Long isbn){
+        return adService.getAllAds(condition, isbn);
     }
 
-    @GetMapping("/book_by_id/{id}")
-    private Book getBook(@PathVariable("id") long id) {
-        return bookservice.getBookById(id);
+    @GetMapping("/{isbn}")
+    private Book getBook(@PathVariable("isbn") Long isbn) {
+        return bookservice.getBookByIsbn(isbn);
     }
 
-    @DeleteMapping("/books/{id}")
-    private void deleteBook(@PathVariable("id") long id) {
-        bookservice.deleteBook(id);
+    @DeleteMapping("/books/{isbn}")
+    private void deleteBook(@PathVariable("isbn") Long isbn) {
+        bookservice.deleteBook(isbn);
     }
     
     @RequestMapping(value = "/create")

@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface AdRepository extends CrudRepository<Ad, Long> {
-    List<Ad> findAllByCondition(String condition);
+    List<Ad> findAllByConditionAndIsbn(String condition, Long isbn);
 }

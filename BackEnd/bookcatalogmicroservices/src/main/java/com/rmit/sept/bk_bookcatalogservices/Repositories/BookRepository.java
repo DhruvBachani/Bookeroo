@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface BookRepository extends CrudRepository<Book, Long> {
 
     boolean existsByIsbn(Long isbn);
+    Book findByIsbn(Long isbn);
 
 }

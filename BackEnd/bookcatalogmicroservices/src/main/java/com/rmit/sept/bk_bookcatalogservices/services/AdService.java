@@ -19,8 +19,8 @@ public class AdService {
         return adRepository.save(newAd);
     }
 
-    public List<Ad> getAllAds(String condition){
-        return adRepository.findAllByCondition(condition.toUpperCase(Locale.ROOT));
+    public List<Ad> getAllAds(String condition, Long isbn){
+        return adRepository.findAllByConditionAndIsbn(condition.toUpperCase(), isbn);
     }
 
 

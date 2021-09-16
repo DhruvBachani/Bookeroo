@@ -25,8 +25,8 @@ public class BookService {
         return bookrepository.save(newBook);
     }
 
-    public Book getBookById(Long id) {
-        return bookrepository.findById(id).get();
+    public Book getBookByIsbn(Long isbn) {
+        return bookrepository.findByIsbn(isbn);
     }
 
     public void updateBook(Book book, Long id) {

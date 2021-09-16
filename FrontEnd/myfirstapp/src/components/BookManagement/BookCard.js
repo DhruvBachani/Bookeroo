@@ -7,7 +7,7 @@ class BookCard extends Component {
     return (
       <div className="book">
           <React.Fragment>
-            <Link to={`/bookPage/${this.props.book.id}`} className="book-title-text">
+            <Link to={`/bookPage/${this.props.book.isbn}`} className="book-title-text">
               <h5>
                 {this.props.book.name} <br />
               </h5>

@@ -1,4 +1,4 @@
-import {GET_BOOKS, GET_CATEGORIES} from "../actions/types";
+import {GET_BOOK, GET_BOOKS, GET_CATEGORIES} from "../actions/types";
 
 const initialState = {
     books: [],
