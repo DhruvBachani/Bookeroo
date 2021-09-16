@@ -26,6 +26,9 @@ class Landing extends Component {
                 <Link className="btn btn-lg btn-secondary mr-2" to="/bookCatalog">
                   Book Catalog
                 </Link>
+                <Link className="btn btn-lg btn-secondary mr-2" to="/newAd">
+                  Post an ad
+                </Link>
               </div>
             </div>
           </div>

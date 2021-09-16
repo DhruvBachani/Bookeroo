@@ -23,6 +23,7 @@ import setJWTToken from "./securityUtils/setJWTToken";
 import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
+import SearchResults from "./components/BookManagement/SearchResults";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -47,7 +48,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <Header />
+            <Route component={Header} />
             {
               //Public Routes
             }
@@ -60,13 +61,14 @@ class App extends Component {
             <Route exact path="/bookPage/:bookId" component={BookPage} />
             <Route exact path="/manageBooks" component={ManageBooks} />
             <Route exact path="/addBook" component={AddBook}/>
+            <Route exact path="/search-results" component={SearchResults}/>
 
 
             {
               //Private Routes
             }
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/addPerson" component={AddPerson} />
+            <SecuredRoute exact path="/dashboard" component={Dashboard} />
+            <SecuredRoute exact path="/addPerson" component={AddPerson} />
             
           </div>
         </Router>

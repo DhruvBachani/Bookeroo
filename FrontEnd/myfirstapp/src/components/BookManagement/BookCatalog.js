@@ -1,11 +1,18 @@
 import React, { Component } from "react";
-import ActionSlider from "./ActionSlider";
+import BookCarousal from "./BookCarousal";
+import {connect} from "react-redux";
+import {login} from "../../actions/securityActions";
+import {getAllBooks} from "../../actions/bookActions";
 
 class BookCatalog extends Component {
+  componentDidMount() {
+    this.props.getAllBooks()
+  }
+
   render() {
+
     return (
       <div className="bookCatalog">
-        <div className="light-overlay landing-inner text-dark">
           <div className="container">
             <div className="col-md-12 text-center">
               <h1 className="display-3 mb-4">The Great Book Catalog</h1>
@@ -14,17 +21,26 @@ class BookCatalog extends Component {
             <hr />
             <div className="col-md-12 align-left">
               <h3>Thriller</h3>
-              <ActionSlider />
               <br />
+              <BookCarousal books={this.props.books}/>
               <hr />
               <h3>Sci-Fi</h3>
-              <ActionSlider />
-            </div>
+\            </div>
           </div>
-        </div>
       </div>
     );
   }
 }
 
-export default BookCatalog;
+const mapStateToProps = (state) => {
+
+  return{
+    books: state.book.books
+  }
+};
+
+export default connect(
+    mapStateToProps,
+    { getAllBooks }
+)(BookCatalog);
+

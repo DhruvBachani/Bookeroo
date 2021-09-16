@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import bookCatalogActions from "../../actions/bookCatalogActions";
+import bookCatalogActions from "../../actions/bookActions";
 import ProductDetails from "./ProductDetails";
 import ProductReviews from "./ProductReviews";
 
@@ -12,11 +12,11 @@ class BookPage extends Component {
     };
   }
 
-  componentDidMount(res) {
-    bookCatalogActions.getBook(this.props.match.params.bookId).then((res) => {
-      this.setState({ book: res.data });
-    });
-  }
+  // componentDidMount(res) {
+  //   bookCatalogActions.getBook(this.props.match.params.bookId).then((res) => {
+  //     this.setState({ book: res.data });
+  //   });
+  // }
 
   render() {
     return (
