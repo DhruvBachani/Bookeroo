@@ -24,10 +24,11 @@ public class DataLoader implements ApplicationRunner {
 
     public  void run(ApplicationArguments args) {
         User admin = new User();
-        admin.setFullName("Admin");
+        admin.setFullName("Admin User");
         admin.setUserType("Admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin123"));
         admin.setUsername("admin@gmail.com");
+        admin.setApproved(true);
 
         userRepository.save(admin);
     }

@@ -96,7 +96,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/dashboard")
+    @PostMapping("/approval")
     public ResponseEntity<?> approveUser(@Valid @RequestBody ApprovalRequest ApprovalRequest, BindingResult result){
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap != null) return errorMap;
@@ -107,6 +107,20 @@ public class UserController {
         return null;
     }
 
+//
+//    @PostMapping("/dashboard")
+//    public ResponseEntity<?> banUser(@Valid @RequestBody ApprovalRequest ApprovalRequest, BindingResult result){
+//        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+//        if(errorMap != null) return errorMap;
+//
+//        userService.setApproval(ApprovalRequest.getUsername());
+//
+//        // return something
+//        return null;
+//    }
+
 }
 
-// TODO dashboard - admin first then normal and publishers etc
+// TODO dashboard profile-
+// TODO admin request - changing approval
+// TODO admin ban request

@@ -54,12 +54,6 @@ class Register extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state.userType);
-    console.log(this.state.phoneNumber);
-    console.log(this.state.abnNumber);
-    console.log(this.state.address);
-    console.log(this.state.username);
-
     const newUser = {
       username: this.state.username,
       fullName: this.state.fullName,
@@ -93,15 +87,15 @@ class Register extends Component {
               <p className="display-6"> User Type </p>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                  <label> &nbsp;User &nbsp; </label>
+                  <label> &nbsp;Customer &nbsp; </label>
                   <input
                       type="radio"
                       onClick = {this.chooseUser}
                       name="userType"
-                      value="User"
+                      value="Customer"
                       onChange={this.onChange}
                   />
-                  <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Publisher &nbsp;</label>
+                  <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Publisher &nbsp;</label>
                   <input
                       type="radio"
                       onClick = {this.chooseUser}
@@ -109,7 +103,7 @@ class Register extends Component {
                       value="Publisher"
                       onChange={this.onChange}
                   />
-                  <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shop Owner&nbsp; </label>
+                  <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shop Owner &nbsp; </label>
                   <input
                       type="radio"
                       onClick = {this.chooseUser}
