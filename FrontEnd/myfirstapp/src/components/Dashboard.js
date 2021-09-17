@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {logout} from "../actions/securityActions";
 import CreateRequestButton from "./UserManagement/CreateRequestButton";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 
 class Dashboard extends Component {
@@ -34,6 +35,10 @@ class Dashboard extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <h1 className="display-4 text-left">Dashboard</h1>
+                        <br />
+                        <Link className="btn btn-lg btn-secondary mr-2" to="/newAd">
+                            Post an ad
+                        </Link>
                         <br />
                         {(this.props.security.user.userType === "Admin") && <CreateRequestButton />}
                         <hr />
