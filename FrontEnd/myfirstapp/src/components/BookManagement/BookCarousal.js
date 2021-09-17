@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import BookCard from "./BookCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import {AiFillCaretLeft, AiFillCaretRight} from "react-icons/all";
 
 const responsive = {
     desktop: {
@@ -45,7 +44,7 @@ class BookCarousal extends Component{
 
         >
             {this.props.books.map((value)=>{
-                        return <BookCard book={value}/>})}
+                return <BookCard book={value} key={value.isbn}/>})}
 
         </Carousel>
 

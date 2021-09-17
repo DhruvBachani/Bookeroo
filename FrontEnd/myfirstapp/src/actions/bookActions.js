@@ -1,7 +1,6 @@
 import axios from "axios";
-import {GET_ERRORS, GET_BOOKS, GET_BOOK, SET_CURRENT_USER, GET_REVIEWS} from "./types";
-import setJWTToken from "../securityUtils/setJWTToken";
-import jwt_decode from "jwt-decode";
+import {GET_ERRORS, GET_BOOKS, GET_BOOK, GET_REVIEWS, GET_CATEGORIES} from "./types";
+
 
 export const createBook = (newBook, history) => async dispatch => {
     try {
@@ -15,21 +14,40 @@ export const createBook = (newBook, history) => async dispatch => {
     }
 };
 
+export const postAd = (AdRequest, history) => async dispatch => {
+    try {
+        const res = await axios.post(`http://localhost:8081/api/books/postAd`, AdRequest);
+        history.push("/bookCatalog");
+    } catch (err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+};
+
 export const getAllBooks = () => async dispatch => {
     const res = await axios.get("http://localhost:8081/api/books/bookCatalog");
-    console.log("request")
     dispatch({
         type: GET_BOOKS,
         payload: res.data
     });
 };
 
-export const getBook = (bookId) => async dispatch => {
-    const res = await axios.get(`http://localhost:8081/api/books/book_by_id/${bookId}`);
+export const getAllCategories = () => async dispatch => {
+    const res = await axios.get("http://localhost:8081/api/books/allCategories");
     dispatch({
-        type: GET_BOOK,
+        type: GET_CATEGORIES,
         payload: res.data
     });
+};
+
+export const getBook = (isbn, history) => async dispatch => {
+        const res = await axios.get(`http://localhost:8081/api/books/${isbn}`);
+        dispatch({
+            type: GET_BOOK,
+            payload: res.data
+        });
 };
 
 export const search = (searchForm, history) => async dispatch => {

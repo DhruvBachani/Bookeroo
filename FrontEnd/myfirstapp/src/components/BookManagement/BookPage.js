@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import ProductDetails from "./ProductDetails";
 import ProductReviews from "./ProductReviews";
 import { getBook, getBookReviews } from "../../actions/bookActions";
+import {Link} from "react-router-dom";
 
 class BookPage extends Component {
   componentDidMount() {
-    const bookID = this.props.match.params.bookId;
+    const bookID = this.props.match.params.isbn;
     this.props.getBook(bookID);
     this.props.getBookReviews(bookID);
   }
@@ -21,6 +22,9 @@ class BookPage extends Component {
               <br />
               <ProductReviews reviews={this.props.reviews} />
             </div>
+            <Link className="btn btn-lg btn-primary mr-2" to={window.location.pathname+"/sellers"}>
+              Choose Seller
+            </Link>
           </div>
         </div>
       </div>
