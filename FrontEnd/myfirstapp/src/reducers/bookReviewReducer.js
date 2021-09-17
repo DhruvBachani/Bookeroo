@@ -1,8 +1,7 @@
-import { GET_REVIEWS } from "../actions/types";
+import { GET_REVIEWS, GET_USER } from "../actions/types";
 
 const initialState = {
-  bookReviews: [],
-  review: {}
+  bookReviews: []
 };
 
 export default function(state = initialState, action) {

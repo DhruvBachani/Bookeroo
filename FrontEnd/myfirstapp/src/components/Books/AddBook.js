@@ -12,7 +12,6 @@ class AddBook extends Component {
       author: "",
       category: "",
       description: "",
-      price: "",
       isbn: "",
     };
 
@@ -31,7 +30,6 @@ class AddBook extends Component {
       author: this.state.author,
       category: this.state.category,
       description: this.state.description,
-      price: this.state.price,
       isbn: this.state.isbn,
     };
 
@@ -90,17 +88,9 @@ class AddBook extends Component {
                 <div className="form-group">
                   <input
                     className="form-control form-control-lg"
-                    placeholder="Price"
-                    name="price"
-                    value={this.state.price}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="form-control form-control-lg"
                     placeholder="ISBN Number"
                     name="isbn"
+                    type="number"
                     value={this.state.isbn}
                     onChange={this.onChange}
                   />

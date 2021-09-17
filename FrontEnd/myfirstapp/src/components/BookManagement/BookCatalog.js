@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {login} from "../../actions/securityActions";
 import {getAllBooks} from "../../actions/bookActions";
 import ActionSlider from "./ActionSlider";
+import BookCarousal from "./BookCarousal";
 
 class BookCatalog extends Component {
   componentDidMount() {
@@ -23,7 +24,7 @@ class BookCatalog extends Component {
             <div className="col-md-12 align-left">
               <h3>Thriller</h3>
               <br />
-              <ActionSlider />
+              <BookCarousal books={this.props.books}/>
               <hr />
               <h3>Sci-Fi</h3>
 \            </div>

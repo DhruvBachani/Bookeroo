@@ -25,6 +25,8 @@ import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
 import SearchResults from "./components/BookManagement/SearchResults";
+import PostAd from "./components/BookManagement/PostAd";
+import Sellers from "./components/BookManagement/Sellers";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -59,10 +61,11 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
 
             <Route exact path="/bookCatalog" component={BookCatalog} />
-            <Route exact path="/bookPage/:bookId" component={BookPage} />
+            <Route exact path="/bookPage/:isbn" component={BookPage} />
             <Route exact path="/manageBooks" component={ManageBooks} />
             <Route exact path="/addBook" component={AddBook}/>
             <Route exact path="/search-results" component={SearchResults}/>
+            <Route exact path="/bookPage/:isbn/sellers" component={Sellers}/>
 
             <Route exact path="/addReview" render={props => (
                 <AddReview {...props}/>
@@ -72,6 +75,8 @@ class App extends Component {
               //Private Routes
             }
             <SecuredRoute exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/newAd" component={PostAd} />
+
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
             
           </div>

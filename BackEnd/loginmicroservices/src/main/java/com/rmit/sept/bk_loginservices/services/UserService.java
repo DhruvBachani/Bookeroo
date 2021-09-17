@@ -31,9 +31,20 @@ public class UserService {
             newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
             //Username has to be unique (exception)
             newUser.setUsername(newUser.getUsername());
+            newUser.setAddress(newUser.getAddress());
+            newUser.setPhoneNumber(newUser.getPhoneNumber());
+            newUser.setAbn_number(newUser.getAbnNumber());
+            newUser.setUserType(newUser.getUserType());
             // Make sure that password and confirmPassword match
             // We don't persist or show the confirmPassword
             newUser.setConfirmPassword("");
+
+            // Setting the user to get approval for admin if they are a publisher or shop publisher
+            if (newUser.getUserType().equals("Publisher") || newUser.getUserType().equals("Shop owner")) {
+                newUser.setApproved(false);
+            } else {
+                newUser.setApproved(true);
+            }
             return userRepository.save(newUser);
 
         }catch (Exception e){
@@ -41,6 +52,22 @@ public class UserService {
         }
 
     }
+
+    public User retreiveUserbyUsername(String username) {
+        return  userRepository.findByUsername(username);
+    }
+
+    public boolean setApproval(String username) {
+
+        User user = retreiveUserbyUsername(username);
+        if (user == null) {
+            return false;
+        } else if (user.getApproved() == false) {
+            user.setApproved(true);
+        }
+        return true;
+    }
+
 
 
 }

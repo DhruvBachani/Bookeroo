@@ -1,8 +1,10 @@
 package com.rmit.sept.bk_bookcatalogservices.web;
 
-import com.rmit.sept.bk_bookcatalogservices.model.Book;
-import com.rmit.sept.bk_bookcatalogservices.model.SearchForm;
+import com.rmit.sept.bk_bookcatalogservices.model.*;
+import com.rmit.sept.bk_bookcatalogservices.services.AdService;
 import com.rmit.sept.bk_bookcatalogservices.services.BookService;
+import com.rmit.sept.bk_bookcatalogservices.services.MapValidationErrorService;
+import com.rmit.sept.bk_bookcatalogservices.validator.AdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,38 +24,46 @@ import javax.validation.Valid;
 public class BookController {
 
     @Autowired
+    private MapValidationErrorService mapValidationErrorService;
+
+    @Autowired
+    private AdService adService;
+
+    @Autowired
+    private AdValidator adValidator;
+
+    @Autowired
     BookService bookservice;
 
     @RequestMapping("/bookCatalog")
     private List<Book> getAllBooks() {
-        return bookservice.getAllBooks();        
 
-        // return Arrays.asList(
-        //     new Book("Persuader", "Lee Child", "Thriller", "No desc", 123),
-        //     new Book("If Tomorrow Comes", "Sydney Sheldon", "Thriller", "No desc", 456),
-        //     new Book("Murder on the Orient Express", "Agatha Christie", "Mystery", "No desc", 2244),
-        //     new Book("The Martian", "Andy Weir", "Adventure", "No desc", 765),
-        //     new Book("NYPD Red", "James Patterson", "Thriller", "No desc", 014),
-        //     new Book("The Recruit", "Robert Muchamore", "Action", "No desc", 775)
-        // );
-
-        // return Collections.singletonList(
-        //     new Book("Persuader", "Lee Child", "Thriller", 123)
-        // );
+        return bookservice.getAllBooks();
     }
 
-    @GetMapping("/book_by_id/{id}")
-    private Book getBook(@PathVariable("id") long id) {
-        return bookservice.getBookById(id);
+    @GetMapping("/allCategories")
+    private List<Category> getAllCategories(){
+        return Arrays.asList(Category.values());
     }
 
-    @DeleteMapping("/books/{id}")
-    private void deleteBook(@PathVariable("id") long id) {
-        bookservice.deleteBook(id);
+    @GetMapping("{isbn}/allAds")
+    private List<Ad> getAllAds(@RequestParam String condition, @PathVariable("isbn") Long isbn){
+        return adService.getAllAds(condition, isbn);
+    }
+
+    @GetMapping("/{isbn}")
+    private Book getBook(@PathVariable("isbn") Long isbn) {
+        return bookservice.getBookByIsbn(isbn);
+    }
+
+    @DeleteMapping("/books/{isbn}")
+    private void deleteBook(@PathVariable("isbn") Long isbn) {
+        bookservice.deleteBook(isbn);
     }
     
     @RequestMapping(value = "/create")
     public Long saveBook(@RequestBody Book book) {
+        book.setCategory(Category.valueOf(book.getCategory()).toString());
         bookservice.saveBook(book);
         return book.getId();
     }
@@ -68,5 +78,17 @@ public class BookController {
     private List<Book> searchFor(@Valid @RequestBody SearchForm searchForm){
 //        System.out.println
         return bookservice.searchBooks(searchForm);
+    }
+
+    @PostMapping("/createAd")
+    private ResponseEntity<?> createAd(@Valid @RequestBody Ad ad, BindingResult result){
+        adValidator.validate(ad, result);
+
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if(errorMap != null)return errorMap;
+        ad.setCondition(Condition.valueOf(ad.getCondition().toUpperCase()).toString());
+        Ad newAd = adService.saveAd(ad);
+
+        return  new ResponseEntity<Ad>(newAd, HttpStatus.CREATED);
     }
 }

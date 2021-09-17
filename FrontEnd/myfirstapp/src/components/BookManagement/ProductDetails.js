@@ -25,15 +25,12 @@ class ProductDetails extends Component {
                 <h4>ISBN: {this.props.book.isbn}</h4> <br />
                 <h4>Category: {this.props.book.category}</h4> <br />
               </div>
-              <div className="col-md-4 text-align-center">
-                <h4>Price: ${this.props.book.price}</h4>
-              </div>
             </div>
-            <br/> <br/>
+            <br /> <br />
             <div className="row>">
               <h4>Description: {this.props.book.description}</h4>
             </div>
-            <br/> <hr/>
+            <br /> <hr />
           </div>
         </div>
       </div>
@@ -42,3 +39,7 @@ class ProductDetails extends Component {
 }
 
 export default ProductDetails;
+
+// <div className="col-md-4 text-align-center">
+//   <h4>Price: ${this.props.book.price}</h4>
+// </div>;

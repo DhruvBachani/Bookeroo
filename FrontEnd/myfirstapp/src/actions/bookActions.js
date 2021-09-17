@@ -1,11 +1,10 @@
 import axios from "axios";
-import {GET_ERRORS, GET_BOOKS, GET_BOOK, SET_CURRENT_USER} from "./types";
-import setJWTToken from "../securityUtils/setJWTToken";
-import jwt_decode from "jwt-decode";
+import {GET_ERRORS, GET_BOOKS, GET_BOOK, GET_REVIEWS, GET_CATEGORIES} from "./types";
 
-export const createBook = (book, history) => async dispatch => {
+
+export const createBook = (newBook, history) => async dispatch => {
     try {
-        const res = await axios.post(`http://localhost:8080/api/book/${this.props.name}`, book);
+        const res = await axios.post("http://localhost:8081/api/books/create", newBook);
         history.push("/dashboard");
     } catch (err) {
         dispatch({
@@ -14,25 +13,41 @@ export const createBook = (book, history) => async dispatch => {
         });
     }
 };
+
+export const postAd = (AdRequest, history) => async dispatch => {
+    try {
+        const res = await axios.post(`http://localhost:8081/api/books/postAd`, AdRequest);
+        history.push("/bookCatalog");
+    } catch (err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+};
+
 export const getAllBooks = () => async dispatch => {
     const res = await axios.get("http://localhost:8081/api/books/bookCatalog");
-    console.log("request")
     dispatch({
         type: GET_BOOKS,
         payload: res.data
     });
 };
 
-export const getBook = (id, history) => async dispatch => {
-    try {
-        const res = await axios.get(`http://localhost:8081/api/book/${id}`);
+export const getAllCategories = () => async dispatch => {
+    const res = await axios.get("http://localhost:8081/api/books/allCategories");
+    dispatch({
+        type: GET_CATEGORIES,
+        payload: res.data
+    });
+};
+
+export const getBook = (isbn, history) => async dispatch => {
+        const res = await axios.get(`http://localhost:8081/api/books/${isbn}`);
         dispatch({
             type: GET_BOOK,
             payload: res.data
         });
-    } catch (error) {
-        history.push("/dashboard");
-    }
 };
 
 export const search = (searchForm, history) => async dispatch => {
@@ -45,4 +60,12 @@ export const search = (searchForm, history) => async dispatch => {
     } catch (error) {
 
     }
+};
+
+export const getBookReviews = (bookId) => async dispatch => {
+    const res = await axios.get(`http://localhost:8082/api/reviews/review_by_id/${bookId}`);
+    dispatch({
+        type: GET_REVIEWS,
+        payload: res.data
+    });
 };
