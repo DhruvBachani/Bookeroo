@@ -3,7 +3,7 @@ import "./App.css";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Layout/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import AddPerson from "./components/Persons/AddPerson";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -55,7 +55,9 @@ class App extends Component {
               //Public Routes
             }
            
-            <Route exact path="/" component={Landing} />
+            <Route exact path="/">
+              <Redirect to="bookCatalog" />
+            </Route>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
 
@@ -71,7 +73,7 @@ class App extends Component {
               //Private Routes
             }
             <SecuredRoute exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/newAd" component={PostAd} />
+            <SecuredRoute exact path="/newAd" component={PostAd} />
 
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
             

@@ -16,8 +16,13 @@ export const createBook = (newBook, history) => async dispatch => {
 
 export const postAd = (AdRequest, history) => async dispatch => {
     try {
-        const res = await axios.post(`http://localhost:8081/api/books/postAd`, AdRequest);
+        const res = await axios.post(`http://localhost:8081/api/books/createAd`, AdRequest);
         history.push("/bookCatalog");
+
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
     } catch (err) {
         dispatch({
             type: GET_ERRORS,

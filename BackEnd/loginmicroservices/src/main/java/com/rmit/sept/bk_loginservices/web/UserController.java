@@ -40,6 +40,11 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+    @GetMapping("/{userId}")
+    private User getUserInfo(@PathVariable("userId") Long userId) {
+        return userService.retreiveUserbyUserId(userId);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result){
         // Validate passwords match
