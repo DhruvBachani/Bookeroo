@@ -57,6 +57,8 @@ public class UserService {
         return  userRepository.findByUsername(username);
     }
 
+    public User retreiveUserbyUserId(Long userId){ return userRepository.getById(userId);}
+
     public boolean setApproval(String username) {
 
         User user = retreiveUserbyUsername(username);

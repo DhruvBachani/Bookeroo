@@ -35,7 +35,7 @@ class Dashboard extends Component {
                     <div className="col-md-12">
                         <h1 className="display-4 text-left">Dashboard</h1>
                         <br />
-                        <CreateRequestButton />
+                        {(this.props.security.user.userType === "Admin") && <CreateRequestButton />}
                         <hr />
                         <form onSubmit={this.onSubmit}><button className="btn btn-lg btn-info"> Log out </button>
                         </form>

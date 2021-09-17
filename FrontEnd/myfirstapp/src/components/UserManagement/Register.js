@@ -27,11 +27,11 @@ class Register extends Component {
 
   chooseUser=(e)=> {
     const value = e.target.value;
-    if(value == "User") {
+    if(value === "Customer") {
       this.setState({showABN: false})
-    } else if(value == "Publisher") {
+    } else if(value === "Publisher") {
       this.setState({showABN: true})
-    } else if(value == "Shop owner") {
+    } else if(value === "Shop owner") {
       this.setState({showABN: true})
     }
   }
@@ -41,6 +41,10 @@ class Register extends Component {
       [e.target.name]: e.target.value
     });
 
+    if(e.target.name ==="userType"){
+      this.chooseUser(e)
+
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -86,30 +90,27 @@ class Register extends Component {
                 })}
                 <p className="display-6"> User Type </p>
                 <form onSubmit={this.onSubmit}>
-                  <div className="form-group">
+                  <div className="form-group" onChange={this.onChange}>
                     <label> &nbsp;Customer &nbsp; </label>
                     <input
                         type="radio"
-                        onClick = {this.chooseUser}
                         name="userType"
                         value="Customer"
-                        onChange={this.onChange}
+                        // onChange={this.onChange}
                     />
                     <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Publisher &nbsp;</label>
                     <input
                         type="radio"
-                        onClick = {this.chooseUser}
                         name="userType"
                         value="Publisher"
-                        onChange={this.onChange}
+                        // onChange={this.onChange}
                     />
                     <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shop Owner &nbsp; </label>
                     <input
                         type="radio"
-                        onClick = {this.chooseUser}
                         name="userType"
                         value="Shop owner"
-                        onChange={this.onChange}
+                        // onChange={this.onChange}
                     />
                   </div>
                   <div className="form-group">
