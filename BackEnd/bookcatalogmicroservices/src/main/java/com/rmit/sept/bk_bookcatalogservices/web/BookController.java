@@ -63,7 +63,7 @@ public class BookController {
     
     @RequestMapping(value = "/create")
     public Long saveBook(@RequestBody Book book) {
-        book.setCategory(Category.valueOf(book.getCategory()).toString());
+//        book.setCategory(Category.valueOf(book.getCategory()).toString());
         bookservice.saveBook(book);
         return book.getId();
     }

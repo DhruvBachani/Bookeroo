@@ -3,7 +3,7 @@ import "./App.css";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Layout/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import AddPerson from "./components/Persons/AddPerson";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -25,8 +25,9 @@ import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
 import SearchResults from "./components/BookManagement/SearchResults";
-import PostAd from "./components/BookManagement/PostAd";
+import Requests from "./components/UserManagement/Requests";
 import Sellers from "./components/BookManagement/Sellers";
+import PostAd from "./components/BookManagement/PostAd";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -56,7 +57,9 @@ class App extends Component {
               //Public Routes
             }
            
-            <Route exact path="/" component={Landing} />
+            <Route exact path="/">
+              <Redirect to="bookCatalog" />
+            </Route>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
 
@@ -75,10 +78,12 @@ class App extends Component {
               //Private Routes
             }
             <SecuredRoute exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/newAd" component={PostAd} />
+            <SecuredRoute exact path="/newAd" component={PostAd} />
 
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
             
+            <SecuredRoute exact path="/requests" component={Requests} />
+
           </div>
         </Router>
       </Provider>

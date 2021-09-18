@@ -13,11 +13,13 @@ class Register extends Component {
       fullName: "",
       password: "",
       confirmPassword: "",
-      phoneNumber: "+61",
+      phoneNumber: "",
+      shopName:"",
       address: "",
       abnNumber: "",
       userType: "",
       showABN: false,
+      showShopName: false,
 
       errors: {}
     };
@@ -25,14 +27,15 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  // Hides the shop name and abn for normal customers to cause less confusion
   chooseUser=(e)=> {
     const value = e.target.value;
-    if(value == "User") {
-      this.setState({showABN: false})
+    if(value == "Customer") {
+      this.setState({showABN: false, showShopName: false})
     } else if(value == "Publisher") {
-      this.setState({showABN: true})
+      this.setState({showABN: true, showShopName: true})
     } else if(value == "Shop owner") {
-      this.setState({showABN: true})
+      this.setState({showABN: true, showShopName: true})
     }
   }
 
@@ -41,15 +44,17 @@ class Register extends Component {
       [e.target.name]: e.target.value
     });
 
+    if(e.target.name ==="userType"){
+      this.chooseUser(e)
+
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-
     if (nextProps.errors) {
 
       this.setState({ errors: nextProps.errors });
     }
-
   }
 
   onSubmit(e) {
@@ -60,11 +65,13 @@ class Register extends Component {
       password: this.state.password,
       confirmPassword: this.state.confirmPassword,
       phoneNumber: this.state.phoneNumber,
+      shopName: this.state.shopName,
       abnNumber: this.state.abnNumber,
       address : this.state.address,
       userType: this.state.userType
     };
 
+    // Ensure publisher and shop owners they can't log in yet.
     if (this.state.userType == "Publisher" || this.state.userType == "Shop owner") {
       alert("Request is sent in! Please wait for your admin approval email before you log in")
     }
@@ -86,30 +93,27 @@ class Register extends Component {
                 })}
                 <p className="display-6"> User Type </p>
                 <form onSubmit={this.onSubmit}>
-                  <div className="form-group">
+                  <div className="form-group" onChange={this.onChange}>
                     <label> &nbsp;Customer &nbsp; </label>
                     <input
                         type="radio"
-                        onClick = {this.chooseUser}
                         name="userType"
                         value="Customer"
-                        onChange={this.onChange}
+                        // onChange={this.onChange}
                     />
                     <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Publisher &nbsp;</label>
                     <input
                         type="radio"
-                        onClick = {this.chooseUser}
                         name="userType"
                         value="Publisher"
-                        onChange={this.onChange}
+                        // onChange={this.onChange}
                     />
                     <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shop Owner &nbsp; </label>
                     <input
                         type="radio"
-                        onClick = {this.chooseUser}
                         name="userType"
                         value="Shop owner"
-                        onChange={this.onChange}
+                        // onChange={this.onChange}
                     />
                   </div>
                   <div className="form-group">
@@ -138,7 +142,6 @@ class Register extends Component {
                     {this.state.showABN && <input
                         required={true}
                         type="number"
-                        // className="form-control form-control-lg popup"
                         className="form-control form-control-lg"
                         placeholder="ABN Number"
                         name="abnNumber"
@@ -147,10 +150,20 @@ class Register extends Component {
                     />}
                   </div>
                   <div className="form-group">
+                    {this.state.showShopName && <input
+                        required={true}
+                        type="text"
+                        className="form-control form-control-lg"
+                        placeholder="Shop Name"
+                        name="shopName"
+                        value={this.state.shopName}
+                        onChange={this.onChange}
+                    />}
+                  </div>
+                  <div className="form-group">
                     <input
                         required={true}
                         type="number"
-                        // className="form-control form-control-lg p2"
                         className="form-control form-control-lg"
                         placeholder="Phone Number"
                         name="phoneNumber"

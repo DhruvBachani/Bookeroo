@@ -30,7 +30,6 @@ class Sellers extends Component{
 
 
     render(){
-        console.log(this.state.sellers)
         return(
             <div>
                 <select className="form-control" onChange={this.onChange} >
@@ -38,7 +37,7 @@ class Sellers extends Component{
                     <option value="old" >Old</option>
                 </select>
                 {this.state.sellers.map((value)=>{
-                    return <div>{value.price}</div>
+                    return <div key={value.userId}>Seller's user id-{value.userId} Seller's price-{value.price}</div>
                 })}
             </div>
         )

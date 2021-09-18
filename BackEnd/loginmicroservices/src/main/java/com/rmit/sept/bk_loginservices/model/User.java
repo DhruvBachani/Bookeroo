@@ -30,7 +30,6 @@ public class User implements UserDetails {
     @NotBlank(message = "Password field is required")
     private String password;
 
-    // @NotBlank(message = "ABN is required for a business")
     @Column(unique = true)
     private String abnNumber;
     private String shopName;
@@ -78,7 +77,7 @@ public class User implements UserDetails {
         return abnNumber;
     }
     public void setAbn_number(String abn_number) {
-        this.abnNumber = abnNumber;
+        this.abnNumber = abn_number;
     }
 
     public String getAddress(){ return address;}

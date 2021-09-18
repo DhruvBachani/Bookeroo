@@ -28,9 +28,9 @@ public class ReviewController {
         return reviewService.getAllReviews();
     }
 
-    @GetMapping("/review_by_id/{BookId}")
-    private List<Review> getReviewsByBookId(@PathVariable("BookId") long id) {
-        return reviewService.getAllReviewsByBookId(id);
+    @GetMapping("/review_by_ISBN/{ISBN}")
+    private List<Review> getReviewsByBookISBN(@PathVariable("ISBN") long ISBN) {
+        return reviewService.getAllReviewsByBookISBN(ISBN);
     }
 
     @DeleteMapping("/books/{BookId}/{id}")

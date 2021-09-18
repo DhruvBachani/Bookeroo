@@ -16,8 +16,13 @@ export const createBook = (newBook, history) => async dispatch => {
 
 export const postAd = (AdRequest, history) => async dispatch => {
     try {
-        const res = await axios.post(`http://localhost:8081/api/books/postAd`, AdRequest);
+        const res = await axios.post(`http://localhost:8081/api/books/createAd`, AdRequest);
         history.push("/bookCatalog");
+
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
     } catch (err) {
         dispatch({
             type: GET_ERRORS,
@@ -62,8 +67,9 @@ export const search = (searchForm, history) => async dispatch => {
     }
 };
 
-export const getBookReviews = (bookId) => async dispatch => {
-    const res = await axios.get(`http://localhost:8082/api/reviews/review_by_id/${bookId}`);
+export const getBookReviews = (bookISBN) => async dispatch => {
+    const res = await axios.get(`http://localhost:8082/api/reviews/review_by_ISBN/${bookISBN}`);
+    console.log(res.data);
     dispatch({
         type: GET_REVIEWS,
         payload: res.data

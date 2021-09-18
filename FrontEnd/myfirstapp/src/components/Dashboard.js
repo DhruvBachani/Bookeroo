@@ -3,11 +3,16 @@ import { connect } from "react-redux";
 import {logout} from "../actions/securityActions";
 import CreateRequestButton from "./UserManagement/CreateRequestButton";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 
 class Dashboard extends Component {
     constructor() {
         super();
+        this.state = {
+            showUser: false,
+            showAdmin: false
+        };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -15,6 +20,12 @@ class Dashboard extends Component {
     componentDidMount() {
         if (!this.props.security.validToken) {
             this.props.history.push("/login");
+        }
+        // Depending on the user, different buttons will be available
+        if(this.props.security.user.userType == "Admin") {
+            this.setState({showAdmin: true})
+        } else {
+            this.setState({showUser: true})
         }
     }
     onSubmit(e) {
@@ -27,7 +38,6 @@ class Dashboard extends Component {
     }
 
     render() {
-        console.log(this);
         return (
             <div className="Dashboard">
             <div className="container">
@@ -35,17 +45,42 @@ class Dashboard extends Component {
                     <div className="col-md-12">
                         <h1 className="display-4 text-left">Dashboard</h1>
                         <br />
-                        <CreateRequestButton />
+                        {/* Admin buttons - others beside requests to be implemented */}
+                        <div>
+                            <button className={"btn btn-lg btn-info"}> Profile </button>
+                            {
+                                this.state.showAdmin &&
+                                <>
+                                    <button className={"btn btn-lg btn-info"}> All Orders </button>
+                                    <button className={"btn btn-lg btn-info"}> All Books </button>
+                                    <CreateRequestButton/>
+                                </>
+                            }
+                            {/* User buttons - to be implemented */}
+                            {
+                                this.state.showUser &&
+                                <>
+                                    <button className={"btn btn-lg btn-info"}> Orders </button>
+                                    <button className={"btn btn-lg btn-info"}> Sell </button>
+                                    <button className={"btn btn-lg btn-info"}> Share </button>
+                                    <button className={"btn btn-lg btn-info"}> Books </button>
+                                    <button className={"btn btn-lg btn-info"}> Reviews </button>
+                                </>
+                                }
+                                <span style={{float:"right"}}>
+                                    <form onSubmit={this.onSubmit}><button className="btn btn-lg btn-info"> Log out </button></form>
+                                </span>
+                        </div>
                         <hr />
-                        <form onSubmit={this.onSubmit}><button className="btn btn-lg btn-info"> Log out </button>
-                        </form>
-                        <hr />
-                        <p> Name: {this.props.security.user.fullName}</p>
+                        {/* User profile - to be seperated for cohesion */}
+                        <p> Name: {this.props.security.user.fullName}
+                            <span style={{float:"right"}}>
+                                <button className="btn btn-info"> Edit </button>
+                            </span>
+                        </p>
                         <p> Role: {this.props.security.user.userType}</p>
                         <p> Address: {this.props.security.user.address}</p>
                         <p> Phone Number: {this.props.security.user.phoneNumber}</p>
-                        <br />
-                        <br />
                         <hr />
                     </div>
                 </div>
