@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {search} from "../../actions/bookActions";
 import { connect } from "react-redux";
-import {GoSearch} from "react-icons/go"
 import * as PropTypes from 'prop-types'
 
  class Header extends Component {
@@ -23,14 +22,13 @@ import * as PropTypes from 'prop-types'
         this.props.search(searchRequest)
 
 
-
      }
 
      onChange(e) {
          this.setState({ [e.target.name]: e.target.value });
+
      }
     render() {
-
         return (
             <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
@@ -69,16 +67,29 @@ import * as PropTypes from 'prop-types'
                                         Manage Books
                                     </a>
                                 </li>
-                                <li className="nav-item">
-                                    <a className="nav-link " href="/register">
-                                        Sign Up
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="/login">
-                                        Login
-                                    </a>
-                                </li>
+                                {/* Changes the sign up/login button to user's full name if the user is logged in. */}
+                                {
+                                    !this.props.security.validToken ?
+                                    <>
+                                        <li className="nav-item">
+                                            <a className="nav-link " href="/register">
+                                                Sign Up
+                                            </a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="/login">
+                                                Login
+                                            </a>
+                                        </li>
+                                    </>
+                                        :
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="/dashboard">
+                                                Welcome {this.props.security.user.fullName}!
+                                            </a>
+                                        </li>
+
+                                }
                             </ul>
                     </ul>
                     </div>
@@ -88,7 +99,15 @@ import * as PropTypes from 'prop-types'
     }
 }
 
+// For the conditional rendering of the sign up and login buttons to user
+Header.propTypes = {
+    security: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+    security: state.security,
+});
+
 export default connect(
-    null,
+    mapStateToProps,
     { search }
 )(Header);

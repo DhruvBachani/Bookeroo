@@ -24,8 +24,9 @@ import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
 import SearchResults from "./components/BookManagement/SearchResults";
-import PostAd from "./components/BookManagement/PostAd";
+import Requests from "./components/UserManagement/Requests";
 import Sellers from "./components/BookManagement/Sellers";
+import PostAd from "./components/BookManagement/PostAd";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -77,6 +78,8 @@ class App extends Component {
 
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
             
+            <SecuredRoute exact path="/requests" component={Requests} />
+
           </div>
         </Router>
       </Provider>
