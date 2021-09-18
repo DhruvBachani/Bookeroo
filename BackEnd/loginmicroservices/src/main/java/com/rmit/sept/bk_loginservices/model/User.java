@@ -78,7 +78,7 @@ public class User implements UserDetails {
         return abnNumber;
     }
     public void setAbn_number(String abn_number) {
-        this.abnNumber = abnNumber;
+        this.abnNumber = abn_number;
     }
 
     public String getAddress(){ return address;}

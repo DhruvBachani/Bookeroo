@@ -5,6 +5,7 @@ import Header from "./components/Layout/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import AddPerson from "./components/Persons/AddPerson";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -24,8 +25,7 @@ import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
 import SearchResults from "./components/BookManagement/SearchResults";
-import PostAd from "./components/BookManagement/PostAd";
-import Sellers from "./components/BookManagement/Sellers";
+import Requests from "./components/UserManagement/Requests";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -77,6 +77,8 @@ class App extends Component {
 
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
             
+            <SecuredRoute exact path="/requests" component={Requests} />
+
           </div>
         </Router>
       </Provider>

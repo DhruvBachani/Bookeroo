@@ -27,7 +27,7 @@ class BookCatalog extends Component {
               <BookCarousal books={this.props.books}/>
               <hr />
               <h3>Sci-Fi</h3>
-\            </div>
+            </div>
           </div>
       </div>
     );
