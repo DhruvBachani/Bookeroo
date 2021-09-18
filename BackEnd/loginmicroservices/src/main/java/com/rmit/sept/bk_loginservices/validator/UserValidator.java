@@ -27,8 +27,13 @@ public class UserValidator implements Validator {
 
         }
 
-       // TODO PHONE NUMBER AND ABN MUST HAVE MIN AND MAX OF 10/11 DIGITS (STRINGS)
+        if (user.getAbnNumber().length() < 11 && user.getAbnNumber().length() > 11){
+            errors.rejectValue("abnNumber","Length", "ABN Number must be at 11 digits");
+        }
 
+        if (user.getPhoneNumber().length() < 10 && user.getPhoneNumber().length() > 10){
+            errors.rejectValue("phoneNumber","Length", "Phone number must be at 10 digits");
+        }
 
     }
 }
