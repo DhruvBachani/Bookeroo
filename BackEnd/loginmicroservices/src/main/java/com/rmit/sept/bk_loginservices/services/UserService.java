@@ -68,7 +68,6 @@ public class UserService {
 
     public User retreiveUserbyUserId(Long userId){ return userRepository.getById(userId);}
 
-    
     // Returns a list of all the users that are not the admins
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
