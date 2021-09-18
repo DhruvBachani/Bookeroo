@@ -20,11 +20,11 @@ public class ReviewService {
         return reviews;
     }
 
-    public List<Review> getAllReviewsByBookId(Long BookId) {
+    public List<Review> getAllReviewsByBookISBN(Long BookISBN) {
         List<Review> temp = getAllReviews();
         List<Review> reviews = new ArrayList<>();
         for (Review rev : temp) {
-            if (rev.getBookId() == BookId) {
+            if (rev.getBookISBN().equals(BookISBN)) {
                 reviews.add(rev);
             }
         }
@@ -33,7 +33,7 @@ public class ReviewService {
 
     public Review saveReview(Review newReview) {
         newReview.setReview(newReview.getReview());
-        newReview.setBookId(newReview.getBookId());
+        newReview.setBookISBN(newReview.getBookISBN());
         newReview.setUserName(newReview.getUserName());
         newReview.setRating(newReview.getRating());
 

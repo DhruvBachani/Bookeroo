@@ -7,9 +7,9 @@ import {Link} from "react-router-dom";
 
 class BookPage extends Component {
   componentDidMount() {
-    const bookID = this.props.match.params.isbn;
-    this.props.getBook(bookID);
-    this.props.getBookReviews(bookID);
+    const bookISBN = this.props.match.params.isbn;
+    this.props.getBook(bookISBN);
+    this.props.getBookReviews(bookISBN);
   }
 
   render() {
@@ -40,22 +40,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { getBook, getBookReviews })(BookPage);
-
-// componentDidMount(res, res2) {
-//   const bookID = this.props.match.params.bookId;
-// bookCatalogActions.getBook(bookID).then((res) => {
-//   this.setState({ book: res.data });
-
-//   bookCatalogActions.getReviews(bookID).then((res2) => {
-//     this.setState({ reviews: res2.data });
-//   });
-
-//     this.props.getBookReviews(bookID);
-
-//   });
-// }
-// componentDidMount(res) {
-//   bookCatalogActions.getBook(this.props.match.params.bookId).then((res) => {
-//     this.setState({ book: res.data });
-//   });
-// }

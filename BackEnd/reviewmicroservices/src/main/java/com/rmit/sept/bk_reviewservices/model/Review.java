@@ -10,7 +10,7 @@ public class Review {
     private Long id;
 
     private String username;
-    private Long bookid;
+    private Long bookISBN;
     private String review;
     private String rating;
 
@@ -24,9 +24,9 @@ public class Review {
 
     public void setUserName(String username) { this.username = username; }
 
-    public Long getBookId() { return bookid; }
+    public Long getBookISBN() { return bookISBN; }
 
-    public void setBookId(Long bookid) { this.bookid = bookid; }
+    public void setBookISBN(Long bookISBN) { this.bookISBN = bookISBN; }
 
     public String getReview() { return review; }
 
