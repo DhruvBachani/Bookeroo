@@ -44,7 +44,14 @@ public class ReviewService {
         reviewrepository.save(review);
     }
 
-    public void deleteReview(Long id) {
-        reviewrepository.deleteById(id);
+    public void deleteReview(Long ISBN) {
+        List<Review> temp = getAllReviews();
+        Long id = (long) 0;
+        for (Review rev : temp) {
+            if (rev.getBookISBN().equals(ISBN)) {
+                id = rev.getId();
+                reviewrepository.deleteById(id);
+            }
+        }
     }
 }
