@@ -57,13 +57,11 @@ public class UserController {
         return  new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-
     @Autowired
     private JwtTokenProvider tokenProvider;
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
 
     // Returns an invalid or a valid jwt based on boolean requirements and if the password is correct
     @PostMapping("/login")
