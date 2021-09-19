@@ -37,7 +37,7 @@ public class UserValidator implements Validator {
         }
 
         if (!user.getUserType().equals("Publisher") && !user.getUserType().equals("Customer") && !user.getUserType().equals("Shop owner")) {
-            errors.rejectValue("Usertype","Category", "Role must be either publisher, shop owner or customer");
+            errors.rejectValue("userType","Category", "Role must be either publisher, shop owner or customer");
         }
 
     }
