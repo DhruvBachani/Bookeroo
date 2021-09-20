@@ -23,35 +23,48 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User saveUser (User newUser){
+        newUser.setFullName(newUser.getFullName());
+        newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+        newUser.setAddress(newUser.getAddress());
+        newUser.setUserType(newUser.getUserType());
 
-      /*  newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-        //Username has to be unique (exception)
         // Make sure that password and confirmPassword match
         // We don't persist or show the confirmPassword
-        return userRepository.save(newUser);
-       */
-        try{
-            newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-            //Username has to be unique (exception)
-            newUser.setUsername(newUser.getUsername());
-            newUser.setAddress(newUser.getAddress());
-            newUser.setPhoneNumber(newUser.getPhoneNumber());
-            newUser.setAbn_number(newUser.getAbnNumber());
-            newUser.setUserType(newUser.getUserType());
-            // Make sure that password and confirmPassword match
-            // We don't persist or show the confirmPassword
-            newUser.setConfirmPassword("");
+        newUser.setConfirmPassword("");
 
-            // Setting the user to get approval for admin if they are a publisher or shop publisher
-            if (newUser.getUserType().equals("Publisher") || newUser.getUserType().equals("Shop owner")) {
-                newUser.setApproved(false);
-            } else {
-                newUser.setApproved(true);
+
+        // Setting the user to get approval for admin if they are a publisher or shop publisher
+        if (newUser.getUserType().equals("Publisher") || newUser.getUserType().equals("Shop owner")) {
+            newUser.setApproved(false);
+        } else {
+            newUser.setApproved(true);
+        }
+
+        // ABN has to be unique (exception)
+        // Phone number has to be unique (exception)
+        newUser.setUsername(newUser.getUsername());
+        userRepository.findAll().forEach(user -> {
+            if (user.getUsername().equals(newUser.getUsername())) {
+                throw new UsernameAlreadyExistsException("Username '" + newUser.getUsername() + "' already exists");
             }
-            return userRepository.save(newUser);
+        });
+        newUser.setPhoneNumber(newUser.getPhoneNumber());
+        userRepository.findAll().forEach(user -> {
+            if (user.getPhoneNumber() != null && newUser.getPhoneNumber() != null && user.getPhoneNumber().equals(newUser.getPhoneNumber())) {
+                throw new UsernameAlreadyExistsException("Phone Number '" + newUser.getPhoneNumber() + "' already exists");
+            }
+        });
+        newUser.setAbn_number(newUser.getAbnNumber());
+        userRepository.findAll().forEach(user -> {
+            if (user.getAbnNumber() != null && newUser.getAbnNumber() != null && user.getAbnNumber().equals(newUser.getAbnNumber())) {
+                throw new UsernameAlreadyExistsException("ABN Number '" + newUser.getAbnNumber() + "' already exists");
+            }
+        });
 
-        }catch (Exception e){
-            throw new UsernameAlreadyExistsException("Username '"+newUser.getUsername()+"' already exists");
+        try {
+            return userRepository.save(newUser);
+        }catch (Exception e) {
+            throw new UsernameAlreadyExistsException("Something went wrong");
         }
 
     }
@@ -105,12 +118,13 @@ public class UserService {
     }
 
     // Changes the approval to false, in the case the admin made a mistake
-    public boolean setUnapproval(long id) {
-        User user = userRepository.getById(id);
+    public boolean setUnapproval(@Valid @RequestBody UserID id) {
+        User user = userRepository.getById(id.getId());
         if (user == null) {
             return false;
         } else if (user.getApproved()) {
             user.setApproved(false);
+            updateUser(user);
         }
         return true;
     }
@@ -128,12 +142,13 @@ public class UserService {
     }
 
     // Changes the ban boolean of a user to false in the case the admin makes a mistake
-    public boolean unbanUser(long id) {
-        User user = userRepository.getById(id);
+    public boolean unbanUser(@Valid UserID id) {
+        User user = userRepository.getById(id.getId());
         if (user == null) {
             return false;
         } else {
             user.setBanned(false);
+            updateUser(user);
         }
         return true;
     }
