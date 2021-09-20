@@ -1,10 +1,8 @@
 .review-form {
-    padding: 50px;
-    min-height: calc(100vh - 170px);
+    margin-left: 20%;
 }
 
 .review-container {
-    margin-left: 35%;
     max-width: 583px;
 }
 

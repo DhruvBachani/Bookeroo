@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`personActions creates GET_ALL_USERS when it is called successfully 1`] = `
+Array [
+  Object {
+    "type": "GET_USER_REQUESTS",
+  },
+  Object {
+    "type": "GET_ALL_USERS",
+  },
+]
+`;
+
+exports[`personActions creates GET_USER_REQUESTS when approving a user 1`] = `
+Array [
+  Object {
+    "type": "GET_USER_REQUESTS",
+  },
+  Object {
+    "type": "GET_ALL_USERS",
+  },
+  Object {
+    "type": "GET_USER_REQUESTS",
+  },
+]
+`;
+
+exports[`personActions creates GET_USER_REQUESTS when banning a user 1`] = `
+Array [
+  Object {
+    "type": "GET_USER_REQUESTS",
+  },
+  Object {
+    "type": "GET_ALL_USERS",
+  },
+  Object {
+    "type": "GET_USER_REQUESTS",
+  },
+  Object {
+    "type": "GET_USER_REQUESTS",
+  },
+]
+`;
+
+exports[`personActions creates GET_USER_REQUESTS when getting all unapproved users 1`] = `
+Array [
+  Object {
+    "type": "GET_USER_REQUESTS",
+  },
+]
+`;
