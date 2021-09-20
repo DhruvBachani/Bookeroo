@@ -44,13 +44,7 @@ public class BookService {
     }
 
     public List<Book> searchBooks(SearchForm searchForm){
-        List<Book> searchResults = new ArrayList<Book>();
-        bookrepository.findAll().forEach(book-> {
-            if(book.getName().replaceAll(" ","").toLowerCase().contains(searchForm.searchFor.replaceAll(" ","").toLowerCase())){
-                searchResults.add(book);
-            }
-        });
-        return searchResults;
+        return bookrepository.findByNameIgnoreCaseContaining(searchForm.searchFor);
     }
 
     public boolean containsByIsbn(Long isbn){
