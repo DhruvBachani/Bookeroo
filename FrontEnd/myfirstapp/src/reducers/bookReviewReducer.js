@@ -1,6 +1,6 @@
 import { GET_REVIEWS, GET_USER } from "../actions/types";
 
-const initialState = {
+export const initialState = {
   bookReviews: []
 };
 

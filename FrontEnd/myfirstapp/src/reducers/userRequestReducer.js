@@ -1,6 +1,6 @@
 import { GET_USER_REQUESTS } from "../actions/types";
 
-const initialState = {
+export const initialState = {
     userRequests: []
 };
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 class ProductReviews extends Component {
   render() {
@@ -12,9 +11,9 @@ class ProductReviews extends Component {
               {this.props.reviews.map((review) => (
                 <div key={review.id}>
                   <h5>
-                    {review.userName} <br/>
+                    {review.userName}<br/>
                   </h5>
-                  <p>{review.review} <br/></p>
+                  <p>{review.review}<br/></p>
                 </div>
               ))}
             </div>
@@ -25,10 +24,4 @@ class ProductReviews extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.review.user
-  };
-};
-
-export default connect(mapStateToProps)(ProductReviews);
+export default ProductReviews;
