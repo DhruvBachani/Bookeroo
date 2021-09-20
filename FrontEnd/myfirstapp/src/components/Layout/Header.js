@@ -54,7 +54,7 @@ import * as PropTypes from 'prop-types'
                                             className="form-control mr-sm-2 "
                                             name="searchFor"
                                             value={this.state.searchFor}
-                                            onChange={this.onChange} />
+                                            onChange={this.onChange} required={true}/>
                                             <button type="submit" className="btn btn-success" >
                                                 <i className="fas fa-search"></i>
                                             </button>

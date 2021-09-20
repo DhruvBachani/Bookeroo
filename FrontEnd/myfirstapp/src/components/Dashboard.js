@@ -65,8 +65,12 @@ class Dashboard extends Component {
                                     <button className={"btn btn-lg btn-info"}> Share </button>
                                     <button className={"btn btn-lg btn-info"}> Books </button>
                                     <button className={"btn btn-lg btn-info"}> Reviews </button>
+
                                 </>
                                 }
+                            <Link className="btn btn-lg btn-secondary mr-2" to="/newAd">
+                                Post an ad
+                            </Link>
                                 <span style={{float:"right"}}>
                                     <form onSubmit={this.onSubmit}><button className="btn btn-lg btn-info"> Log out </button></form>
                                 </span>

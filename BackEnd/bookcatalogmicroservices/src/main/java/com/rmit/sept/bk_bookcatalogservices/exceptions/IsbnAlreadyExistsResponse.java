@@ -1,10 +1,10 @@
-package com.rmit.sept.bk_loginservices.exceptions;
+package com.rmit.sept.bk_bookcatalogservices.exceptions;
 
-public class UsernameAlreadyExistsResponse {
+public class IsbnAlreadyExistsResponse {
 
     private String field;
 
-    public UsernameAlreadyExistsResponse(String field) {
+    public IsbnAlreadyExistsResponse(String field) {
         this.field = field;
     }
 

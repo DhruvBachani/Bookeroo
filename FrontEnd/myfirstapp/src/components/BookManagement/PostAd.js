@@ -38,8 +38,11 @@ class PostAd extends Component{
 
     async componentDidMount() {
         this.props.getAllBooks().then(()=>{
-            this.setState({isbn: this.props.books[0].isbn
-            })
+            if(this.props.books.length !== 0) {
+                this.setState({
+                    isbn: this.props.books[0].isbn
+                })
+            }
         });
         this.state.userId = this.props.user.id
     }
@@ -64,14 +67,14 @@ class PostAd extends Component{
                                     </select>
                                 </div>
 
-                                <div className="form-check form-check-inline" onChange={this.onChange}  name="condition">
-                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="new"
-                                           value="new" disabled={(this.props.user.userType === "Customer")? true:false}/>
+                                <div className="form-check form-check-inline"   >
+                                    <input className="form-check-input" type="radio" name="condition" id="new"
+                                           value="new" disabled={(this.props.user.userType === "Customer")? true:false} onChange={this.onChange}/>
                                         <label className="form-check-label" htmlFor="new">New</label>
                                 </div>
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input" name="inlineRadioOptions" type="radio" defaultChecked={true}
-                                           value="old" />
+                                    <input className="form-check-input" name="condition" type="radio" defaultChecked={true}
+                                           value="old" onChange={this.onChange}/>
                                         <label className="form-check-label" htmlFor="old">Old</label>
                                 </div>
                             <br />

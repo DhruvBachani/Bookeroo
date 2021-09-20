@@ -28,6 +28,16 @@ public class UserService {
         newUser.setAddress(newUser.getAddress());
         newUser.setUserType(newUser.getUserType());
 
+        /*  newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+            Username has to be unique (exception)
+            Make sure that password and confirmPassword match
+            We don't persist or show the confirmPassword
+        */
+        newUser.setFullName(newUser.getFullName());
+        newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+        newUser.setAddress(newUser.getAddress());
+        newUser.setUserType(newUser.getUserType());
+
         // Make sure that password and confirmPassword match
         // We don't persist or show the confirmPassword
         newUser.setConfirmPassword("");
@@ -66,7 +76,6 @@ public class UserService {
         }catch (Exception e) {
             throw new UsernameAlreadyExistsException("Something went wrong");
         }
-
     }
 
     public void updateUser(User user) {

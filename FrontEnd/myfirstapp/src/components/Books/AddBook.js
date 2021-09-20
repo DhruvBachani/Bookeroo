@@ -37,6 +37,7 @@ class AddBook extends Component {
 
 
     this.props.createBook(newBook, this.props.history);
+    alert("New Book Successfully Created.")
   }
 
   async componentDidMount() {
@@ -63,6 +64,7 @@ class AddBook extends Component {
                     name="name"
                     value={this.state.name}
                     onChange={this.onChange}
+                    required={true}
                   />
                 </div>
                 <div className="form-group">
@@ -73,10 +75,11 @@ class AddBook extends Component {
                     name="author"
                     value={this.state.author}
                     onChange={this.onChange}
+                    required={true}
                   />
                 </div>
                 <div className="form-group">
-                  <select className="form-control" onChange={this.onChange} name="category" >
+                  <select className="form-control" onChange={this.onChange} name="category" required={true}>
                     {
                       this.props.categories.map((value)=>{
 
@@ -92,6 +95,7 @@ class AddBook extends Component {
                     name="description"
                     value={this.state.description}
                     onChange={this.onChange}
+                    required={true}
                   />
                 </div>
                 <div className="form-group">
@@ -102,6 +106,7 @@ class AddBook extends Component {
                     type="number"
                     value={this.state.isbn}
                     onChange={this.onChange}
+                    required={true}
                   />
                 </div>
 

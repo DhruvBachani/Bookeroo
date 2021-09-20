@@ -13,13 +13,15 @@
 
 * Github repository: https://github.com/DhruvBachani/Bookeroo/
 * Jira Board: https://bookeroogroup6.atlassian.net/jira/software/projects/BG6/boards/1/backlog
-* Google Docs: https://drive.google.com/xxxx
-
+* Google Docs: https://drive.google.com/drive/folders/1_-937tvipAGywIdPHBh7YxhbDMPe62FV?usp=sharing
 	
-## Code documentation - Release 0.1.0 - date
-*
+## Code documentation - Release 0.1.0 - 21/09/2021
+* Users can register and login with the neccessary data needed to run the book website.
+* Admins can approve or decline publishers and shop owners.
+* Books with the all neccessary data can now be added/deleted/updated.
+* Sellers can now be added and post an ad to sell their books.
+* Reviews can be added from the backend. 
   
-
 To run the application locally:
 First ensure that you have:
 - An IDE preferably IntelliJ to re-enact this readme as close as possible, 
@@ -30,10 +32,10 @@ First ensure that you have:
 - 	Once done, edit your System Path Variable to add new "%JAVA_HOME%\bin" and check again on the command prompt.
 
 Once this is all downloaded:
-1. Open the project on IntelliJ and enter in the terminal:
-	- cd Backend/loginmicroservices
+1. Open the project on IntelliJ and enter in the terminal, for each and every microservice:
+	- cd Backend/[microservice]
 	- ./mvnw package
-	- java -jar target/loginmicroservices-0.0.1.jar
+	- java -jar target/[microservice-0.0.1.jar]
 2. In a second terminal, type:
 	- cd FrontEnd/myfirstapp
 	- npm install
