@@ -70,6 +70,9 @@ public class AdServiceUnitTest {
         // Creating mock dependencies to not rely on external databases
         Mockito.when(adRepository.save(any(Ad.class))).thenReturn(new Ad());
         Mockito.when(bookRepository.findAll()).thenReturn(booksInDatabase);
+        ArrayList<Ad> conditionAndIsbnResult = new ArrayList<>();
+        conditionAndIsbnResult.add(ad);
+        Mockito.when(adRepository.findAllByConditionAndIsbn(any(String.class), any(Long.class))).thenReturn(conditionAndIsbnResult);
 
 
 
@@ -94,6 +97,12 @@ public class AdServiceUnitTest {
         ad.setIsbn(book1.getIsbn());
         ad.setCondition("New");
         assertNotNull(adService.saveAd(ad));
+    }
+
+    @Test
+    public void getAllAds_returnListOfAds(){
+        assertTrue(adService.getAllAds("New", (long) 2) instanceof List);
+
     }
 
 
