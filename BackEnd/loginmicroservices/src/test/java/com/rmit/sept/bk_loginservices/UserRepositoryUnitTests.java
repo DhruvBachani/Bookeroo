@@ -31,7 +31,7 @@ public class UserRepositoryUnitTests {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
-    public void save_WhenAllDetailsAreFilled_Test()
+    public void save_WhenAllDetailsAreFilled()
     {
         // given
         User customer = new User();
@@ -48,7 +48,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test
-    public void save_WhenAddressIsBlank_Test()
+    public void save_WhenAddressIsBlank()
     {
         // given
         User customer = new User();
@@ -67,7 +67,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test
-    public void save_WhenPhoneNumberIsBlank_Test()
+    public void save_WhenPhoneNumberIsBlank()
     {
         // given
         User customer = new User();
@@ -83,7 +83,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test
-    public void findByUsername_ReturnUser_WhenUsernameIsValid_Test()
+    public void findByUsername_ReturnUser_WhenUsernameIsValid()
     {
         // given
         User customer = new User();
@@ -104,7 +104,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenUsernameIsBlank_Test()
+    public void save_ThrowException_WhenUsernameIsBlank()
     {
         // given
         User customer = new User();
@@ -122,7 +122,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenPasswordIsBlank_Test()
+    public void save_ThrowException_WhenPasswordIsBlank()
     {
         // given
         User customer = new User();
@@ -141,7 +141,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenUserTypeIsBlank_Test()
+    public void save_ThrowException_WhenUserTypeIsBlank()
     {
         // given
         User customer = new User();
@@ -160,7 +160,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenFullNameIsBlank_Test()
+    public void save_ThrowException_WhenFullNameIsBlank()
     {
         //given
         User customer = new User();
@@ -178,7 +178,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test
-    public void save_WhenTwoUserAreUnique_Test()
+    public void save_WhenTwoUserAreUnique()
     {
         //given
         User customer = new User();
@@ -207,7 +207,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test (expected = PersistenceException.class)
-    public void save_ThrowException_WhenUsernameIsNotUnique_Test()
+    public void save_ThrowException_WhenUsernameIsNotUnique()
     {
         //given
         User customer = new User();
@@ -235,7 +235,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test (expected = PersistenceException.class)
-    public void save_ThrowException_WhenPhoneNumberIsNotUnique_Test()
+    public void save_ThrowException_WhenPhoneNumberIsNotUnique()
     {
         //given
         User customer = new User();
@@ -262,7 +262,7 @@ public class UserRepositoryUnitTests {
     }
 
     @Test (expected = PersistenceException.class)
-    public void save_ThrowException_WhenABNNumberIsNotUnique_Test()
+    public void save_ThrowException_WhenABNNumberIsNotUnique()
     {
         //given
         User customer = new User();

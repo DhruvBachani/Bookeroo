@@ -22,7 +22,7 @@ import static org.mockito.BDDMockito.any;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class BookServiceUnitTest {
+public class BookServiceUnitTests {
 
     @InjectMocks
     private BookService bookService;
