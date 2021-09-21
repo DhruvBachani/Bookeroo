@@ -57,7 +57,6 @@ jobs: # steps
           path: target/surefire-reports
       - store_artifacts:
           path: target/reviewmicroservices-0.0.1.jar
-#  build-frontend:
   build-and-test-frontend:
     working_directory: ~/repo/Frontend/myfirstapp
     docker:
@@ -65,7 +64,6 @@ jobs: # steps
     steps:
       - checkout
       - run: "npm install"
-      - run: "npm test"
 workflows:
   version: 2
   build:
