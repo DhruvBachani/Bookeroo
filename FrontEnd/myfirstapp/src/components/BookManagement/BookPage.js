@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ProductDetails from "./ProductDetails";
 import ProductReviews from "./ProductReviews";
+import AddReview from "../Books/AddReview";
 import { getBook, getBookReviews } from "../../actions/bookActions";
 import {Link} from "react-router-dom";
 
@@ -21,6 +22,7 @@ class BookPage extends Component {
               <ProductDetails book={this.props.book} />
               <br />
               <ProductReviews reviews={this.props.reviews} />
+              <AddReview/>
             </div>
             <Link className="btn btn-lg btn-primary mr-2" to={window.location.pathname+"/sellers"}>
               Choose Seller

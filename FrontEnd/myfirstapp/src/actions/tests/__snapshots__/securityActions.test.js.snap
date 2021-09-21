@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`securityActions creates SET_CURRENT_USER when logging in 1`] = `
+Array [
+  Object {
+    "type": "SET_CURRENT_USER",
+  },
+]
+`;
+
+exports[`securityActions creates SET_CURRENT_USER when logging out 1`] = `
+Array [
+  Object {
+    "type": "SET_CURRENT_USER",
+  },
+  Object {
+    "type": "SET_CURRENT_USER",
+  },
+]
+`;

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`bookReviewReducer should handle GET_REVIEWS 1`] = `
+Object {
+  "book": Object {
+    "allCategories": Array [],
+    "book": Array [],
+    "books": Array [],
+  },
+  "errors": Object {},
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "requests": Object {
+    "userRequests": Array [],
+  },
+  "review": Object {
+    "bookReviews": undefined,
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+}
+`;
+
+exports[`bookReviewReducer should return the initial state 1`] = `
+Object {
+  "book": Object {
+    "allCategories": Array [],
+    "book": Array [],
+    "books": Array [],
+  },
+  "errors": Object {},
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "requests": Object {
+    "userRequests": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+}
+`;
