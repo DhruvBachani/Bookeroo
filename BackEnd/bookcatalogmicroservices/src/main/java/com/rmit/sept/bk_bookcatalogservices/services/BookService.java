@@ -29,14 +29,6 @@ public class BookService {
         return bookrepository.findByIsbn(isbn);
     }
 
-    public void updateBook(Book book, Long id) {
-        bookrepository.save(book);
-    }
-
-    public void deleteBook(Long id) {
-        bookrepository.deleteById(id);
-    }
-
     public List<Book> searchBooks(SearchForm searchForm){
         List<Book> searchResults = new ArrayList<Book>();
         bookrepository.findAll().forEach(book-> {

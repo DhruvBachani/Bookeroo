@@ -23,12 +23,6 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User saveUser (User newUser){
-
-        /*  newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-            Username has to be unique (exception)
-            Make sure that password and confirmPassword match
-            We don't persist or show the confirmPassword
-        */
         newUser.setFullName(newUser.getFullName());
         newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
         newUser.setAddress(newUser.getAddress());
@@ -72,6 +66,7 @@ public class UserService {
         }catch (Exception e) {
             throw new UsernameAlreadyExistsException("Something went wrong");
         }
+
     }
 
     public void updateUser(User user) {
@@ -123,12 +118,13 @@ public class UserService {
     }
 
     // Changes the approval to false, in the case the admin made a mistake
-    public boolean setUnapproval(long id) {
-        User user = userRepository.getById(id);
+    public boolean setUnapproval(@Valid @RequestBody UserID id) {
+        User user = userRepository.getById(id.getId());
         if (user == null) {
             return false;
         } else if (user.getApproved()) {
             user.setApproved(false);
+            updateUser(user);
         }
         return true;
     }
@@ -146,12 +142,13 @@ public class UserService {
     }
 
     // Changes the ban boolean of a user to false in the case the admin makes a mistake
-    public boolean unbanUser(long id) {
-        User user = userRepository.getById(id);
+    public boolean unbanUser(@Valid UserID id) {
+        User user = userRepository.getById(id.getId());
         if (user == null) {
             return false;
         } else {
             user.setBanned(false);
+            updateUser(user);
         }
         return true;
     }

@@ -56,10 +56,7 @@ public class BookController {
         return bookservice.getBookByIsbn(isbn);
     }
 
-    @DeleteMapping("/books/{isbn}")
-    private void deleteBook(@PathVariable("isbn") Long isbn) {
-        bookservice.deleteBook(isbn);
-    }
+
     
     @RequestMapping(value = "/create")
     public Long saveBook(@RequestBody Book book) {
@@ -68,11 +65,6 @@ public class BookController {
         return book.getId();
     }
 
-    @PutMapping("/books")
-    private Book updateBook(@RequestBody Book book) {
-        bookservice.updateBook(book, book.getId());
-        return book;
-    }
 
     @PostMapping("/search")
     private List<Book> searchFor(@Valid @RequestBody SearchForm searchForm){

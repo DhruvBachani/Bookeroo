@@ -28,14 +28,14 @@ public class ReviewController {
         return reviewService.getAllReviews();
     }
 
-    @GetMapping("/review_by_id/{BookId}")
-    private List<Review> getReviewsByBookId(@PathVariable("BookId") long id) {
-        return reviewService.getAllReviewsByBookId(id);
+    @GetMapping("/review_by_ISBN/{ISBN}")
+    private List<Review> getReviewsByBookISBN(@PathVariable("ISBN") long ISBN) {
+        return reviewService.getAllReviewsByBookISBN(ISBN);
     }
 
-    @DeleteMapping("/books/{BookId}/{id}")
-    private void deleteReviewsByBookId(@PathVariable("id") long id) {
-        reviewService.deleteReview(id);
+    @DeleteMapping("/delete/{ISBN}")
+    private void deleteReviewsByBookId(@PathVariable("ISBN") long ISBN) {
+        reviewService.deleteReview(ISBN);
     }
 
     @RequestMapping(value = "/create")
@@ -44,7 +44,7 @@ public class ReviewController {
         return review.getId();
     }
 
-    @PutMapping("/books")
+    @PutMapping("/update")
     private Review updateReview(@RequestBody Review review) {
         reviewService.updateReview(review, review.getId());
         return review;

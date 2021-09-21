@@ -67,8 +67,9 @@ export const search = (searchForm, history) => async dispatch => {
     }
 };
 
-export const getBookReviews = (bookId) => async dispatch => {
-    const res = await axios.get(`http://localhost:8082/api/reviews/review_by_id/${bookId}`);
+export const getBookReviews = (bookISBN) => async dispatch => {
+    const res = await axios.get(`http://localhost:8082/api/reviews/review_by_ISBN/${bookISBN}`);
+    console.log(res.data);
     dispatch({
         type: GET_REVIEWS,
         payload: res.data
