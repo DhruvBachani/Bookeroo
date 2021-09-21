@@ -63,8 +63,7 @@ jobs: # steps
     docker:
       - image: circleci/node:12
     steps:
-      - checkout:
-          path:  ~/repo
+      - checkout
       - run: "npm install"
       - run: "npm test"
 workflows:
