@@ -15,9 +15,16 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 
 
     @ExceptionHandler
-    public final ResponseEntity<Object> handleIsbnAlreadyExists(IsbnAlreadyExistsException ex, WebRequest request){
-        IsbnAlreadyExistsResponse exceptionResponse = new IsbnAlreadyExistsResponse(ex.getMessage());
+    public final ResponseEntity<Object> handleInvalidIsbn(InvalidIsbnException ex, WebRequest request){
+        InvalidIsbnResponse exceptionResponse = new InvalidIsbnResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleInvalidCondition(InvalidConditionException ex, WebRequest request){
+        InvalidConditionResponse exceptionResponse = new InvalidConditionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
 }
 

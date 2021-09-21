@@ -1,7 +1,7 @@
 package com.rmit.sept.bk_bookcatalogservices.services;
 
 import com.rmit.sept.bk_bookcatalogservices.Repositories.BookRepository;
-import com.rmit.sept.bk_bookcatalogservices.exceptions.IsbnAlreadyExistsException;
+import com.rmit.sept.bk_bookcatalogservices.exceptions.InvalidIsbnException;
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
 import com.rmit.sept.bk_bookcatalogservices.model.SearchForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class BookService {
     public Book saveBook (Book newBook) {
         bookrepository.findAll().forEach(book -> {
             if(book.getIsbn() == newBook.getIsbn()){
-                throw new IsbnAlreadyExistsException("A book with same isbn already exists.");
+                throw new InvalidIsbnException("A book with same isbn already exists.");
             }
         });
         Book retval = bookrepository.save(newBook);

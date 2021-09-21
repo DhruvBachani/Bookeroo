@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class IsbnAlreadyExistsException extends RuntimeException {
+public class InvalidConditionException extends RuntimeException {
 
-    public IsbnAlreadyExistsException(String message) {
+    public InvalidConditionException(String message) {
         super(message);
     }
 }

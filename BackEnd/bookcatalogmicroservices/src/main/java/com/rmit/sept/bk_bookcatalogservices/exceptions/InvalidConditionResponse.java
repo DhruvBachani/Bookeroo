@@ -1,10 +1,10 @@
 package com.rmit.sept.bk_bookcatalogservices.exceptions;
 
-public class IsbnAlreadyExistsResponse {
+public class InvalidConditionResponse {
 
     private String field;
 
-    public IsbnAlreadyExistsResponse(String field) {
+    public InvalidConditionResponse(String field) {
         this.field = field;
     }
 
