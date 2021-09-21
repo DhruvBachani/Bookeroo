@@ -2,7 +2,7 @@ package com.rmit.sept.bk_bookcatalogservices;
 
 
 import com.rmit.sept.bk_bookcatalogservices.Repositories.BookRepository;
-import com.rmit.sept.bk_bookcatalogservices.exceptions.IsbnAlreadyExistsException;
+import com.rmit.sept.bk_bookcatalogservices.exceptions.InvalidIsbnException;
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
 import com.rmit.sept.bk_bookcatalogservices.model.SearchForm;
 import com.rmit.sept.bk_bookcatalogservices.services.BookService;
@@ -116,7 +116,7 @@ public class BookServiceUnitTests {
         assertTrue(bookService.containsByIsbn(booksInDatabase.get(0).getIsbn()));
     }
 
-    @Test(expected = IsbnAlreadyExistsException.class)
+    @Test(expected = InvalidIsbnException.class)
     public void saveBook_throwException_ifIsbnAlreadyInDatabase(){
         bookService.saveBook(book1);
     }
