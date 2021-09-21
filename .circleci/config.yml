@@ -57,7 +57,7 @@ jobs: # steps
           path: target/surefire-reports
       - store_artifacts:
           path: target/reviewmicroservices-0.0.1.jar
-  build-and-test-frontend:
+  build-frontend:
     working_directory: ~/repo/Frontend/myfirstapp
     docker:
       - image: circleci/node:12
@@ -80,7 +80,7 @@ workflows:
           filters:
             branches:
               only: testing
-      - build-and-test-frontend:
+      - build-frontend:
           filters:
             branches:
               only: testing
