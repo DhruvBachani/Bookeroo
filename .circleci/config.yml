@@ -1,6 +1,6 @@
 version: 2.1
 jobs: # steps
-  build-login:
+  build-and-test-login-microservice:
     working_directory: ~/repo/BackEnd/loginmicroservices
     docker:
       - image: circleci/openjdk:8-jdk-stretch
@@ -19,7 +19,7 @@ jobs: # steps
           path: target/surefire-reports
       - store_artifacts:
           path: target/loginmicroservices-0.0.1.jar
-  build-book:
+  build-and-test-book-microservice:
     working_directory: ~/repo/BackEnd/bookcatalogmicroservices
     docker:
       - image: circleci/openjdk:8-jdk-stretch
@@ -38,7 +38,7 @@ jobs: # steps
           path: target/surefire-reports
       - store_artifacts:
           path: target/bookcatalogmicroservices-0.0.1.jar
-  build-review:
+  build-and-test-review-microservice:
     working_directory: ~/repo/BackEnd/reviewmicroservices
     docker:
       - image: circleci/openjdk:8-jdk-stretch
@@ -58,37 +58,29 @@ jobs: # steps
       - store_artifacts:
           path: target/reviewmicroservices-0.0.1.jar
 #  build-frontend:
-#    working_directory: ~/repo/Frontend/myfirstapp
-#      docker:
-#          - image: circleci/openjdk:8-jdk-stretch
-#      steps:
-#        - checkout:
-#            path: ~/repo
-#        - restore_cache:
-#            key: circleci-reviewmicroservices-{{ checksum "pom.xml" }}
-#        - run: mvn dependency:go-offline
-#        - save_cache:
-#            paths:
-#              - ~/.m2
-#            key: circleci-reviewmicroservices-{{ checksum "pom.xml" }}
-#        - run: mvn package
-#        - store_test_results:
-#            path: target/surefire-reports
-#        - store_artifacts:
-#            path: target/reviewmicroservices-0.0.1.jar
+  build-and-test-frontend:
+  docker:
+    - image: circleci/node:12
+  steps:
+    - checkout
+    - run: "npm test"
 workflows:
   version: 2
   build:
     jobs:
-      - build-login:
+      - build-and-test-login-microservice:
           filters:
             branches:
               only: testing
-      - build-book:
+      - build-and-test-book-microservice:
           filters:
             branches:
               only: testing
-      - build-review:
+      - build-and-test-review-microservice:
+          filters:
+            branches:
+              only: testing
+      - build-and-test-frontend:
           filters:
             branches:
               only: testing
