@@ -28,7 +28,8 @@ public class BookService {
                 throw new IsbnAlreadyExistsException("A book with same isbn already exists.");
             }
         });
-        return bookrepository.save(newBook);
+        Book retval = bookrepository.save(newBook);
+        return retval;
     }
 
     public Book getBookByIsbn(Long isbn) {

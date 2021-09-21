@@ -2,6 +2,7 @@ package com.rmit.sept.bk_bookcatalogservices;
 
 
 import com.rmit.sept.bk_bookcatalogservices.Repositories.BookRepository;
+import com.rmit.sept.bk_bookcatalogservices.exceptions.IsbnAlreadyExistsException;
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
 import com.rmit.sept.bk_bookcatalogservices.model.SearchForm;
 import com.rmit.sept.bk_bookcatalogservices.services.BookService;
@@ -22,7 +23,7 @@ import static org.mockito.BDDMockito.any;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class BookServiceUnitTest {
+public class BookServiceUnitTests {
 
     @InjectMocks
     private BookService bookService;
@@ -33,6 +34,8 @@ public class BookServiceUnitTest {
     private Book book1 = new Book();
     private Book book2 = new Book();
     private Book book3 = new Book();
+
+    private String searchingString = "rr";
 
     long isbnNotInDatabase = 5;
     List<Book> booksInDatabase;
@@ -65,10 +68,13 @@ public class BookServiceUnitTest {
         booksInDatabase.add(book3);
 
         // Creating mock dependencies to not rely on external databases
+        Mockito.when(bookRepository.save(any(Book.class))).thenReturn(new Book());
         Mockito.when(bookRepository.existsByIsbn(book1.getIsbn())).thenReturn(true);
         Mockito.when(bookRepository.existsByIsbn(isbnNotInDatabase)).thenReturn(false);
         Mockito.when(bookRepository.findByIsbn(book1.getIsbn())).thenReturn(book1);
         Mockito.when(bookRepository.findAll()).thenReturn(booksInDatabase);
+        Mockito.when(bookRepository.findByNameIgnoreCaseContaining(any(String.class))).thenReturn(new ArrayList<>(booksInDatabase));
+
 
 
     }
@@ -108,6 +114,27 @@ public class BookServiceUnitTest {
     @Test
     public void containsByIsbn_returnTrue_IfBookWithIsbnInDatabase(){
         assertTrue(bookService.containsByIsbn(booksInDatabase.get(0).getIsbn()));
+    }
+
+    @Test(expected = IsbnAlreadyExistsException.class)
+    public void saveBook_throwException_ifIsbnAlreadyInDatabase(){
+        bookService.saveBook(book1);
+    }
+
+    @Test
+    public void saveBook_returnBook_ifIsbnNotInDatabase(){
+        Book book = new Book();
+        book.setIsbn(isbnNotInDatabase);
+        Book retVal = bookService.saveBook(book);
+        assertNotNull(retVal);
+    }
+
+    @Test
+    public void searchBooks_returnListOfFoundBooks_IfBooksTitleContainsString(){
+        SearchForm searchForm = new SearchForm();
+        searchForm.searchFor = searchingString;
+        List<Book> searchResult = bookService.searchBooks(searchForm);
+        assertEquals(3, searchResult.size());
     }
 
 
