@@ -8,6 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ms_bookcatalog {
 
     public static void main(String[] args) {
-        SpringApplication.run(ms_login.class, args);
+        SpringApplication.run(ms_bookcatalog.class, args);
     }
 }
