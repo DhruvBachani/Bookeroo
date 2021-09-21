@@ -13,6 +13,7 @@ public class Book {
     private String author;
     private String category;
     private String description;
+    @Column(unique = true)
     private Long isbn;
 
     public Book() {
