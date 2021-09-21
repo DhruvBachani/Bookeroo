@@ -117,9 +117,8 @@ public class UserService {
         } else if (!user.getApproved()) {
             user.setApproved(true);
             updateUser(user);
-            return true;
         }
-        return false;
+        return true;
     }
 
     // Changes the approval to false, in the case the admin made a mistake
@@ -129,6 +128,7 @@ public class UserService {
             return false;
         } else if (user.getApproved()) {
             user.setApproved(false);
+            updateUser(user);
         }
         return true;
     }
@@ -152,6 +152,7 @@ public class UserService {
             return false;
         } else {
             user.setBanned(false);
+            updateUser(user);
         }
         return true;
     }
