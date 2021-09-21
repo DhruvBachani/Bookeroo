@@ -14,12 +14,15 @@ class SearchResults extends Component {
         return (
             <div>
                 <h1>Search Results</h1>
-                <div className="search-grid">
-                    {this.props.books.map((value)=>{
-                        return <div> <BookCard book={value} /></div>
+                {(this.props.books.length!==0) && <div className="search-grid">
+                    {this.props.books.map((value) => {
+                        return <div><BookCard book={value}/></div>
                     })}
+                </div>}
 
-                </div>
+                {(this.props.books.length===0) && <div>
+                    <h3>No Results found</h3>
+                </div>}
             </div>
         );
     }
