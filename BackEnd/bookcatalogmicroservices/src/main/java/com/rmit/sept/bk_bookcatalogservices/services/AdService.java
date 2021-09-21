@@ -24,33 +24,37 @@ public class AdService {
     BookRepository bookRepository;
 
     public Ad saveAd(Ad newAd) {
-        boolean validIsbn = false;
-        List<Book> allBooks = (List<Book>) bookRepository.findAll();
-        for(Book book: allBooks){
-            if(newAd.getIsbn() == book.getIsbn()){
-                validIsbn = true;
-                break;
-            }
-        }
-
-        if(!validIsbn){
+        if(!validIsbn(newAd.getIsbn())){
             throw new InvalidIsbnException("Book with given Isbn doesn't exists");
         }
-        boolean validCondition = false;
-        for(Condition condition: Condition.values()){
-            if(condition.toString().equalsIgnoreCase(newAd.getCondition())){
-                validCondition=true;
-            }
-        }
-        if(!validCondition){
+        if (!validCondition(newAd.getCondition())){
             throw new InvalidConditionException("Invalid Condition provided");
         }
         return adRepository.save(newAd);
     }
 
     public List<Ad> getAllAds(String condition, Long isbn){
+
         return adRepository.findAllByConditionAndIsbn(condition.toUpperCase(), isbn);
     }
 
+    public boolean validCondition(String testingCondition){
+        for(Condition condition: Condition.values()){
+            if(condition.toString().equalsIgnoreCase(testingCondition)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validIsbn(Long testingIsbn){
+        List<Book> allBooks = (List<Book>) bookRepository.findAll();
+        for(Book book: allBooks){
+            if(testingIsbn == book.getIsbn()){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
