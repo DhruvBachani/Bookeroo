@@ -6,6 +6,7 @@ import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
 import com.rmit.sept.bk_loginservices.model.User;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -18,7 +19,7 @@ import javax.validation.ConstraintViolationException;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class UserRepositoryUnitTest {
+public class UserRepositoryUnitTests {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -30,7 +31,7 @@ public class UserRepositoryUnitTest {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
-    public void save_WhenAllDetailsAreFilled()
+    public void save_WhenAllDetailsAreFilled_Test()
     {
         // given
         User customer = new User();
@@ -47,7 +48,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test
-    public void save_WhenAddressIsBlank()
+    public void save_WhenAddressIsBlank_Test()
     {
         // given
         User customer = new User();
@@ -66,7 +67,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test
-    public void save_WhenPhoneNumberIsBlank()
+    public void save_WhenPhoneNumberIsBlank_Test()
     {
         // given
         User customer = new User();
@@ -82,7 +83,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test
-    public void findByUsername_ReturnUser_WhenUsernameIsValid()
+    public void findByUsername_ReturnUser_WhenUsernameIsValid_Test()
     {
         // given
         User customer = new User();
@@ -103,7 +104,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenUsernameIsBlank()
+    public void save_ThrowException_WhenUsernameIsBlank_Test()
     {
         // given
         User customer = new User();
@@ -121,7 +122,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenPasswordIsBlank()
+    public void save_ThrowException_WhenPasswordIsBlank_Test()
     {
         // given
         User customer = new User();
@@ -140,7 +141,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenUserTypeIsBlank()
+    public void save_ThrowException_WhenUserTypeIsBlank_Test()
     {
         // given
         User customer = new User();
@@ -159,7 +160,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenFullNameIsBlank()
+    public void save_ThrowException_WhenFullNameIsBlank_Test()
     {
         //given
         User customer = new User();
@@ -177,7 +178,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test
-    public void save_WhenTwoUserAreUnique()
+    public void save_WhenTwoUserAreUnique_Test()
     {
         //given
         User customer = new User();
@@ -206,7 +207,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test (expected = PersistenceException.class)
-    public void save_ThrowException_WhenUsernameIsNotUnique()
+    public void save_ThrowException_WhenUsernameIsNotUnique_Test()
     {
         //given
         User customer = new User();
@@ -234,7 +235,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test (expected = PersistenceException.class)
-    public void save_ThrowException_WhenPhoneNumberIsNotUnique()
+    public void save_ThrowException_WhenPhoneNumberIsNotUnique_Test()
     {
         //given
         User customer = new User();
@@ -261,7 +262,7 @@ public class UserRepositoryUnitTest {
     }
 
     @Test (expected = PersistenceException.class)
-    public void save_ThrowException_WhenABNNumberIsNotUnique()
+    public void save_ThrowException_WhenABNNumberIsNotUnique_Test()
     {
         //given
         User customer = new User();

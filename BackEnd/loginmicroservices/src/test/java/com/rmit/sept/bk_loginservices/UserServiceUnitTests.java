@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
 import com.rmit.sept.bk_loginservices.model.User;
 import com.rmit.sept.bk_loginservices.payload.UserID;
@@ -23,7 +22,7 @@ import static org.mockito.BDDMockito.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserServiceUnitTest {
+public class UserServiceUnitTests {
 
     @InjectMocks
     private UserService userService;

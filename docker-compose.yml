@@ -1,0 +1,32 @@
+version: "3"
+services:
+  loginmicroservice:
+    image: "loginmicroservice"
+    build:
+      context: "./BackEnd/loginmicroservices"
+    ports:
+      - "8080:8080"
+  bookmicroservice:
+    image: "bookmicroservice"
+    build:
+      context: "./BackEnd/bookcatalogmicroservices"
+    ports:
+      - "8081:8081"
+  reviewmicroservice:
+    image: "reviewmicroservice"
+    build:
+      context: "./BackEnd/reviewmicroservices"
+    ports:
+      - "8082:8082"
+
+  frontend:
+    image: "frontend"
+    build:
+      context: "./FrontEnd/myfirstapp"
+    container_name: "frontend"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - loginmicroservice
+      - bookmicroservice
+      - reviewmicroservice

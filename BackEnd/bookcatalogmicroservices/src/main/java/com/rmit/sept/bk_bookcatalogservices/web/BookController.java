@@ -68,7 +68,6 @@ public class BookController {
 
     @PostMapping("/search")
     private List<Book> searchFor(@Valid @RequestBody SearchForm searchForm){
-//        System.out.println
         return bookservice.searchBooks(searchForm);
     }
 
