@@ -1,23 +1,18 @@
 package com.rmit.sept.bk_bookcatalogservices;
 
-import static org.junit.Assert.*;
-
 import com.rmit.sept.bk_bookcatalogservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
-import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
-import com.rmit.sept.bk_loginservices.model.User;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -36,255 +31,127 @@ public class BookRepositoryUnitTests {
     public void save_WhenAllDetailsAreFilled_Test()
     {
         // given
-
-
-        // when persisted, then no exception is thrown
-        Assertions.assertDoesNotThrow(() -> entityManager.persist(customer));
-        entityManager.flush();
-    }
-
-    @Test
-    public void save_WhenAddressIsBlank_Test()
-    {
-        // given
-        User customer = new User();
-        customer.setFullName("Linda Vu");
-        customer.setUserType("Customer");
-        customer.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer.setUsername("linda@gmail.com");
-        customer.setPhoneNumber("0412121121");
-        entityManager.persist(customer);
-        entityManager.flush();
+        book.setAuthor("Patrick");
+        book.setName("World");
+        book.setIsbn((long)1);
 
         // when persisted, then no exception is thrown
-        Assertions.assertDoesNotThrow(() -> entityManager.persist(customer));
+        Assertions.assertDoesNotThrow(() -> entityManager.persist(book));
         entityManager.flush();
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void save_WhenIsbnIsNull_Test()
+    {
+        // given
+        book.setAuthor("Patrick");
+        book.setName("World");
+        book.setIsbn(null);
+        entityManager.persist(book);
+        entityManager.flush();
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void save_WhenNameIsBlank_Test()
+    {
+        // given
+        book.setAuthor("Patrick");
+        book.setIsbn((long)1);
+        entityManager.persist(book);
+        entityManager.flush();
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void save_WhenAuthorIsBlank_Test()
+    {
+        // given
+        book.setName("World");
+        book.setIsbn((long)1);
+        entityManager.persist(book);
+        entityManager.flush();
+    }
+
+    @Test
+    public void existsByIsbn_returnTrue_IfBookWithIsbnExists(){
+
+        book.setAuthor("Patrick");
+        book.setName("World");
+        book.setIsbn((long)1);
+        entityManager.persist(book);
+        entityManager.flush();
+
+        assertTrue(bookRepository.existsByIsbn((long)1));
 
     }
 
     @Test
-    public void save_WhenPhoneNumberIsBlank_Test()
-    {
-        // given
-        User customer = new User();
-        customer.setFullName("Linda Vu");
-        customer.setUserType("Customer");
-        customer.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer.setUsername("linda@gmail.com");
-        customer.setAddress("420 Swamped Uni Street");
+    public void existsByIsbn_returnFalse_IfBookWithIsbnDoesntExist(){
 
-        //when persisted, then no exception is thrown
-        Assertions.assertDoesNotThrow(() -> entityManager.persist(customer));
+        book.setAuthor("Patrick");
+        book.setName("World");
+        book.setIsbn((long)1);
+        entityManager.persist(book);
         entityManager.flush();
+
+        assertFalse(bookRepository.existsByIsbn((long)2));
+
     }
 
     @Test
-    public void findByUsername_ReturnUser_WhenUsernameIsValid_Test()
-    {
-        // given
-        User customer = new User();
-        customer.setFullName("Linda Vu");
-        customer.setUserType("Customer");
-        customer.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer.setUsername("linda@gmail.com");
-        customer.setAddress("420 Swamped Uni Street");
-        customer.setPhoneNumber("0412121121");
-        entityManager.persist(customer);
+    public void findByIsbn_returnNull_IfBookWithIsbnDoesntExist(){
+
+        book.setAuthor("Patrick");
+        book.setName("World");
+        book.setIsbn((long)1);
+        entityManager.persist(book);
         entityManager.flush();
 
-        // when
-        User found = userRepository.findByUsername(customer.getUsername());
+        assertNull(bookRepository.findByIsbn((long)2));
 
-        // then
-        assertEquals(found.getUsername(), customer.getUsername());
-    }
-
-    @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenUsernameIsBlank_Test()
-    {
-        // given
-        User customer = new User();
-        customer.setFullName("Linda Vu");
-        customer.setUserType("Customer");
-        customer.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer.setAddress("420 Swamped Uni Street");
-        customer.setPhoneNumber("0412121121");
-
-        // when
-        entityManager.persist(customer);
-        entityManager.flush();
-
-        // then, exception is thrown
-    }
-
-    @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenPasswordIsBlank_Test()
-    {
-        // given
-        User customer = new User();
-        customer.setFullName("Linda Vu");
-        customer.setUserType("Customer");
-        customer.setUsername("linda@gmail.com");
-        customer.setAddress("420 Swamped Uni Street");
-        customer.setPhoneNumber("0412121121");
-
-        // when
-        entityManager.persist(customer);
-        entityManager.flush();
-
-        // then, exception is thrown
-
-    }
-
-    @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenUserTypeIsBlank_Test()
-    {
-        // given
-        User customer = new User();
-        customer.setFullName("Linda Vu");
-        customer.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer.setUsername("linda@gmail.com");
-        customer.setAddress("420 Swamped Uni Street");
-        customer.setPhoneNumber("0412121121");
-
-        // when
-        entityManager.persist(customer);
-        entityManager.flush();
-
-        // then, exception is thrown
-
-    }
-
-    @Test (expected = ConstraintViolationException.class)
-    public void save_ThrowException_WhenFullNameIsBlank_Test()
-    {
-        //given
-        User customer = new User();
-        customer.setUserType("Customer");
-        customer.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer.setUsername("linda@gmail.com");
-        customer.setAddress("420 Swamped Uni Street");
-        customer.setPhoneNumber("0412121121");
-
-        // when
-        entityManager.persist(customer);
-        entityManager.flush();
-
-        // then, exception is thrown
     }
 
     @Test
-    public void save_WhenTwoUserAreUnique_Test()
-    {
-        //given
-        User customer = new User();
-        customer.setFullName("Linda Vu");
-        customer.setUserType("Publisher");
-        customer.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer.setUsername("linda@gmail.com");
-        customer.setAddress("420 Swamped Uni Street");
-        customer.setPhoneNumber("0412121121");
-        customer.setAbn_number("12345678901");
+    public void findByIsbn_returnBook_IfBookWithIsbnExists(){
 
-
-        User customer1 = new User();
-        customer1.setFullName("Jimmy Vu");
-        customer1.setUserType("Publisher");
-        customer1.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer1.setUsername("jimmy@gmail.com");
-        customer.setPhoneNumber("0412345678");
-        customer1.setAbn_number("12312312312");
-
-
-        // when persists, then, no exception is thrown
-        Assertions.assertDoesNotThrow(() -> entityManager.persist(customer));
-        Assertions.assertDoesNotThrow(() -> entityManager.persist(customer1));
-        entityManager.flush();
-    }
-
-    @Test (expected = PersistenceException.class)
-    public void save_ThrowException_WhenUsernameIsNotUnique_Test()
-    {
-        //given
-        User customer = new User();
-        customer.setFullName("Linda Vu");
-        customer.setUserType("Customer");
-        customer.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer.setUsername("linda@gmail.com");
-        customer.setAddress("420 Swamped Uni Street");
-        customer.setPhoneNumber("0412121121");
-
-        User customer1 = new User();
-        customer1.setFullName("Jimmy Vu");
-        customer1.setUserType("Customer");
-        customer1.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer1.setUsername("linda@gmail.com");
-
-
-
-        // when
-        entityManager.persist(customer);
-        entityManager.persist(customer1);
+        book.setAuthor("Patrick");
+        book.setName("World");
+        book.setIsbn((long)1);
+        entityManager.persist(book);
         entityManager.flush();
 
-        // then, exception is thrown
+        assertEquals((Long)((long)1),bookRepository.findByIsbn((long)1).getIsbn());
+        assertTrue(bookRepository.findByIsbn((long)1) instanceof Book);
+
     }
 
-    @Test (expected = PersistenceException.class)
-    public void save_ThrowException_WhenPhoneNumberIsNotUnique_Test()
-    {
-        //given
-        User customer = new User();
-        customer.setFullName("Linda Vu");
-        customer.setUserType("Customer");
-        customer.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer.setUsername("linda@gmail.com");
-        customer.setAddress("420 Swamped Uni Street");
-        customer.setPhoneNumber("0412121121");
+    @Test
+    public void findByNameIgnoreCaseContaining_returnListOfBook_IfBookNameContainingStringExists(){
 
-        User customer1 = new User();
-        customer1.setFullName("Jimmy Vu");
-        customer1.setUserType("Customer");
-        customer1.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer1.setUsername("Jimmy@gmail.com");
-        customer1.setPhoneNumber("0412121121");
-
-        // when
-        entityManager.persist(customer);
-        entityManager.persist(customer1);
+        book.setAuthor("Patrick");
+        book.setName("World");
+        book.setIsbn((long)1);
+        entityManager.persist(book);
         entityManager.flush();
 
-        // then, exception is thrown
+        assertEquals(1, bookRepository.findByNameIgnoreCaseContaining("ld").size());
+        assertEquals((Long)((long)1), bookRepository.findByNameIgnoreCaseContaining("ld").get(0).getIsbn());
+
     }
 
-    @Test (expected = PersistenceException.class)
-    public void save_ThrowException_WhenABNNumberIsNotUnique_Test()
-    {
-        //given
-        User customer = new User();
-        customer.setFullName("Linda Vu");
-        customer.setUserType("Publisher");
-        customer.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer.setUsername("linda@gmail.com");
-        customer.setAddress("420 Swamped Uni Street");
-        customer.setPhoneNumber("0412121121");
-        customer.setAbn_number("12345678901");
+    @Test
+    public void findByNameIgnoreCaseContaining_returnEmptyListOfBook_IfBookNameContainingStringDoesntExist(){
 
-        User customer1 = new User();
-        customer1.setFullName("Jimmy Vu");
-        customer1.setUserType("Publisher");
-        customer1.setPassword(bCryptPasswordEncoder.encode("asdasdasd"));
-        customer1.setUsername("Jimmy@gmail.com");
-        customer1.setPhoneNumber("0412345678");
-        customer1.setAbn_number("12345678901");
-
-        // when
-        entityManager.persist(customer);
-        entityManager.persist(customer1);
+        book.setAuthor("Patrick");
+        book.setName("World");
+        book.setIsbn((long)1);
+        entityManager.persist(book);
         entityManager.flush();
 
-        // then, exception is thrown
+        assertTrue(bookRepository.findByNameIgnoreCaseContaining("docker").isEmpty());
+
+
     }
+
 
 
 
