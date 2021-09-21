@@ -35,12 +35,15 @@ Once this is all downloaded:
 1. Open the project on IntelliJ and enter in the terminal, for each and every microservice:
 	- cd Backend/[microservice]
 	- ./mvnw package
-	- java -jar target/[microservice-0.0.1.jar]
+	- java -jar target/[jar file e.g. loginmicroservices-0.0.1.jar]
 2. In a second terminal, type:
 	- cd FrontEnd/myfirstapp
 	- npm install
 	- npm start
 
-Note: 
-- Project may not have downloaded spring.boot.framework properly. To do so, add a version (2.4.0) and download dependancies/restart IntelliJ again.
-- H2-console was not shown at the beginning, the configure method on the SecurityConfig file was modified to get it working. 
+Testing:
+- All tests are conducted on the testing branch - which is exactly the same as the development/master branch (aside from the tests).
+- We believe it's best to leave the testing to this branch to avoid having tests in our production code. 
+- All microservices have unit tests that are configured to run at a './mvnw package' build (or './mvnw test' to just test the code).
+- For frontend testings, all tests are configured to run at 'npm test' (might need to 'npm install again), once the test terminal appears, press 'a' to run all tests and then 'u' to update the snapshots.
+- All tests are successful.
