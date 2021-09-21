@@ -64,6 +64,7 @@ jobs: # steps
       - image: circleci/node:12
     steps:
       - checkout
+      - run: "npm install"
       - run: "npm test"
 workflows:
   version: 2
