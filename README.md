@@ -47,3 +47,6 @@ Testing:
 - All microservices have unit tests that are configured to run at a './mvnw package' build (or './mvnw test' to just test the code).
 - For frontend testings, all tests are configured to run at 'npm test' (might need to 'npm install again), once the test terminal appears, press 'a' to run all tests and then 'u' to update the snapshots.
 - All tests are successful.
+
+CircleCI:
+- The CircleCI job builds are also only configured to the testing branch for the same reason above. All jobs were successful as seen from our testing branch as well as the screenshots from our documents.  
