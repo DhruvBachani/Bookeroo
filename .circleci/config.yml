@@ -59,6 +59,7 @@ jobs: # steps
           path: target/reviewmicroservices-0.0.1.jar
 #  build-frontend:
   build-and-test-frontend:
+    working_directory: ~/repo/Frontend/myfirstapp
   docker:
     - image: circleci/node:12
   steps:
