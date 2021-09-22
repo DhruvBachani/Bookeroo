@@ -71,11 +71,6 @@ class Register extends Component {
       userType: this.state.userType
     };
 
-    // Ensure publisher and shop owners they can't log in yet.
-    if (this.state.userType == "Publisher" || this.state.userType == "Shop owner") {
-      alert("Request is sent in! Please wait for your admin approval email before you log in")
-    }
-
     this.props.createNewUser(newUser, this.props.history);
   }
 

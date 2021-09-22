@@ -1,6 +1,8 @@
 package com.rmit.sept.bk_bookcatalogservices.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -8,11 +10,14 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank
     private String name;
+    @NotBlank
     private String author;
     private String category;
     private String description;
+    @Column(unique = true)
+    @NotNull
     private Long isbn;
 
     public Book() {

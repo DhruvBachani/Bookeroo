@@ -13,6 +13,10 @@ export const createNewUser = (newUser, history) => async dispatch => {
             type: GET_ERRORS,
             payload: {}
         });
+        // Ensure publisher and shop owners they can't log in yet.
+        if (newUser.userType == "Publisher" || newUser.userType == "Shop owner") {
+            alert("Request is sent in! Please wait for your admin approval email before you log in")
+        }
     }
     catch (err){
         dispatch ({

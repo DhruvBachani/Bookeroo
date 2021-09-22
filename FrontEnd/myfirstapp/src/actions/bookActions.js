@@ -5,7 +5,7 @@ import {GET_ERRORS, GET_BOOKS, GET_BOOK, GET_REVIEWS, GET_CATEGORIES} from "./ty
 export const createBook = (newBook, history) => async dispatch => {
     try {
         const res = await axios.post("http://localhost:8081/api/books/create", newBook);
-        history.push("/dashboard");
+        history.push("/bookCatalog");
     } catch (err) {
         dispatch({
             type: GET_ERRORS,
