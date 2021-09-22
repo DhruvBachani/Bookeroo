@@ -4,7 +4,6 @@ import ProductDetails from "./ProductDetails";
 import ProductReviews from "./ProductReviews";
 import AddReview from "../Books/AddReview";
 import { getBook, getBookReviews } from "../../actions/bookActions";
-import {Link} from "react-router-dom";
 
 class BookPage extends Component {
   componentDidMount() {
@@ -20,13 +19,12 @@ class BookPage extends Component {
           <div className="row">
             <div className="col-md-12">
               <ProductDetails book={this.props.book} />
-              <br />
+              <br/><hr/>
               <ProductReviews reviews={this.props.reviews} />
+              <br/>
               <AddReview/>
             </div>
-            <Link className="btn btn-lg btn-primary mr-2" to={window.location.pathname+"/sellers"}>
-              Choose Seller
-            </Link>
+            <br/>
           </div>
         </div>
       </div>

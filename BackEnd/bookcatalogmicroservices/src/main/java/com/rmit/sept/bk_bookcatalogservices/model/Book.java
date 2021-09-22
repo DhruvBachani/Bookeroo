@@ -23,14 +23,6 @@ public class Book {
     public Book() {
     }
 
-    // public Book(String name, String author, String category, String description, int isbn) {
-    //     this.name = name;
-    //     this.author = author;
-    //     this.category = category;
-    //     this.description = description;
-    //     this.isbn = isbn;
-    // }
-
     public Long getId() { return this.id; }
 
     public String getName() { return name; }

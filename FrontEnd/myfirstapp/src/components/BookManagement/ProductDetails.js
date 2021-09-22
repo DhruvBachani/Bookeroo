@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom";
 
 class ProductDetails extends Component {
   render() {
@@ -10,7 +11,7 @@ class ProductDetails extends Component {
               <div className="col-md-4">
                 <div className="book-cover-image-container">
                   <img
-                    src=""
+                    src="https://sept-bookcatalog.s3.ap-southeast-2.amazonaws.com/murder-on-the-orient-express.jpg"
                     alt="Image not found"
                     onError={(e) => {
                       e.target.onerror = null;
@@ -19,18 +20,19 @@ class ProductDetails extends Component {
                   />
                 </div>
               </div>
-              <div className="col-md-4">
-                <h4>Title: {this.props.book.name}</h4> <br />
-                <h4>Author: {this.props.book.author}</h4> <br />
-                <h4>ISBN: {this.props.book.isbn}</h4> <br />
-                <h4>Category: {this.props.book.category}</h4> <br />
+              <div className="col-md-8">
+                <h1 class="book-title">{this.props.book.name}</h1>
+                <h4 class="book-author">{this.props.book.author}</h4> <br/><br/>
+                <div class="book-desc">{this.props.book.description}</div><br/><br/><br/>
+                <h4 class="book-author">{this.props.book.category}</h4> <br/>
+                <br/><br/><br/><br/>
+                <div className="seller">
+                  <Link className="btn btn-lg btn-primary mr-2" to={window.location.pathname+"/sellers"}>
+                    Choose Seller
+                  </Link>
+                </div>
               </div>
             </div>
-            <br /> <br />
-            <div className="row>">
-              <h4>Description: {this.props.book.description}</h4>
-            </div>
-            <br /> <hr />
           </div>
         </div>
       </div>
@@ -40,6 +42,14 @@ class ProductDetails extends Component {
 
 export default ProductDetails;
 
+
 // <div className="col-md-4 text-align-center">
 //   <h4>Price: ${this.props.book.price}</h4>
 // </div>;
+
+
+// <br /> <br />
+// <div className="row>">
+  
+// </div>
+// <br /> <hr />
