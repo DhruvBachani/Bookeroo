@@ -11,7 +11,7 @@ class ProductDetails extends Component {
               <div className="col-md-4">
                 <div className="book-cover-image-container">
                   <img
-                    src="https://sept-bookcatalog.s3.ap-southeast-2.amazonaws.com/murder-on-the-orient-express.jpg"
+                    src={this.props.book.image}
                     alt="Image not found"
                     onError={(e) => {
                       e.target.onerror = null;
