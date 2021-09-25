@@ -11,7 +11,7 @@ class ProductDetails extends Component {
               <div className="col-md-4">
                 <div className="book-cover-image-container">
                   <img
-                    src="https://sept-bookcatalog.s3.ap-southeast-2.amazonaws.com/murder-on-the-orient-express.jpg"
+                    src={this.props.book.image}
                     alt="Image not found"
                     onError={(e) => {
                       e.target.onerror = null;
@@ -21,10 +21,10 @@ class ProductDetails extends Component {
                 </div>
               </div>
               <div className="col-md-8">
-                <h1 class="book-title">{this.props.book.name}</h1>
-                <h4 class="book-author">{this.props.book.author}</h4> <br/><br/>
-                <div class="book-desc">{this.props.book.description}</div><br/><br/><br/>
-                <h4 class="book-author">{this.props.book.category}</h4> <br/>
+                <h1 className="book-title">{this.props.book.name}</h1>
+                <h4 className="book-author">{this.props.book.author}</h4> <br/><br/>
+                <div className="book-desc">{this.props.book.description}</div><br/><br/><br/>
+                <h4 className="book-author">{this.props.book.category}</h4> <br/>
                 <br/><br/><br/><br/>
                 <div className="seller">
                   <Link className="btn btn-lg btn-primary mr-2" to={window.location.pathname+"/sellers"}>

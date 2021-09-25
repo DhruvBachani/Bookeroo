@@ -25,6 +25,7 @@ public class DataLoader implements ApplicationRunner {
         book1.setDescription("Just after midnight, a snowdrift stops the Orient Express in its tracks. " +
         "An American tycoon lies dead in his compartment, stabbed a dozen times, his door locked from the inside.\n");
         book1.setIsbn((long) 99798);
+        book1.setImage("https://sept-bookcatalog.s3.ap-southeast-2.amazonaws.com/murder-on-the-orient-express.jpg");
 
         bookRepository.save(book1);
     }

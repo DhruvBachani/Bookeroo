@@ -20,6 +20,8 @@ public class Book {
     @NotNull
     private Long isbn;
 
+    private String image;
+
     public Book() {
     }
 
@@ -44,4 +46,12 @@ public class Book {
     public Long getIsbn() { return isbn; }
 
     public void setIsbn(Long isbn) { this.isbn = isbn; }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
