@@ -69,9 +69,20 @@ export const search = (searchForm, history) => async dispatch => {
 
 export const getBookReviews = (bookISBN) => async dispatch => {
     const res = await axios.get(`http://localhost:8082/api/reviews/review_by_ISBN/${bookISBN}`);
-    console.log(res.data);
     dispatch({
         type: GET_REVIEWS,
         payload: res.data
     });
+};
+
+export const addNewReview = (review) => async dispatch => {
+    try {
+        await axios.post(`http://localhost:8082/api/reviews/create`, review);
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
+    } catch (err) {
+
+    }
 };

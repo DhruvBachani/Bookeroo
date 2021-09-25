@@ -32,11 +32,6 @@ public class ReviewService {
     }
 
     public Review saveReview(Review newReview) {
-        newReview.setReview(newReview.getReview());
-        newReview.setBookISBN(newReview.getBookISBN());
-        newReview.setUserName(newReview.getUserName());
-        newReview.setRating(newReview.getRating());
-
         return reviewrepository.save(newReview);
     }
 

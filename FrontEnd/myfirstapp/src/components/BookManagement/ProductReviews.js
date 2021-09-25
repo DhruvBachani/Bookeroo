@@ -7,7 +7,7 @@ class ProductReviews extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 class="book-review">Reviews & Ratings</h1>
+              <h1 className="book-review">Reviews & Ratings</h1>
               {this.props.reviews.map((review) => (
                 <div key={review.id}>
                   <br />
