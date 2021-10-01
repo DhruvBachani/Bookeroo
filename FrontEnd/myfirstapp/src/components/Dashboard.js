@@ -4,6 +4,7 @@ import {logout} from "../actions/securityActions";
 import CreateRequestButton from "./UserManagement/CreateRequestButton";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import CreateAllBooksButton from "./UserManagement/CreateAllBooksButton";
 
 
 class Dashboard extends Component {
@@ -52,7 +53,7 @@ class Dashboard extends Component {
                                 this.state.showAdmin &&
                                 <>
                                     <button className={"btn btn-lg btn-info"}> All Orders </button>
-                                    <button className={"btn btn-lg btn-info"}> All Books </button>
+                                    <CreateAllBooksButton/>
                                     <CreateRequestButton/>
                                 </>
                             }
@@ -67,7 +68,7 @@ class Dashboard extends Component {
                                     <button className={"btn btn-lg btn-info"}> Reviews </button>
 
                                 </>
-                                }
+                            }
                             <Link className="btn btn-lg btn-secondary mr-2" to="/newAd">
                                 Post an ad
                             </Link>
