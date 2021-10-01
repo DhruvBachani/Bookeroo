@@ -19,6 +19,13 @@ export const createOrder = (order, history) => async dispatch => {
     });
 
   }
-
 };
 
+export const getShoppingCart = () => async dispatch => {
+};
+
+export const getSellers = () => async dispatch => {
+};
+
+export const saveOrder = () => async dispatch => {
+};

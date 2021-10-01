@@ -5,6 +5,8 @@ import Header from "./components/Layout/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddPerson from "./components/Persons/AddPerson";
+import CheckOut from "./components/Order/CheckOut";
+
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -59,7 +61,7 @@ class App extends Component{
               }
               <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/addPerson" component={AddPerson} />
-
+                <Route exact path="/checkout" component={CheckOut} />
 
             <div className="container">
                 <div className="row">
@@ -67,7 +69,6 @@ class App extends Component{
                         {
                             // Not to be confused, v1 paypal has NOT been integrated with the frontend
                         }
-                        <PayPalCheckout />
                     </div>
                 </div>
             </div>

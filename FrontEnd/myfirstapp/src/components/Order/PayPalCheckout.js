@@ -1,14 +1,14 @@
 import axios from "axios";
-import React from "react";
+import React, {Component} from "react";
 import ReactDOM from "react-dom";
+import {connect} from "react-redux";
+import {saveOrder, getShoppingCart, getSellers} from "../../actions/orderActions";
 
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
-// This is my attempt at v2 paypal before I gave up and worked on v1 on the backend :(
-// It is here for prosperity
-// Not to be confused, v1 paypal has NOT been integrated with the frontend
-function PayPalCheckout() {
+function PayPalCheckout(props) {
+    console.log(props)
     function _createOrder(data, actions) {
         return actions.order.create({
             //   how do I bring data here..
@@ -36,40 +36,74 @@ function PayPalCheckout() {
 
                 }
             },
-            purchase_units: [{
-                amount: {
-                    currency_code: "AUD",
-                    value: "200",
-                    breakdown: {
-                        item_total: {  /* Required when including the `items` array */
-                            currency_code: "AUD",
-                            value: "200" //values need to equal
+
+            purchase_units: [
+                {
+                    reference_id : "1",
+                    // payee: { // probably wont have, hassle to link sellers to paypal
+                    //     email_address: "",
+                    //     merchant_id: "",
+                    // },
+                    amount: {
+                        currency_code: "AUD",
+                        value: "200",
+                        breakdown: {
+                            item_total: {  /* Required when including the `items` array */
+                                currency_code: "AUD",
+                                value: "200" // values need to equal
+                            }
                         }
-                    }
-                },
-                items: [
-                    {
-                        name: "First Product Name",
-                        description: "Optional descriptive text..",
-                        sku: "1234", // The stock keeping unit (SKU) for the item. In our case, the book id
-                        unit_amount: {
-                            currency_code: "AUD",
-                            value: "50"
-                        },
-                        quantity: "2"
                     },
-                    {
-                        name: "Second Product Name",
-                        description: "Weird",
-                        sku: "1234",
-                        unit_amount: {
-                            currency_code: "AUD",
-                            value: "50"
+                    items: [
+                        {
+                            name: "Book 1",
+                            description: "Optional descriptive text..",
+                            sku: "1234", // The stock keeping unit (SKU) for the item. In our case, the book id
+                            unit_amount: {
+                                currency_code: "AUD",
+                                value: "50"
+                            },
+                            quantity: "2"
                         },
-                        quantity: "2"
-                    }
-                ]
-            }]
+                        {
+                            name: "Book 2",
+                            description: "Weird",
+                            sku: "1234",
+                            unit_amount: {
+                                currency_code: "AUD",
+                                value: "50"
+                            },
+                            quantity: "2"
+                        }
+                    ]
+                },
+                {
+                    reference_id : "2",
+                    amount: {
+                        currency_code: "AUD",
+                        value: "50",
+                        breakdown: {
+                            item_total: {  /* Required when including the `items` array */
+                                currency_code: "AUD",
+                                value: "50" // values need to equal
+                            }
+                        }
+                    },
+                    items: [
+                        {
+                            name: "Book 3",
+                            description: "descriptive text..",
+                            sku: "1234", // The stock keeping unit (SKU) for the item. In our case, the book id
+                            unit_amount: {
+                                currency_code: "AUD",
+                                value: "50"
+                            },
+                            quantity: "1"
+                        }
+                    ]
+                }
+            ],
+
         });
     }
     async function _onApprove(data, actions) {
@@ -78,13 +112,12 @@ function PayPalCheckout() {
         let orderId = order.id;
         let orderStatus = order.status;
         alert("Thanks for purchasing! OrderID: " + orderId + " Status: "+ orderStatus);
-        await axios.post("http://localhost:8000/api/saveOrder/", orderId);
-        //how do I save the book now..
+        await axios.post("http://localhost:8000/api/checkout/", order);
         return order;
     }
-    function _onError(err) {
+    function _onError(message, err) {
         console.log(err);
-        alert(err);
+        alert(message);
     }
 
     return (
@@ -93,9 +126,10 @@ function PayPalCheckout() {
                 createOrder={(data, actions) => _createOrder(data, actions)}
                 onApprove={(data, actions) => _onApprove(data, actions)}
                 onCancel={() => _onError("Payment has been cancelled")}
-                onError={(err) => _onError("Something wrong with the order details")}
+                onError={(err) => _onError("Something wrong with the order details", err)}
             />
         </div>
     );
 }
-export default PayPalCheckout;
+
+export default (PayPalCheckout);

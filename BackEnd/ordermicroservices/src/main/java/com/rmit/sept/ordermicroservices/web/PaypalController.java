@@ -3,6 +3,7 @@ package com.rmit.sept.ordermicroservices.web;
 
 
 import com.rmit.sept.ordermicroservices.model.Order;
+import com.rmit.sept.ordermicroservices.services.OrderService;
 import com.rmit.sept.ordermicroservices.services.PaypalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class PaypalController {
 
     @Autowired
     PaypalService service;
+
+    @Autowired
+    OrderService orderService;
 
     public static final String SUCCESS_URL = "pay/success";
     public static final String CANCEL_URL = "pay/cancel";
@@ -68,6 +72,13 @@ public class PaypalController {
             System.out.println(e.getMessage());
         }
         return "redirect:/dashboard";
+    }
+
+
+
+    @PostMapping("/checkout")
+    public void saveOrder() {
+       orderService.saveOrder();
     }
 
 }
