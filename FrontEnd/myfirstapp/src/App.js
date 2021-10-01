@@ -3,9 +3,11 @@ import "./App.css";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Layout/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import AddPerson from "./components/Persons/AddPerson";
+
 import CheckOut from "./components/Order/CheckOut";
+import PayPalCheckout from "./components/Order/PayPalCheckout";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -14,16 +16,25 @@ import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
 
+import BookCatalog from "./components/BookManagement/BookCatalog";
+import BookPage from "./components/BookManagement/BookPage";
+import ManageBooks from "./components/Books/ManageBooks";
+import AddBook from "./components/Books/AddBook";
+import AddReview from "./components/Books/AddReview"
+
+
 import jwt_decode from "jwt-decode";
 import setJWTToken from "./securityUtils/setJWTToken";
 import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
-import PayPalCheckout from "./components/Order/PayPalCheckout";
+import SearchResults from "./components/BookManagement/SearchResults";
+import Requests from "./components/UserManagement/Requests";
 
+import Sellers from "./components/BookManagement/Sellers";
+import PostAd from "./components/BookManagement/PostAd";
 
 const jwtToken = localStorage.jwtToken;
-
 
 if (jwtToken) {
   setJWTToken(jwtToken);
@@ -40,41 +51,48 @@ if (jwtToken) {
   }
 }
 
-class App extends Component{
+class App extends Component {
   render() {
     return (
-    <Provider store={store}>
-          <Router>
-            <div className="App">
-              <Header />
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Route component={Header} />
+            {
+              //Public Routes
+            }
 
-              {
-                //Public Routes
-              }
+            <Route exact path="/">
+              <Redirect to="bookCatalog" />
+            </Route>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
 
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
+            <Route exact path="/bookCatalog" component={BookCatalog} />
+            <Route exact path="/bookPage/:isbn" component={BookPage} />
+            <Route exact path="/manageBooks" component={ManageBooks} />
+            <Route exact path="/addBook" component={AddBook}/>
+            <Route exact path="/search-results" component={SearchResults}/>
+            <Route exact path="/bookPage/:isbn/sellers" component={Sellers}/>
 
-              {
-                //Private Routes
-              }
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/addPerson" component={AddPerson} />
-                <Route exact path="/checkout" component={CheckOut} />
+            <Route exact path="/addReview" render={props => (
+                <AddReview {...props}/>
+            )}>
+            </Route>
+            {
+              //Private Routes
+            }
+            <SecuredRoute exact path="/dashboard" component={Dashboard} />
+            <SecuredRoute exact path="/newAd" component={PostAd} />
 
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12 text-center">
-                        {
-                            // Not to be confused, v1 paypal has NOT been integrated with the frontend
-                        }
-                    </div>
-                </div>
-            </div>
-            </div>
-          </Router>
-        </Provider>
+            <SecuredRoute exact path="/addPerson" component={AddPerson} />
+
+            <SecuredRoute exact path="/requests" component={Requests} />
+            <Route exact path="/checkout" component={CheckOut} />
+
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }

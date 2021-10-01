@@ -2,17 +2,17 @@ package com.rmit.sept.bk_loginservices.exceptions;
 
 public class UsernameAlreadyExistsResponse {
 
-    private String username;
+    private String field;
 
-    public UsernameAlreadyExistsResponse(String username) {
-        this.username = username;
+    public UsernameAlreadyExistsResponse(String field) {
+        this.field = field;
     }
 
-    public String getUsername() {
-        return username;
+    public String getField() {
+        return field;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setField(String field) {
+        this.field = field;
     }
 }

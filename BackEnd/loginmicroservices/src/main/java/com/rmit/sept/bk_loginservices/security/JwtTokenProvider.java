@@ -24,8 +24,13 @@ public class JwtTokenProvider {
 
         Map<String,Object> claims = new HashMap<>();
         claims.put("id", (Long.toString(user.getId())));
+        claims.put("userType", user.getUserType());
         claims.put("username", user.getUsername());
         claims.put("fullName", user.getFullName());
+        claims.put("address", user.getAddress());
+        claims.put("phoneNumber", user.getPhoneNumber());
+        claims.put("ABN", user.getAbnNumber());
+        claims.put("shopName", user.getShopName());
 
         return Jwts.builder()
                 .setSubject(userId)

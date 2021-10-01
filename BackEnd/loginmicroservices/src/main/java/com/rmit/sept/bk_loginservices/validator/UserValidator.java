@@ -24,12 +24,21 @@ public class UserValidator implements Validator {
 
         if(!user.getPassword().equals(user.getConfirmPassword())){
             errors.rejectValue("confirmPassword","Match", "Passwords must match");
-
         }
 
-        //confirmPassword
+        if (user.getUserType().equals("Publisher") || user.getUserType().equals("Shop owner")) {
+            if (user.getAbnNumber().length() < 11 || user.getAbnNumber().length() > 11) {
+                errors.rejectValue("abnNumber", "Length", "ABN Number must be at 11 digits");
+            }
+        }
 
+        if (user.getPhoneNumber().length() < 10 || user.getPhoneNumber().length() > 10){
+            errors.rejectValue("phoneNumber","Length", "Phone number must be at 10 digits");
+        }
 
+        if (!user.getUserType().equals("Publisher") && !user.getUserType().equals("Customer") && !user.getUserType().equals("Shop owner")) {
+            errors.rejectValue("userType","Category", "Role must be either publisher, shop owner or customer");
+        }
 
     }
 }
