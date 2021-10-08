@@ -68,6 +68,7 @@ public class OrderService {
         userTransaction.setCurrency(paypalOrder.purchaseUnits().get(0).items().get(0).unitAmount().currencyCode());
 
         userTransaction.setShippingName(paypalOrder.purchaseUnits().get(0).shippingDetail().name().fullName());
+        // TODO: sort address out
         String address = paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().toString();
         System.out.println(address);
         userTransaction.setAddress(address);

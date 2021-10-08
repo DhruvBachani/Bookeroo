@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import CreateAllBooksButton from "./UserManagement/CreateAllBooksButton";
 import CreateUserOrderButton from "./UserManagement/CreateUserOrderButton";
+import CreateAllTransactionsButton from "./UserManagement/CreateAllTransactionsButton";
 
 
 class Dashboard extends Component {
@@ -53,7 +54,7 @@ class Dashboard extends Component {
                             {
                                 this.state.showAdmin &&
                                 <>
-                                    <button className={"btn btn-lg btn-info"}> All Orders </button>
+                                    <CreateAllTransactionsButton/>
                                     <CreateAllBooksButton/>
                                     <CreateRequestButton/>
                                 </>

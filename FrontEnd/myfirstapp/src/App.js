@@ -8,6 +8,7 @@ import AddPerson from "./components/Persons/AddPerson";
 
 import CheckOut from "./components/Order/CheckOut";
 import UserOrders from "./components/UserManagement/UserOrders";
+import AdminOrders from "./components/UserManagement/AdminOrders";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -94,6 +95,7 @@ class App extends Component {
             <SecuredRoute exact path="/checkout" component={CheckOut} />
             {/* TODO: ask about :id */}
             <SecuredRoute exact path="/orders" component={UserOrders} />
+            <SecuredRoute exact path="/orders/all" component={AdminOrders} />
 
           </div>
         </Router>
