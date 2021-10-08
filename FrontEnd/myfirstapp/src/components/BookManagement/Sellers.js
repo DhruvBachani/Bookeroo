@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import Table from "../Layout/Table"
 
 
 class Sellers extends Component{
@@ -28,6 +29,25 @@ class Sellers extends Component{
 
     }
 
+    columns = ()=>{
+        return ([{
+            Header: 'Available Options',
+            columns:
+            [
+                {
+                    Header: 'Seller-id',
+                    accessor: 'userId'
+                },
+
+                {
+                    Header: 'Price',
+                    accessor: 'price'
+                }
+
+            ]
+        }])
+    }
+
 
     render(){
         return(
@@ -36,9 +56,11 @@ class Sellers extends Component{
                     <option value="new"  >New</option>
                     <option value="old" >Old</option>
                 </select>
-                {this.state.sellers.map((value)=>{
-                    return <div key={value.userId}>Seller's user id-{value.userId} Seller's price-{value.price}</div>
-                })}
+                {/*{this.state.sellers.map((value)=>{*/}
+                {/*    return <div key={value.userId}>Seller's user id-{value.userId} Seller's price-{value.price}</div>*/}
+                {/*})}*/}
+                {console.log(this.state.sellers)}
+                <Table columns={this.columns()} rows={[{userId: 1, price: 12}]} />
             </div>
         )
     }
