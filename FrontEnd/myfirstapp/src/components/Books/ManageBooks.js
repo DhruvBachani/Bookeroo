@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CreateBookButton from "./CreateBookButton";
+import CreateEditBooksListButton from "./CreateEditBooksListButton";
 
 class ManageBooks extends Component {
   render() {
@@ -14,7 +15,8 @@ class ManageBooks extends Component {
               </h2>
               <br />
               <div className="display-5 text-center">
-                <CreateBookButton />
+                <CreateBookButton /> <br/><br/>
+                <CreateEditBooksListButton />
               </div>
             </div>
           </div>
