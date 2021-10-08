@@ -4,6 +4,7 @@ import {logout} from "../actions/securityActions";
 import CreateRequestButton from "./UserManagement/CreateRequestButton";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import CreateUserOrderButton from "./UserManagement/CreateUserOrderButton";
 
 
 class Dashboard extends Component {
@@ -60,7 +61,8 @@ class Dashboard extends Component {
                             {
                                 this.state.showUser &&
                                 <>
-                                    <button className={"btn btn-lg btn-info"}> Orders </button>
+                                    <CreateUserOrderButton/>
+                                    {/*<button className={"btn btn-lg btn-info"}> Orders </button>*/}
                                     <button className={"btn btn-lg btn-info"}> Sell </button>
                                     <button className={"btn btn-lg btn-info"}> Share </button>
                                     <button className={"btn btn-lg btn-info"}> Books </button>

@@ -138,15 +138,20 @@ class CheckOut extends Component {
         );
     }
 }
+
 CheckOut.propTypes = {
-    createProject: PropTypes.func.isRequired
+    createProject: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired,
+    security: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => {
     return{
+        security: state.security,
         buyer: state.user,
         seller: state.seller,
-        shoppingCart: state.shoppingCart
+        shoppingCart: state.shoppingCart,
+        errors: state.errors
     }
 };
 

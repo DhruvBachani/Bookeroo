@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import {connect} from "react-redux";
 import {saveOrder, getShoppingCart, getSellers} from "../../actions/orderActions";
+import PropTypes from "prop-types";
 
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
@@ -57,7 +58,7 @@ function PayPalCheckout(props) {
                     items: [
                         {
                             name: "Book 1",
-                            description: "Optional descriptive text..",
+                            description: "New",
                             sku: "1234", // The stock keeping unit (SKU) for the item. In our case, the book id
                             unit_amount: {
                                 currency_code: "AUD",
@@ -67,7 +68,7 @@ function PayPalCheckout(props) {
                         },
                         {
                             name: "Book 2",
-                            description: "Weird",
+                            description: "New",
                             sku: "1234",
                             unit_amount: {
                                 currency_code: "AUD",
@@ -92,7 +93,7 @@ function PayPalCheckout(props) {
                     items: [
                         {
                             name: "Book 3",
-                            description: "descriptive text..",
+                            description: "Old",
                             sku: "1234", // The stock keeping unit (SKU) for the item. In our case, the book id
                             unit_amount: {
                                 currency_code: "AUD",
@@ -108,11 +109,15 @@ function PayPalCheckout(props) {
     }
     async function _onApprove(data, actions) {
         let order = await actions.order.capture();
-        console.log(order);
+        console.log(order.id);
         let orderId = order.id;
+        const CheckOutRequest = {
+            paypalOrderId: order.id,
+            userId: props.checkout.security.user.id
+        };
         let orderStatus = order.status;
         alert("Thanks for purchasing! OrderID: " + orderId + " Status: "+ orderStatus);
-        await axios.post("http://localhost:8000/api/checkout/", order);
+        await axios.post("http://localhost:8083/api/orders/checkout", CheckOutRequest);
         return order;
     }
     function _onError(message, err) {

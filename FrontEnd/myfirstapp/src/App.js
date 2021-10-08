@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import AddPerson from "./components/Persons/AddPerson";
 
 import CheckOut from "./components/Order/CheckOut";
-import PayPalCheckout from "./components/Order/PayPalCheckout";
+import UserOrders from "./components/UserManagement/UserOrders";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -88,7 +88,9 @@ class App extends Component {
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
 
             <SecuredRoute exact path="/requests" component={Requests} />
-            <Route exact path="/checkout" component={CheckOut} />
+            <SecuredRoute exact path="/checkout" component={CheckOut} />
+            {/* TODO: ask about :id */}
+            <SecuredRoute exact path="/orders" component={UserOrders} />
 
           </div>
         </Router>
