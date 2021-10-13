@@ -1,14 +1,14 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 
-const CreateAllBooksButtons=() => {
+const CreateUserOrderButton=() => {
     return (
         <React.Fragment>
-            <Link to="/all-books"
+            <Link to="/orders"
                   className="btn btn-lg btn-info">
-                All Books
+                Orders
             </Link>
         </React.Fragment>
     )
 };
-export default CreateAllBooksButtons;
+export default CreateUserOrderButton;
