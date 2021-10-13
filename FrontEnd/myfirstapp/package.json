@@ -13,6 +13,7 @@
     "react": "^16.14.0",
     "react-bootstrap": "^1.6.1",
     "react-bootstrap-carousel": "^4.1.1",
+    "react-csv": "^2.0.3",
     "react-dom": "^16.14.0",
     "react-icons": "^4.2.0",
     "react-multi-carousel": "^2.6.5",

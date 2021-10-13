@@ -27,6 +27,8 @@ import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
 import SearchResults from "./components/BookManagement/SearchResults";
 import Requests from "./components/UserManagement/Requests";
+import AllBooks from "./components/UserManagement/AllBooks";
+
 
 import Sellers from "./components/BookManagement/Sellers";
 import PostAd from "./components/BookManagement/PostAd";
@@ -82,6 +84,7 @@ class App extends Component {
             }
             <SecuredRoute exact path="/dashboard" component={Dashboard} />
             <SecuredRoute exact path="/newAd" component={PostAd} />
+            <SecuredRoute exact path="/all-books" component={AllBooks}/>
 
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
             
