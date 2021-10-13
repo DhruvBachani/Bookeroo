@@ -1,5 +1,6 @@
 package com.rmit.sept.ordermicroservices.web;
 
+import com.rmit.sept.ordermicroservices.model.PurchasedBook;
 import com.rmit.sept.ordermicroservices.model.Transaction;
 import com.rmit.sept.ordermicroservices.payload.CheckoutRequest;
 import com.rmit.sept.ordermicroservices.services.OrderService;
@@ -33,9 +34,14 @@ public class OrderController {
         return null;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/user/all")
     public List<Transaction> getAllTransactions(){
         return orderService.getAllTransactions();
+    }
+
+    @GetMapping("/book/all")
+    public List<PurchasedBook> getAllBookTransactions(){
+        return orderService.getAllBookTransactions();
     }
 
     @GetMapping("/user/{userId}")

@@ -1,8 +1,9 @@
-import { GET_USER_TRANSACTIONS, GET_ALL_TRANSACTIONS } from "../actions/types";
+import {GET_USER_TRANSACTIONS, GET_ALL_TRANSACTIONS, GET_ALL_BOOK_TRANSACTIONS} from "../actions/types";
 
 export const initialState = {
     userTransactions: [],
-    allTransactions: []
+    allTransactions: [],
+    purchasedBooks: []
 };
 
 export default function(state = initialState, action) {
@@ -17,7 +18,11 @@ export default function(state = initialState, action) {
                 ...state,
                 allTransactions: action.payload
             };
-
+        case GET_ALL_BOOK_TRANSACTIONS:
+            return {
+                ...state,
+                purchasedBooks: action.payload
+            };
         default:
             return state;
     }

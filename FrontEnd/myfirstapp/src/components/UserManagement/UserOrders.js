@@ -26,7 +26,7 @@ class UserOrders extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-2">
+                    <div className="row">
                         {this.props.userTransactions.map((transaction) => {
                             return (
                                 <div key={transaction.id} className="col mb-4">
@@ -35,26 +35,27 @@ class UserOrders extends Component {
                                             {/* Publisher/Shop Owner Information */}
                                             <h5 className="card-title">OrderID: {transaction.id} </h5>
                                             <h5 className="card-title">Paypal OrderID: {transaction.payPalOrderId} </h5>
-                                            <h6 className="card-subtitle mb-2 text-muted"> Date Ordered: {transaction.createAt} </h6>
+                                            <h6 className="card-subtitle mb-2 text-muted"> Date Ordered: {transaction.create_At} </h6>
                                             <br />
                                             <h5 className="card-text"> Books </h5>
                                             <hr/>
                                             {transaction.purchases.map((book) => {
                                                 return (
-                                                    <div key={book.id}>
+                                                    <div key={book.id} class="row">
                                                     {/* TODO: get book link maybe */}
-                                                    <p className="card-text"> Books: {book.isbn} </p>
-                                                    <p className="card-text"> Condition: {book.condition} </p>
-                                                    <p className="card-text"> Quantity: {book.quantity} </p>
+                                                    <p className="card-text" className="col"> Title: Get book object </p>
+                                                    <p className="card-text" class="col"> ISBN: {book.isbn} </p>
+                                                    <p className="card-text" class="col"> Condition: {book.condition} </p>
+                                                    <p className="card-text" class="col"> Quantity: {book.quantity} </p>
                                                     {/* TODO: get seller name? */}
-                                                    <p className="card-text"> Seller: {book.seller} </p>
-                                                    <p className="card-text"> Delivery Status: {book.deliveryStatus} </p>
-                                                    <p className="card-text"> Price: {book.cost} </p>
+                                                    <p className="card-text" class="col"> Seller: {book.seller} </p>
+                                                    <p className="card-text" class="col"> Delivery Status: {book.deliveryStatus} </p>
+                                                    <p className="card-text" class="col"> Price: ${book.cost} </p>
                                                         <hr/>
                                                     </div>
                                             );})}
                                             <p className="card-text">  Address: {transaction.address} </p>
-                                            <p className="card-text">  Total Cost: {transaction.totalCost} </p>
+                                            <p className="card-text">  Total Cost: ${transaction.totalCost} </p>
                                             <p className="card-text"> Refund Button </p>
                                         </div>
                                     </div>

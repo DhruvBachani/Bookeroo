@@ -97,4 +97,11 @@ public class OrderService {
     }
 
 
+    public List<PurchasedBook> getAllBookTransactions() {
+        List<PurchasedBook> allPurchasedBooks = new ArrayList<>();
+        purchasedBookRepository.findAll().forEach(book -> allPurchasedBooks.add(book));
+        return allPurchasedBooks;
+    }
+
+
 }
