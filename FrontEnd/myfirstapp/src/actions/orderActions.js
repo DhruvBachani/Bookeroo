@@ -53,6 +53,19 @@ export const getAllPurchasedBooks = () => async dispatch => {
   }
 };
 
+export const refundOrder = (orderId) => async dispatch => {
+  try{
+    const res = await axios.post("http://localhost:8083/api/orders/refund", orderId);
+    alert(res.data);
+    window.location.reload(false);
+
+  }
+  catch (err){
+    alert("Error: Order cannot be found in our database. Has it already been completed or cancelled?")
+  }
+};
+
+
 export const getShoppingCart = () => async dispatch => {
 };
 

@@ -109,7 +109,8 @@ function PayPalCheckout(props) {
     }
     async function _onApprove(data, actions) {
         let order = await actions.order.capture();
-        console.log(order.id);
+
+        console.log(order);
         let orderId = order.id;
         const CheckOutRequest = {
             paypalOrderId: order.id,
