@@ -4,7 +4,7 @@ import personReducer from "./personReducer";
 import securityReducer from "./securityReducer";
 import bookReducer from "./bookReducer";
 import bookReviewReducer from "./bookReviewReducer";
-import userRequestReducer from "./userRequestReducer";
+import userReducer from "./userReducer";
 import orderReducer from "./orderReducer";
 
 export default combineReducers({
@@ -13,7 +13,7 @@ export default combineReducers({
   security: securityReducer,
   book: bookReducer,
   review: bookReviewReducer,
-  requests: userRequestReducer,
+  user: userReducer,
   order: orderReducer
 });
 
