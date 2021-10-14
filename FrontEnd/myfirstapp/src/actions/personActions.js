@@ -3,7 +3,7 @@ import { GET_ERRORS, GET_PERSONS, GET_PERSON } from "./types";
 
 export const createPerson = (person, history) => async dispatch => {
   try {
-    const res = await axios.post("http://localhost:8080/api/person", person);
+    const res = await axios.post("http://bookeroologinservice-env.eba-qekp3zsp.us-east-2.elasticbeanstalk.com/api/person", person);
     history.push("/dashboard");
   } catch (err) {
     dispatch({
@@ -13,7 +13,7 @@ export const createPerson = (person, history) => async dispatch => {
   }
 };
 export const getPersons = () => async dispatch => {
-  const res = await axios.get("/api/person/all");
+  const res = await axios.get("http://bookeroologinservice-env.eba-qekp3zsp.us-east-2.elasticbeanstalk.com/api/person/all");
   dispatch({
     type: GET_PERSONS,
     payload: res.data
@@ -22,7 +22,7 @@ export const getPersons = () => async dispatch => {
 
 export const getPerson = (id, history) => async dispatch => {
   try {
-    const res = await axios.get(`/api/person/${id}`);
+    const res = await axios.get(`http://bookeroologinservice-env.eba-qekp3zsp.us-east-2.elasticbeanstalk.com/api/person/${id}`);
     dispatch({
       type: GET_PERSON,
       payload: res.data

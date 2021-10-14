@@ -3,7 +3,7 @@ import {GET_ERRORS, GET_ALL_TRANSACTIONS, GET_USER_TRANSACTIONS, GET_ALL_BOOK_TR
 
 export const getUserTransactions = (userId) => async dispatch => {
   try{
-    const res = await axios.get(`http://localhost:8083/api/orders/user/${userId}`);
+    const res = await axios.get(`http://bookerooorderservice-env.eba-mwpv9kkq.us-east-2.elasticbeanstalk.com/api/orders/user/${userId}`);
     console.log(res);
     dispatch({
       type: GET_USER_TRANSACTIONS,
@@ -21,7 +21,7 @@ export const getUserTransactions = (userId) => async dispatch => {
 
 export const getAllTransactions = () => async dispatch => {
   try{
-    const res = await axios.get("http://localhost:8083/api/orders/user/all");
+    const res = await axios.get("http://bookerooorderservice-env.eba-mwpv9kkq.us-east-2.elasticbeanstalk.com/api/orders/user/all");
     dispatch({
       type: GET_ALL_TRANSACTIONS,
       payload: res.data
@@ -38,7 +38,7 @@ export const getAllTransactions = () => async dispatch => {
 
 export const getAllPurchasedBooks = () => async dispatch => {
   try{
-    const res = await axios.get("http://localhost:8083/api/orders/book/all");
+    const res = await axios.get("http://bookerooorderservice-env.eba-mwpv9kkq.us-east-2.elasticbeanstalk.com/api/orders/book/all");
     dispatch({
       type: GET_ALL_BOOK_TRANSACTIONS,
       payload: res.data

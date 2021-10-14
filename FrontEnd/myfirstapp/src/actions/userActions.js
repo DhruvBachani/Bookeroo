@@ -3,7 +3,7 @@ import {GET_USER_REQUESTS, GET_ALL_USERS, GET_ERRORS} from "./types";
 
 // Retrieves all the unapproved shop owners and publishers from the backend
 export const getAllUnapprovedUsers = () => async dispatch => {
-    const res = await axios.get("http://localhost:8080/api/users/requests", );
+    const res = await axios.get("http://bookeroologinservice-env.eba-qekp3zsp.us-east-2.elasticbeanstalk.com/api/users/requests", );
     dispatch({
         type: GET_USER_REQUESTS,
         payload: res.data
@@ -12,7 +12,7 @@ export const getAllUnapprovedUsers = () => async dispatch => {
 
 // Retrieves all the users from the backend. To be implemented.
 export const getAllUsers = () => async dispatch => {
-    const res = await axios.get("http://localhost:8080/api/users/all", );
+    const res = await axios.get("http://bookeroologinservice-env.eba-qekp3zsp.us-east-2.elasticbeanstalk.com/api/users/all", );
     dispatch({
         type: GET_ALL_USERS,
         payload: res.data
@@ -23,7 +23,7 @@ export const getAllUsers = () => async dispatch => {
 export const approveUser = (id) => async dispatch => {
     try {
         // Returns a list of unapproved users for redux
-        const res = await axios.post("http://localhost:8080/api/users/requests", id);
+        const res = await axios.post("http://bookeroologinservice-env.eba-qekp3zsp.us-east-2.elasticbeanstalk.com/api/users/requests", id);
         dispatch({
             type: GET_USER_REQUESTS,
             payload: res.data
@@ -39,7 +39,7 @@ export const approveUser = (id) => async dispatch => {
 // Sends an update to the backend to ban the user
 export const banUser = (id) => async dispatch => {
     try {
-        const res = await axios.post("http://localhost:8080/api/users/ban", id);
+        const res = await axios.post("http://bookeroologinservice-env.eba-qekp3zsp.us-east-2.elasticbeanstalk.com/api/users/ban", id);
         dispatch({
             // Additional implementation needs to added for overall users
             // For now, it is just publishers/shop owners being banned, so we can leave this for now

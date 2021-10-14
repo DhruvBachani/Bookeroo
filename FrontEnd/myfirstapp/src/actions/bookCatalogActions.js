@@ -4,11 +4,11 @@ import { GET_ERRORS, GET_BOOK, GET_REVIEWS } from "./types";
 
 class BookCatalogService {
     getAllBooks() {
-        return axios.get("http://localhost:8081/api/books/bookCatalog");
+        return axios.get("http://bookeroobookservice-env-1.eba-timxttf9.us-east-2.elasticbeanstalk.com/api/books/bookCatalog");
     }
 
     getBook(bookId) {
-        return axios.get(`http://localhost:8081/api/books/book_by_id/${bookId}`);
+        return axios.get(`http://bookeroobookservice-env-1.eba-timxttf9.us-east-2.elasticbeanstalk.com/api/books/book_by_id/${bookId}`);
     }
 
     getReviews(bookId) {
@@ -21,7 +21,7 @@ export default new BookCatalogService();
 export const createBook = (newBook, history) => async (dispatch) => {
 
     try {
-        await axios.post("http://localhost:8081/api/books/create", newBook);
+        await axios.post("http://bookeroobookservice-env-1.eba-timxttf9.us-east-2.elasticbeanstalk.com/api/books/create", newBook);
         history.push("/manageBooks");
     } catch (err) {
         dispatch({
