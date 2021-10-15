@@ -33,6 +33,8 @@ import Requests from "./components/UserManagement/Requests";
 
 import Sellers from "./components/BookManagement/Sellers";
 import PostAd from "./components/BookManagement/PostAd";
+import CheckOut from "./components/Order/CheckOut";
+import UserOrders from "./components/UserManagement/UserOrders";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -88,7 +90,8 @@ class App extends Component {
             <SecuredRoute exact path="/newAd" component={PostAd} />
 
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
-            
+            <SecuredRoute exact path="/checkout" component={CheckOut} />
+            <SecuredRoute exact path="/orders" component={UserOrders} />
             <SecuredRoute exact path="/requests" component={Requests} />
 
           </div>
