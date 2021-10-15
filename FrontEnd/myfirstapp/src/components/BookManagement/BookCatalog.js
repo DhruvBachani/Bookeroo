@@ -1,48 +1,75 @@
 import React, { Component } from "react";
 // import BookCarousal from "./BookCarousal";
-import {connect} from "react-redux";
-import {login} from "../../actions/securityActions";
-import {getAllBooks} from "../../actions/bookActions";
+import { connect } from "react-redux";
+import { login } from "../../actions/securityActions";
+import { getAllBooks } from "../../actions/bookActions";
 import ActionSlider from "./ActionSlider";
 import BookCarousal from "./BookCarousal";
 
 class BookCatalog extends Component {
   componentDidMount() {
-    this.props.getAllBooks()
+    this.props.getAllBooks();
   }
 
   render() {
-
     return (
       <div className="bookCatalog">
-          <div className="container">
-            <div className="col-md-12 text-center">
-              <h1 className="display-3 mb-4">The Great Book Catalog</h1>
+        <div className="bookeroo-container">
+          <div className="bookeroo-logo col-md-12 text-center">
+            <img
+              className="img-class"
+              src="https://sept-bookcatalog.s3.ap-southeast-2.amazonaws.com/Bookeroo-logo.png"
+              alt="Image not found"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/default.jpg";
+              }}
+            />
+            <h1 className="bookeroo-font-title">Bookeroo Studios</h1>
+          </div>
+          <br />
+          <hr />
+          <div className="row">
+            <div className="col-md-4 align-left">
+              <img
+                className="img-class-thriller"
+                src="https://sept-bookcatalog.s3.ap-southeast-2.amazonaws.com/thriller_zone.jpg"
+                alt="Image not found"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/default.jpg";
+                }}
+              />
+            </div>
+            <div className="col-md-2"></div>
+            <div className="col-md-5">
+                <br/><br/><br/><br/><br/><br/>
+                <div className="bookeroo-font-category-title">
+                  Browse Our Latest Thriller Novels
+                </div>
             </div>
             <br />
+            <BookCarousal books={this.props.books} />
             <hr />
-            <div className="col-md-12 align-left">
-              <h3>Thriller</h3>
-              <br />
-              <BookCarousal books={this.props.books}/>
-              <hr />
-              <h3>Sci-Fi</h3>
-            </div>
+            <h3>Sci-Fi</h3>
           </div>
+          <div className="bookeroo-font-title">A</div>
+          <div className="bookeroo-font-title">A</div>
+          <div className="bookeroo-font-title">A</div>
+          <div className="bookeroo-font-title">A</div>
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return{
-    books: state.book.books
-  }
+  return {
+    books: state.book.books,
+  };
 };
 
-export default connect(
-    mapStateToProps,
-    { getAllBooks }
-)(BookCatalog);
+export default connect(mapStateToProps, { getAllBooks })(BookCatalog);
 
-// <BookCarousal books={this.props.books}/>
+// <h3 className="bookeroo-font-category-title">Thriller</h3>
+// display-3 mb-4

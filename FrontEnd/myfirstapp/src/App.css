@@ -84,9 +84,17 @@ img {
 
 .img-class {
   height: auto;
-  max-height: 250px;
+  max-height: 280px;
   width: auto;
-  max-width: 250px;
+  max-width: 280px;
+}
+
+.img-class-thriller {
+  height: auto;
+  max-height: 700px;
+  width: auto;
+  max-width: 700px;
+  padding-left: 15%;
 }
 
 .carousel-container {
@@ -169,4 +177,38 @@ input[type=text].search-bar:focus {
 
 .seller {
   text-align: right;
+}
+
+
+/*
+  Special Bookeroo Theme Design
+  Author: Aditya Vadgama
+*/
+
+.bookeroo-container {
+  background: #141d2b;
+  min-height: fit-content;
+}
+
+.bookeroo-logo {
+  padding: 170px;
+}
+
+.bookeroo-font-title {
+  font-family: Neue Haas Unica;
+  font-weight: 600;
+  font-size: 4.6rem;
+  color: white;
+}
+
+.bookeroo-font-category-title {
+  font-family: 'Chalkduster', 'fantasy';
+  font-weight: 800;
+  font-size: 59px;
+  color: white;
+  text-align: center;
+}
+
+.bookeroo-nav {
+  background-color: #141d2b;
 }
