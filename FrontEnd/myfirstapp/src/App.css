@@ -66,6 +66,7 @@ img {
 }
 
 .book {
+  background: cornflowerblue;
   flex: 0 0 19.7%;
   text-align: center;
   margin: 0 13px;
@@ -73,9 +74,9 @@ img {
   padding: 5px 11px;
 }
 
-/* .book-title-text {
+.book-title-text {
   color: white;
-} */
+}
 
 /* .sliderContainer:hover .book {
   transform: translateX(-25%);
@@ -177,6 +178,13 @@ input[type=text].search-bar:focus {
 
 .seller {
   text-align: right;
+
+}
+.bookCatalog, .login, .about, .contactUS, .Persons{
+  min-height: 83vh;
+}
+.fa{
+  margin: 0 2rem 0 2rem;
 }
 
 
