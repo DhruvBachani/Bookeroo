@@ -43,20 +43,16 @@ class BookCatalog extends Component {
             </div>
             <div className="col-md-2"></div>
             <div className="col-md-5">
-                <br/><br/><br/><br/><br/><br/>
+                <br/><br/><br/><br/><br/><br/><br/><br/>
                 <div className="bookeroo-font-category-title">
-                  Browse Our Latest Thriller Novels
+                  Browse Our Latest Thriller Novels & More
                 </div>
             </div>
-            <br />
-            <BookCarousal books={this.props.books} />
-            <hr />
-            <h3>Sci-Fi</h3>
+            <br/>
           </div>
-          <div className="bookeroo-font-title">A</div>
-          <div className="bookeroo-font-title">A</div>
-          <div className="bookeroo-font-title">A</div>
-          <div className="bookeroo-font-title">A</div>
+          <div className="bookeroo-books">
+            <BookCarousal books={this.props.books} />
+          </div>
         </div>
       </div>
     );
