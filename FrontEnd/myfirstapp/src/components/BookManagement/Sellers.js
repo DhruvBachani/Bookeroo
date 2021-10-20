@@ -29,8 +29,7 @@ class Sellers extends Component{
 
     }
 
-    columns = ()=>{
-        return ([{
+    columns = [{
             Header: 'Available Options',
             columns:
             [
@@ -45,8 +44,7 @@ class Sellers extends Component{
                 }
 
             ]
-        }])
-    }
+        }]
 
 
     render(){
@@ -60,7 +58,7 @@ class Sellers extends Component{
                 {/*    return <div key={value.userId}>Seller's user id-{value.userId} Seller's price-{value.price}</div>*/}
                 {/*})}*/}
                 {console.log(this.state.sellers)}
-                <Table columns={this.columns()} rows={[{userId: 1, price: 12}]} />
+                <Table columns={this.columns} data={this.state.sellers} />
             </div>
         )
     }

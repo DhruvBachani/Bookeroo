@@ -1,7 +1,8 @@
 import React from 'react'
 import {useTable} from 'react-table'
 
-export const Table = ({ columns, data }) => {
+
+function Table({ columns, data }) {
     // Use the state and functions returned from useTable to build your UI
     const {
         getTableProps,
@@ -11,7 +12,7 @@ export const Table = ({ columns, data }) => {
         prepareRow,
     } = useTable({
         columns,
-        data: data,
+        data,
     })
 
     // Render the UI for your table
