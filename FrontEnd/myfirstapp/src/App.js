@@ -12,6 +12,10 @@ import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
 
+import AboutUs from "./staticPage/AboutUs";
+import ContactUs from "./staticPage/ContactUs";
+import Footer from "./components/Layout/Footer";
+
 import BookCatalog from "./components/BookManagement/BookCatalog";
 import BookPage from "./components/BookManagement/BookPage";
 import ManageBooks from "./components/Books/ManageBooks";
@@ -29,6 +33,8 @@ import Requests from "./components/UserManagement/Requests";
 
 import Sellers from "./components/BookManagement/Sellers";
 import PostAd from "./components/BookManagement/PostAd";
+import CheckOut from "./components/Order/CheckOut";
+import UserOrders from "./components/UserManagement/UserOrders";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -63,6 +69,8 @@ class App extends Component {
             </Route>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/aboutUs" component={AboutUs} />
+            <Route exact path="/contactUs" component={ContactUs} />
 
             <Route exact path="/bookCatalog" component={BookCatalog} />
             <Route exact path="/bookPage/:isbn" component={BookPage} />
@@ -82,10 +90,12 @@ class App extends Component {
             <SecuredRoute exact path="/newAd" component={PostAd} />
 
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
-            
+            <SecuredRoute exact path="/checkout" component={CheckOut} />
+            <SecuredRoute exact path="/orders" component={UserOrders} />
             <SecuredRoute exact path="/requests" component={Requests} />
 
           </div>
+          <Footer /> 
         </Router>
       </Provider>
     );

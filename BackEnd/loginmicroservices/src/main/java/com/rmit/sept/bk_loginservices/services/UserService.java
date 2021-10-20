@@ -4,6 +4,8 @@ import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
 import com.rmit.sept.bk_loginservices.exceptions.UsernameAlreadyExistsException;
 import com.rmit.sept.bk_loginservices.model.User;
 import com.rmit.sept.bk_loginservices.payload.UserID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +18,8 @@ import java.util.List;
 @Service
 public class UserService {
 
+    private final Logger log = LoggerFactory.getLogger(UserService.class);
+
     @Autowired
     private UserRepository userRepository;
 
@@ -23,6 +27,14 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User saveUser (User newUser){
+
+
+
+        /*  newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+            Username has to be unique (exception)
+            Make sure that password and confirmPassword match
+            We don't persist or show the confirmPassword
+        */
         newUser.setFullName(newUser.getFullName());
         newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
         newUser.setAddress(newUser.getAddress());
@@ -66,7 +78,6 @@ public class UserService {
         }catch (Exception e) {
             throw new UsernameAlreadyExistsException("Something went wrong");
         }
-
     }
 
     public void updateUser(User user) {
@@ -112,14 +123,13 @@ public class UserService {
         } else if (!user.getApproved()) {
             user.setApproved(true);
             updateUser(user);
-            return true;
         }
-        return false;
+        return true;
     }
 
     // Changes the approval to false, in the case the admin made a mistake
-    public boolean setUnapproval(@Valid @RequestBody UserID id) {
-        User user = userRepository.getById(id.getId());
+    public boolean setUnapproval(long id) {
+        User user = userRepository.getById(id);
         if (user == null) {
             return false;
         } else if (user.getApproved()) {
@@ -142,8 +152,8 @@ public class UserService {
     }
 
     // Changes the ban boolean of a user to false in the case the admin makes a mistake
-    public boolean unbanUser(@Valid UserID id) {
-        User user = userRepository.getById(id.getId());
+    public boolean unbanUser(long id) {
+        User user = userRepository.getById(id);
         if (user == null) {
             return false;
         } else {

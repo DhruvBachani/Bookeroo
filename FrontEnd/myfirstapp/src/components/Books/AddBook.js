@@ -12,6 +12,7 @@ class AddBook extends Component {
       category: "",
       description: "",
       isbn: "",
+      image: "",
     };
 
     this.onChange = this.onChange.bind(this);
@@ -31,7 +32,8 @@ class AddBook extends Component {
       author: this.state.author,
       category: this.state.category,
       description: this.state.description,
-      isbn: this.state.isbn
+      isbn: this.state.isbn,
+      image: this.state.image
     };
 
 
@@ -107,6 +109,16 @@ class AddBook extends Component {
                     value={this.state.isbn}
                     onChange={this.onChange}
                     required={true}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Image URL"
+                    name="image"
+                    value={this.state.image}
+                    onChange={this.onChange}
                   />
                 </div>
 

@@ -5,6 +5,7 @@ import securityReducer from "./securityReducer";
 import bookReducer from "./bookReducer";
 import bookReviewReducer from "./bookReviewReducer";
 import userRequestReducer from "./userRequestReducer";
+import orderReducer from "./orderReducer";
 
 export default combineReducers({
   errors: errorReducer,
@@ -12,6 +13,7 @@ export default combineReducers({
   security: securityReducer,
   book: bookReducer,
   review: bookReviewReducer,
-  requests: userRequestReducer
+  requests: userRequestReducer,
+  order: orderReducer
 });
 
