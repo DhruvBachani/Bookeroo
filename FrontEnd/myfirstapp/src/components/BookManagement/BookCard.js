@@ -9,7 +9,15 @@ class BookCard extends Component {
           <React.Fragment>
             <Link to={`/bookPage/${this.props.book.isbn}`} className="book-title-text">
               <h5>
-                {this.props.book.name} <br />
+                <img
+                    className="img-class"
+                    src={this.props.book.image}
+                    alt="Image not found"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/default.jpg";
+                    }}
+                  />
               </h5>
             </Link>
           </React.Fragment>
@@ -19,6 +27,10 @@ class BookCard extends Component {
 }
 
 export default BookCard;
+
+
+// {this.props.book.name} <br />
+
 
 // <a className="book-title-text" href="/bookPage">
 // <h5>
