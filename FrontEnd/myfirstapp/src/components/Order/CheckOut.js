@@ -42,7 +42,6 @@ class CheckOut extends Component {
             country_code: this.state.country_code
         };
 
-        this.props.createNewUser(address, this.props.history);
     }
 
     onChange(e) {
@@ -50,6 +49,7 @@ class CheckOut extends Component {
     }
     render() {
         const { errors } = this.state;
+        console.log(this.props)
         return (
             <div className="container">
                 <div className="row">
@@ -127,7 +127,7 @@ class CheckOut extends Component {
                                 />
                             </div>
                             <br/>
-                            <PayPalCheckout checkout={this.props}/>
+                            <PayPalCheckout checkout={this.props} state={this.state}/>
                     </div>
                     <div className="col">
                         <h2 className="display-5 text-center">Order Information</h2>

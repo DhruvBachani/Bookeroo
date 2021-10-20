@@ -1,27 +1,35 @@
 package com.rmit.sept.ordermicroservices.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.paypal.http.HttpResponse;
-import com.paypal.http.serializer.Json;
 import com.paypal.orders.*;
 import com.paypal.payments.CapturesRefundRequest;
-import com.paypal.payments.LinkDescription;
 import com.rmit.sept.ordermicroservices.Repositories.PurchasedBookRepository;
 import com.rmit.sept.ordermicroservices.Repositories.TransactionRepository;
 import com.rmit.sept.ordermicroservices.config.PayPalClient;
 import com.rmit.sept.ordermicroservices.model.PurchasedBook;
 import com.rmit.sept.ordermicroservices.model.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import org.json.JSONObject;
 import com.paypal.payments.Refund;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class OrderService {
+
+    private final Logger log = LoggerFactory.getLogger(OrderService.class);
 
     @Autowired
     PayPalClient payPalClient;
@@ -33,96 +41,112 @@ public class OrderService {
     PurchasedBookRepository purchasedBookRepository;
 
 
-    // Retrieve order from Paypal
-    public Order getOrder(String orderId) throws IOException {
+    // Retrieve order from Paypal API
+    public Order getOrder(String orderId) {
+        log.warn("Can cause IOException");
         OrdersGetRequest request = new OrdersGetRequest(orderId);
-        HttpResponse<Order> response = payPalClient.client().execute(request);
-        return response.result();
+        try {
+            HttpResponse<Order> response = payPalClient.client().execute(request);
+            log.info("Successfully retrieved PayPal Order from ID");
+            return response.result();
+        } catch (IOException e) {
+            log.error("IOException occurred: Invalid PayPal ID");
+        }
+        return null;
     }
 
-    public void saveOrder(String orderId, String userId) throws IOException {
+    // Store necessary information from PayPal transaction to our database
+    public void saveOrder(String orderId, String userId) {
 
-        List<PurchasedBook> list = new ArrayList<>();
+        // Check if the PayPal orderId already exists in the database
+        AtomicBoolean orderExists = new AtomicBoolean(false);
+        transactionRepository.findAll().forEach(transaction -> {
+            if (transaction.getPayPalOrderId().equals(orderId)) {
+                orderExists.set(true);
+                return;
+            }
+        });
 
         Order paypalOrder = getOrder(orderId);
-        Transaction userTransaction = new Transaction();
-        userTransaction.setPayPalOrderId(paypalOrder.id());
-        userTransaction.setPayPalEmail(paypalOrder.payer().email());
-        userTransaction.setUserId(userId);
-        int totalCost = 0;
-        for (PurchaseUnit unit : paypalOrder.purchaseUnits()) {
-            for (Item item : unit.items()) {
-                PurchasedBook book = new PurchasedBook();
-                book.setIsbn(item.sku());
-                book.setSeller(unit.referenceId());
-                book.setCondition(item.description());
-                book.setQuantity(Integer.parseInt(item.quantity()));
-                book.setCost(Double.parseDouble(item.unitAmount().value()) * book.getQuantity());
-                totalCost += book.getCost();
-                book.setCurrency(item.unitAmount().currencyCode());
-                book.setTransaction(userTransaction);
-                book.setDeliveryStatus("Processing");
-                list.add(book);
+        if (!orderExists.get() && paypalOrder != null) {
+            // Extracting PayPal transaction detail into a new transaction entry.
+            List<PurchasedBook> list = new ArrayList<>();
+            Transaction userTransaction = new Transaction();
+            userTransaction.setPayPalOrderId(paypalOrder.id());
+            userTransaction.setPayPalEmail(paypalOrder.payer().email());
+            userTransaction.setUserId(userId);
+            int totalCost = 0;
+            for (PurchaseUnit unit : paypalOrder.purchaseUnits()) {
+                for (Item item : unit.items()) {
+                    PurchasedBook book = new PurchasedBook();
+                    book.setIsbn(item.sku());
+                    book.setSeller(unit.referenceId());
+                    book.setCondition(item.description());
+                    book.setQuantity(Integer.parseInt(item.quantity()));
+                    book.setCost(Double.parseDouble(item.unitAmount().value()) * book.getQuantity());
+                    totalCost += book.getCost();
+                    book.setCurrency(item.unitAmount().currencyCode());
+                    book.setTransaction(userTransaction);
+                    book.setDeliveryStatus("Processing");
+                    list.add(book);
+                }
             }
-        }
-        userTransaction.setTotalCost(totalCost);
-        userTransaction.setCurrency(paypalOrder.purchaseUnits().get(0).items().get(0).unitAmount().currencyCode());
+            userTransaction.setTotalCost(totalCost);
+            userTransaction.setCurrency(paypalOrder.purchaseUnits().get(0).items().get(0).unitAmount().currencyCode());
 
-        userTransaction.setShippingName(paypalOrder.purchaseUnits().get(0).shippingDetail().name().fullName());
-        String address = paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().addressLine1() +  " " +
-                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().adminArea2() + " " +
-                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().adminArea1() + " " +
-                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().postalCode() + " " +
-                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().countryCode()
-                ;
-        System.out.println(address);
-        userTransaction.setAddress(address);
-        userTransaction.setCreate_At(new Date());
-        transactionRepository.save(userTransaction);
+            // Concatenating the address
+            userTransaction.setShippingName(paypalOrder.purchaseUnits().get(0).shippingDetail().name().fullName());
+            String address = paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().addressLine1() +  " " +
+                    paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().adminArea2() + " " +
+                    paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().adminArea1() + " " +
+                    paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().postalCode() + " " +
+                    paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().countryCode();
+            userTransaction.setAddress(address);
+            userTransaction.setCreate_At(new Date());
 
-        for (PurchasedBook book : list) {
-            purchasedBookRepository.save(book);
+            transactionRepository.save(userTransaction);
+            for (PurchasedBook book : list) {
+                purchasedBookRepository.save(book);
+            }
+            log.info("Successfully stored the transaction to database");
         }
+
     }
 
     public List<Transaction> getTransactionsByUserId(String userId) {
         List<Transaction> userTransactions = new ArrayList<>();
+        long id = Long.parseLong(userId);
         transactionRepository.findAll().forEach(transaction -> {
-            if (!transaction.getId().equals(userId)) {
+            if (transaction.getId() == id) {
                 userTransactions.add(transaction);
             }
         });
+        if (userTransactions.isEmpty()) {log.info("No transaction for users is returned.");}
         return userTransactions;
     }
 
     public List<Transaction> getAllTransactions() {
         List<Transaction> allTransactions = new ArrayList<>();
         transactionRepository.findAll().forEach(transaction -> allTransactions.add(transaction));
+        if (allTransactions.isEmpty()) {log.info("No transaction is returned.");}
         return allTransactions;
     }
 
-
-    public List<PurchasedBook> getAllBookTransactions() {
-        List<PurchasedBook> allPurchasedBooks = new ArrayList<>();
-        purchasedBookRepository.findAll().forEach(book -> allPurchasedBooks.add(book));
-        return allPurchasedBooks;
-    }
-
-    public String refundOrder(String orderID, boolean debug) throws IOException {
+    public String refundOrder(String orderID){
 
         Transaction order = transactionRepository.getById(Long.parseLong(orderID,10));
 
         // Check if 2 hours have passed since ordering
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(order.getCreate_At());
+        calendar.add(Calendar.HOUR_OF_DAY, 2);
         Calendar calendar2 = Calendar.getInstance();
-        calendar2.setTime(order.getCreate_At());
-        calendar2.add(Calendar.HOUR_OF_DAY, 2);
-        int result = calendar.compareTo(calendar2);
+        int result = calendar2.compareTo(calendar);
+        log.info("Date result: " + result + "if result is 1, then it has been over 2 hours");
 
-        if (result < 0) {
+        // Proceed if the time hasn't been 2 hours yet
+        if (result <= 0) {
             Order paypalOrder = getOrder(order.getPayPalOrderId());
-
             // Iterate through the PayPal order to get each refund id
             List<String> refundIds = new ArrayList<>();
             Iterator<PurchaseUnit> it = paypalOrder.purchaseUnits().iterator();
@@ -135,15 +159,17 @@ public class OrderService {
                 }
             }
 
+            // Calling PayPal API to refund each capture sales individually
             for (String refundId : refundIds) {
                 CapturesRefundRequest request = new CapturesRefundRequest(refundId);
                 request.prefer("return=representation");
-
-                HttpResponse<Refund> response = payPalClient.client().execute(request);
-                if (debug) {
-                    System.out.println("Status Code: " + response.statusCode());
-                    System.out.println("Status: " + response.result().status());
-                    System.out.println("Refund Id: " + response.result().id());
+                try {
+                    HttpResponse<Refund> response = payPalClient.client().execute(request);
+                    log.info("Status Code: " + response.statusCode());
+                    log.info("Status: " + response.result().status());
+                    log.info("Refund Id: " + response.result().id());
+                } catch (IOException e) {
+                    log.error("IOException Occurred");
                 }
             }
 

@@ -2,6 +2,8 @@ package com.rmit.sept.bk_reviewservices.services;
 
 import com.rmit.sept.bk_reviewservices.Repositories.ReviewRepository;
 import com.rmit.sept.bk_reviewservices.model.Review;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,9 @@ import java.util.List;
 
 @Service
 public class ReviewService {
+
+    private final Logger log = LoggerFactory.getLogger(ReviewService.class);
+
     @Autowired
     ReviewRepository reviewrepository;
 

@@ -36,22 +36,22 @@ export const getAllTransactions = () => async dispatch => {
   }
 };
 
-export const getAllPurchasedBooks = () => async dispatch => {
-  try{
-    const res = await axios.get("http://localhost:8083/api/orders/book/all");
-    dispatch({
-      type: GET_ALL_BOOK_TRANSACTIONS,
-      payload: res.data
-    });
-  }
-  catch (err){
-    dispatch ({
-      type: GET_ERRORS,
-      payload: err.response.data
-    });
-
-  }
-};
+// export const getAllPurchasedBooks = () => async dispatch => {
+//   try{
+//     const res = await axios.get("http://localhost:8083/api/orders/book/all");
+//     dispatch({
+//       type: GET_ALL_BOOK_TRANSACTIONS,
+//       payload: res.data
+//     });
+//   }
+//   catch (err){
+//     dispatch ({
+//       type: GET_ERRORS,
+//       payload: err.response.data
+//     });
+//
+//   }
+// };
 
 export const refundOrder = (orderId) => async dispatch => {
   try{

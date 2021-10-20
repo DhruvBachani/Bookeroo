@@ -7,6 +7,8 @@ import com.rmit.sept.ordermicroservices.model.Transaction;
 import com.rmit.sept.ordermicroservices.payload.CheckoutRequest;
 import com.rmit.sept.ordermicroservices.payload.RefundRequest;
 import com.rmit.sept.ordermicroservices.services.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,48 +21,34 @@ import java.util.List;
 @RequestMapping("/api/orders")
 public class OrderController {
 
+    private final Logger log = LoggerFactory.getLogger(OrderController.class);
+
     @Autowired
     OrderService orderService;
 
+    // Saves all successful PayPal transaction sent from the client
     @PostMapping("/checkout")
-    public void saveOrder(@Valid @RequestBody CheckoutRequest checkoutRequest) throws IOException {
-        System.out.println(checkoutRequest.getPaypalOrderId() + " " + checkoutRequest.getUserId());
+    public void saveOrder(@Valid @RequestBody CheckoutRequest checkoutRequest) {
+        log.info("POST Request to  /checkout, PayPalID " + checkoutRequest.getPaypalOrderId() + " UserID: " + checkoutRequest.getUserId());
         orderService.saveOrder(checkoutRequest.getPaypalOrderId(), checkoutRequest.getUserId());
-    }
-
-    @GetMapping("/checkout/{orderId}")
-    public Transaction getOrder(@PathVariable String orderId){
-        return null;
     }
 
     @GetMapping("/user/all")
     public List<Transaction> getAllTransactions(){
+        log.info("GET Request to /user/all");
         return orderService.getAllTransactions();
-    }
-
-    @GetMapping("/book/all")
-    public List<PurchasedBook> getAllBookTransactions(){
-        return orderService.getAllBookTransactions();
     }
 
     @GetMapping("/user/{userId}")
     public List<Transaction> getUserTransactions(@PathVariable String userId) {
+        log.info("GET Request /user" + userId);
         return orderService.getTransactionsByUserId(userId);
     }
 
-    @DeleteMapping("/checkout/{orderId}")
-    public void deleteOrder(@PathVariable String orderId) {
-
-    }
-
-    @PatchMapping("/checkout/{orderId}")
-    public void updateOrder(@PathVariable String orderId) {
-    }
-
-    // Retrieves all users for frontend
     @PostMapping("/refund")
-    public String getRefund(@Valid @RequestBody RefundRequest refundRequest) throws IOException {
-        return orderService.refundOrder(refundRequest.getOrderId(), true);
+    public String sendRefund(@Valid @RequestBody RefundRequest refundRequest) {
+        log.info("GET Request to /refund, orderID: " + refundRequest.getOrderId());
+        return orderService.refundOrder(refundRequest.getOrderId());
     }
 
 }
