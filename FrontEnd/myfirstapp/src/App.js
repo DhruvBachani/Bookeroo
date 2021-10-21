@@ -21,6 +21,8 @@ import BookPage from "./components/BookManagement/BookPage";
 import ManageBooks from "./components/Books/ManageBooks";
 import AddBook from "./components/Books/AddBook";
 import AddReview from "./components/Books/AddReview"
+import AdminOrders from "./components/UserManagement/AdminOrders";
+import AllBooks from "./components/UserManagement/AllBooks";
 
 
 import jwt_decode from "jwt-decode";
@@ -93,6 +95,11 @@ class App extends Component {
             <SecuredRoute exact path="/checkout" component={CheckOut} />
             <SecuredRoute exact path="/orders" component={UserOrders} />
             <SecuredRoute exact path="/requests" component={Requests} />
+         
+
+            <SecuredRoute exact path="/all-books" component={AllBooks}/>
+
+            <SecuredRoute exact path="/orders/all" component={AdminOrders} />
 
           </div>
           <Footer /> 
