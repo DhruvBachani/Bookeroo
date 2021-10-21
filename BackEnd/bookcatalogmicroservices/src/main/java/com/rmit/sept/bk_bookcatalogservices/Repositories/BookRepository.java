@@ -12,5 +12,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     boolean existsByIsbn(Long isbn);
     Book findByIsbn(Long isbn);
     List<Book> findByNameIgnoreCaseContaining(String name);
+    List<Book> findByAuthorIgnoreCaseContaining(String author);
+
 
 }

@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {saveOrder, getShoppingCart, getSellers} from "../../actions/orderActions";
 import PropTypes from "prop-types";
 
-
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 function PayPalCheckout(props) {
@@ -21,7 +20,7 @@ function PayPalCheckout(props) {
 
                 },
                 address: {
-                    address_line_1: "123McHigh Street", // etc "[[${user.addressLine1}]]"
+                    address_line_1: "123 McHigh Street", // etc "[[${user.addressLine1}]]"
                     address_line_2: "",
                     admin_area_2: "Melbourne",
                     admin_area_1: "VIC",

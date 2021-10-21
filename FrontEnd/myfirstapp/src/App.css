@@ -181,8 +181,8 @@ input[type=text].search-bar:focus {
   text-align: right;
 
 }
-.bookCatalog, .login, .about, .contactUS, .Persons{
-  min-height: 83vh;
+.App{
+  min-height: calc(100vh - 52px);
 }
 .fa{
   margin: 0 2rem 0 2rem;
@@ -230,3 +230,4 @@ input[type=text].search-bar:focus {
   background-color: #141d2b;
   padding-inline: inherit;
 }
+

@@ -4,7 +4,7 @@ class Footer extends Component {
   render() {
     return (
       <div className="footer">
-        <nav className="navbar navbar-expand-sm navbar-dark bookeroo-nav mt-2 footer">
+        <nav className="navbar navbar-expand-sm navbar-dark bookeroo-nav footer">
           <div className="bookeroo-footer">
             <div className="collapse navbar-collapse" id="mobile-nav">
               <ul className="navbar-nav mr-auto">
