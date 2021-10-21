@@ -1,8 +1,18 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import {getUserTransactions} from "../../actions/orderActions";
+import {getUserTransactions, refundOrder} from "../../actions/orderActions";
 
 class UserOrders extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            orderId: "",
+        };
+        this.onChange = this.onChange.bind(this);
+        this.onRefund = this.onRefund.bind(this);
+    }
+
     componentDidMount() {
         this.props.getUserTransactions(this.props.security.user.id)
     }
@@ -12,8 +22,12 @@ class UserOrders extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    onRefund(e) {
+        e.preventDefault();
+        this.props.refundOrder(this.state)
+    }
+
     render() {
-        console.log(this.props.userTransactions)
         return (
             <div className="requests">
                 <div className="container">
@@ -26,10 +40,9 @@ class UserOrders extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="row">
                         {this.props.userTransactions.map((transaction) => {
                             return (
-                                <div key={transaction.id} className="col mb-4">
+                                <div key={transaction.id} >
                                     <div className="card">
                                         <div className="card-body">
                                             {/* Publisher/Shop Owner Information */}
@@ -43,7 +56,7 @@ class UserOrders extends Component {
                                                 return (
                                                     <div key={book.id} class="row">
                                                     {/* TODO: get book link maybe */}
-                                                    <p className="card-text" className="col"> Title: Get book object </p>
+                                                    <p className="card-text" class="col"> Title: Get book object </p>
                                                     <p className="card-text" class="col"> ISBN: {book.isbn} </p>
                                                     <p className="card-text" class="col"> Condition: {book.condition} </p>
                                                     <p className="card-text" class="col"> Quantity: {book.quantity} </p>
@@ -56,13 +69,22 @@ class UserOrders extends Component {
                                             );})}
                                             <p className="card-text">  Address: {transaction.address} </p>
                                             <p className="card-text">  Total Cost: ${transaction.totalCost} </p>
-                                            <p className="card-text"> Refund Button </p>
+                                            <form  style={{textAlign: "center"}} onSubmit={this.onRefund}>
+                                                <button type="submit"
+                                                        className={"btn btn-danger"}
+                                                        name="orderId"
+                                                        value={transaction.id}
+                                                        onClick={this.onChange}
+                                                >
+                                                    Refund
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
+                                    <br />
                                 </div>
                             );
                         })}
-                    </div>
                 </div>
 
             </div>
@@ -74,13 +96,14 @@ class UserOrders extends Component {
 const mapStateToProps = (state) => {
     return{
         userTransactions: state.order.userTransactions,
-        security: state.security
+        security: state.security,
+        errors: state.errors
     }
 };
 
 export default connect(
     mapStateToProps,
-    { getUserTransactions }
+    { getUserTransactions, refundOrder}
 )(UserOrders);
 
 

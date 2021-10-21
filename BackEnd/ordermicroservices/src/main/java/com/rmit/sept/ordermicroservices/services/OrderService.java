@@ -1,10 +1,10 @@
 package com.rmit.sept.ordermicroservices.services;
 
 import com.paypal.http.HttpResponse;
-import com.paypal.orders.Item;
-import com.paypal.orders.Order;
-import com.paypal.orders.OrdersGetRequest;
-import com.paypal.orders.PurchaseUnit;
+import com.paypal.http.serializer.Json;
+import com.paypal.orders.*;
+import com.paypal.payments.CapturesRefundRequest;
+import com.paypal.payments.LinkDescription;
 import com.rmit.sept.ordermicroservices.Repositories.PurchasedBookRepository;
 import com.rmit.sept.ordermicroservices.Repositories.TransactionRepository;
 import com.rmit.sept.ordermicroservices.config.PayPalClient;
@@ -13,10 +13,12 @@ import com.rmit.sept.ordermicroservices.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.json.JSONObject;
+import com.paypal.payments.Refund;
+
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -64,12 +66,15 @@ public class OrderService {
             }
         }
         userTransaction.setTotalCost(totalCost);
-        // Currency will be set to the first unit - which might be redundant..
         userTransaction.setCurrency(paypalOrder.purchaseUnits().get(0).items().get(0).unitAmount().currencyCode());
 
         userTransaction.setShippingName(paypalOrder.purchaseUnits().get(0).shippingDetail().name().fullName());
-        // TODO: sort address out
-        String address = paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().toString();
+        String address = paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().addressLine1() +  " " +
+                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().adminArea2() + " " +
+                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().adminArea1() + " " +
+                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().postalCode() + " " +
+                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().countryCode()
+                ;
         System.out.println(address);
         userTransaction.setAddress(address);
         userTransaction.setCreate_At(new Date());
@@ -103,5 +108,52 @@ public class OrderService {
         return allPurchasedBooks;
     }
 
+    public String refundOrder(String orderID, boolean debug) throws IOException {
 
+        Transaction order = transactionRepository.getById(Long.parseLong(orderID,10));
+
+        // Check if 2 hours have passed since ordering
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(order.getCreate_At());
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(order.getCreate_At());
+        calendar2.add(Calendar.HOUR_OF_DAY, 2);
+        int result = calendar.compareTo(calendar2);
+
+        if (result < 0) {
+            Order paypalOrder = getOrder(order.getPayPalOrderId());
+
+            // Iterate through the PayPal order to get each refund id
+            List<String> refundIds = new ArrayList<>();
+            Iterator<PurchaseUnit> it = paypalOrder.purchaseUnits().iterator();
+            while (it.hasNext()) {
+                PurchaseUnit unit = it.next();
+                Iterator<Capture> captureIterator = unit.payments().captures().iterator();
+                while (captureIterator.hasNext()) {
+                    Capture cap = captureIterator.next();
+                    refundIds.add(cap.id());
+                }
+            }
+
+            for (String refundId : refundIds) {
+                CapturesRefundRequest request = new CapturesRefundRequest(refundId);
+                request.prefer("return=representation");
+
+                HttpResponse<Refund> response = payPalClient.client().execute(request);
+                if (debug) {
+                    System.out.println("Status Code: " + response.statusCode());
+                    System.out.println("Status: " + response.result().status());
+                    System.out.println("Refund Id: " + response.result().id());
+                }
+            }
+
+            for(PurchasedBook bookOrder: order.getPurchases()) {
+                bookOrder.setDeliveryStatus("Cancelled");
+                purchasedBookRepository.save(bookOrder);
+            }
+        } else {
+            return "Error: Order has been placed for more than 2 hours";
+        }
+        return "Refund Successful";
+    }
 }

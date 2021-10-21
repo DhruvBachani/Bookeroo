@@ -53,3 +53,20 @@ export const banUser = (id) => async dispatch => {
         });
     }
 };
+
+export const refundOrder = (id) => async dispatch => {
+    try {
+        const res = await axios.post("http://localhost:8083/api/orders/refund", id);
+        dispatch({
+            // Additional implementation needs to added for overall users
+            // For now, it is just publishers/shop owners being banned, so we can leave this for now
+            type: GET_USER_REQUESTS,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch ({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+};

@@ -1,8 +1,11 @@
 package com.rmit.sept.ordermicroservices.web;
 
+import com.paypal.http.HttpResponse;
+import com.paypal.payments.Refund;
 import com.rmit.sept.ordermicroservices.model.PurchasedBook;
 import com.rmit.sept.ordermicroservices.model.Transaction;
 import com.rmit.sept.ordermicroservices.payload.CheckoutRequest;
+import com.rmit.sept.ordermicroservices.payload.RefundRequest;
 import com.rmit.sept.ordermicroservices.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +55,12 @@ public class OrderController {
 
     @PatchMapping("/checkout/{orderId}")
     public void updateOrder(@PathVariable String orderId) {
-
     }
+
+    // Retrieves all users for frontend
+    @PostMapping("/refund")
+    public String getRefund(@Valid @RequestBody RefundRequest refundRequest) throws IOException {
+        return orderService.refundOrder(refundRequest.getOrderId(), true);
+    }
+
 }
