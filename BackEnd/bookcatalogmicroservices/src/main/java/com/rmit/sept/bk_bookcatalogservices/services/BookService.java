@@ -44,7 +44,11 @@ public class BookService {
     }
 
     public List<Book> searchBooks(SearchForm searchForm){
-        return bookrepository.findByNameIgnoreCaseContaining(searchForm.searchFor);
+        List<Book> searchResults = new ArrayList<Book>();
+        if(searchForm.searchBy.equals("isbn")) { searchResults.add(bookrepository.findByIsbn(Long.parseLong(searchForm.searchFor)));}
+        else if(searchForm.searchBy.equals("name")) { searchResults = bookrepository.findByNameIgnoreCaseContaining(searchForm.searchFor);}
+        else if(searchForm.searchBy.equals("author")) { searchResults = bookrepository.findByAuthorIgnoreCaseContaining(searchForm.searchFor);}
+        return searchResults;
     }
 
     public boolean containsByIsbn(Long isbn){

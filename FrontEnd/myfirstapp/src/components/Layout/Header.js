@@ -8,6 +8,7 @@ class Header extends Component {
     super();
     this.state = {
       searchFor: "",
+      searchBy: "name"
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -15,8 +16,10 @@ class Header extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    console.log(this.state.searchBy)
     const searchRequest = {
       searchFor: this.state.searchFor,
+      searchBy: this.state.searchBy
     };
     this.props.history.push("/search-results");
     this.props.search(searchRequest);
@@ -24,6 +27,7 @@ class Header extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+    debugger
   }
   render() {
     return (
@@ -42,9 +46,15 @@ class Header extends Component {
               </li>
             </ul>
             <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
+              <select name="searchBy" className="form-control" onChange={this.onChange}>
+                <option value="name">By: Name</option>
+                <option value="isbn">By: Isbn</option>
+                <option value="author">By: Author</option>
+
+              </select>
               <input
                 type="text"
-                className="form-control mr-sm-2"
+                className="form-control mr-sm"
                 name="searchFor"
                 value={this.state.searchFor}
                 onChange={this.onChange}
