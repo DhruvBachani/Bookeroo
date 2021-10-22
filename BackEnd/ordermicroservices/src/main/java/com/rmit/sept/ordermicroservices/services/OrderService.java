@@ -64,12 +64,15 @@ public class OrderService {
             }
         }
         userTransaction.setTotalCost(totalCost);
-        // Currency will be set to the first unit - which might be redundant..
         userTransaction.setCurrency(paypalOrder.purchaseUnits().get(0).items().get(0).unitAmount().currencyCode());
 
         userTransaction.setShippingName(paypalOrder.purchaseUnits().get(0).shippingDetail().name().fullName());
-        // TODO: sort address out
-        String address = paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().toString();
+        String address = paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().addressLine1() +  " " +
+                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().adminArea2() + " " +
+                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().adminArea1() + " " +
+                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().postalCode() + " " +
+                paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().countryCode()
+                ;
         System.out.println(address);
         userTransaction.setAddress(address);
         userTransaction.setCreate_At(new Date());
