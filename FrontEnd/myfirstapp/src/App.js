@@ -77,7 +77,7 @@ class App extends Component {
             <Route exact path="/bookCatalog" component={BookCatalog} />
             <Route exact path="/bookPage/:isbn" component={BookPage} />
             <Route exact path="/manageBooks" component={ManageBooks} />
-            <Route exact path="/addBook" component={AddBook}/>
+
             <Route exact path="/search-results" component={SearchResults}/>
             <Route exact path="/bookPage/:isbn/sellers" component={Sellers}/>
 
@@ -88,18 +88,19 @@ class App extends Component {
             {
               //Private Routes
             }
+            
             <SecuredRoute exact path="/dashboard" component={Dashboard} />
             <SecuredRoute exact path="/newAd" component={PostAd} />
-
+            <SecuredRoute exact path="/addBook" component={AddBook}/>
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
             <SecuredRoute exact path="/checkout" component={CheckOut} />
             <SecuredRoute exact path="/orders" component={UserOrders} />
             <SecuredRoute exact path="/requests" component={Requests} />
-         
-
             <SecuredRoute exact path="/all-books" component={AllBooks}/>
-
             <SecuredRoute exact path="/orders/all" component={AdminOrders} />
+            <SecuredRoute exact path="/orders/all" component={AdminOrders} />
+
+
 
           </div>
           <Footer /> 
