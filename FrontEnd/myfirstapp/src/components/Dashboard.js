@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import CreateAllBooksButton from "./UserManagement/CreateAllBooksButton";
 import CreateUserOrderButton from "./UserManagement/CreateUserOrderButton";
 import CreateAllTransactionsButton from "./UserManagement/CreateAllTransactionsButton";
+import CreateAllUsersButton from "./UserManagement/CreateAllUsersButton";
 
 
 class Dashboard extends Component {
@@ -50,10 +51,10 @@ class Dashboard extends Component {
                         <br />
                         {/* Admin buttons - others beside requests to be implemented */}
                         <div>
-                            <button className={"btn btn-lg btn-info"}> Profile </button>
                             {
                                 this.state.showAdmin &&
                                 <>
+                                    <CreateAllUsersButton/>
                                     <CreateAllTransactionsButton/>
                                     <CreateAllBooksButton/>
                                     <CreateRequestButton/>

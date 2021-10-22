@@ -21,8 +21,7 @@ import BookPage from "./components/BookManagement/BookPage";
 import ManageBooks from "./components/Books/ManageBooks";
 import AddBook from "./components/Books/AddBook";
 import AddReview from "./components/Books/AddReview"
-
-
+import AdminOrders from "./components/UserManagement/AdminOrders";
 import jwt_decode from "jwt-decode";
 import setJWTToken from "./securityUtils/setJWTToken";
 import { SET_CURRENT_USER } from "./actions/types";
@@ -30,6 +29,9 @@ import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
 import SearchResults from "./components/BookManagement/SearchResults";
 import Requests from "./components/UserManagement/Requests";
+
+import AdminAllUsers from "./components/UserManagement/AdminAllUsers";
+import AllBooks from "./components/UserManagement/AllBooks";
 
 import Sellers from "./components/BookManagement/Sellers";
 import PostAd from "./components/BookManagement/PostAd";
@@ -76,7 +78,7 @@ class App extends Component {
             <Route exact path="/bookCatalog" component={BookCatalog} />
             <Route exact path="/bookPage/:isbn" component={BookPage} />
             <Route exact path="/manageBooks" component={ManageBooks} />
-            <Route exact path="/addBook" component={AddBook}/>
+
             <Route exact path="/search-results" component={SearchResults}/>
             <Route exact path="/bookPage/:isbn/sellers" component={Sellers}/>
 
@@ -87,14 +89,29 @@ class App extends Component {
             {
               //Private Routes
             }
+            
             <SecuredRoute exact path="/dashboard" component={Dashboard} />
             <SecuredRoute exact path="/newAd" component={PostAd} />
 
+            <SecuredRoute exact path="/addBook" component={AddBook}/>
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
             <SecuredRoute exact path="/checkout" component={CheckOut} />
             <SecuredRoute exact path="/orders" component={UserOrders} />
             <SecuredRoute exact path="/requests" component={Requests} />
             <SecuredRoute exact path="/cart" component={Cart} />
+            <SecuredRoute exact path="/all-books" component={AllBooks}/>
+            <SecuredRoute exact path="/orders/all" component={AdminOrders} />
+
+            <SecuredRoute exact path="/book/all" component={AllBooks}/>
+
+            <SecuredRoute exact path="/user/requests" component={Requests} />
+
+            <SecuredRoute exact path="/order" component={UserOrders} />
+            <SecuredRoute exact path="/order/all" component={AdminOrders} />
+            <SecuredRoute exact path="/user/all" component={AdminAllUsers} />
+
+
+
 
           </div>
           <Footer /> 

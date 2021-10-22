@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 const CreateUserOrderButton=() => {
     return (
         <React.Fragment>
-            <Link to="/orders"
+            <Link to="/order"
                   className="btn btn-lg btn-info">
                 Orders
             </Link>
