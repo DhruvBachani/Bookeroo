@@ -48,7 +48,7 @@ function CartItem ({item, onRemove}){
 
                     <div>Price: {item.price}</div>
                 </div>
-            <Button  onClick={()=>deleteItem(item.id)}/>
+            <Button  onClick={()=>deleteItem(item.id)}>Remove</Button>
         </div>
     )
 }
