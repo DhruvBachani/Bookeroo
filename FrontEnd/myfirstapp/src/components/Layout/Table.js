@@ -1,8 +1,36 @@
-import React from 'react'
-import {useTable} from 'react-table'
+import React, {useEffect} from 'react'
+import {useTable, useRowSelect} from 'react-table'
+import {useDispatch} from "react-redux";
+import {login} from "../../actions/securityActions";
+import {GET_CATEGORIES, GET_ERRORS, GET_SELECTED_ADS} from "../../actions/types";
 
 
-function Table({ columns, data }) {
+
+const IndeterminateCheckbox = React.forwardRef(
+
+    ({ indeterminate, ...rest }, ref) => {
+        const defaultRef = React.useRef()
+        const resolvedRef = ref || defaultRef
+        const dispatch = useDispatch()
+
+        React.useEffect(() => {
+            resolvedRef.current.indeterminate = indeterminate
+        }, [resolvedRef, indeterminate])
+
+        return (
+            <>
+                <input type="checkbox"  ref={resolvedRef} {...rest} />
+            </>
+        )
+    }
+)
+
+
+function Table({ columns, data, onRowSelect }) {
+
+
+    const dispatch = useDispatch();
+
     // Use the state and functions returned from useTable to build your UI
     const {
         getTableProps,
@@ -10,13 +38,45 @@ function Table({ columns, data }) {
         headerGroups,
         rows,
         prepareRow,
+        selectedFlatRows,
+        state: {selectedRowIds}
     } = useTable({
         columns,
         data,
-    })
+    },
+    useRowSelect,
+        hooks => {
+            hooks.visibleColumns.push(columns => [
+                // Let's make a column for selection
+                {
+                    id: 'selection',
 
+
+                    // The cell can use the individual row's getToggleRowSelectedProps method
+                    // to the render a checkbox
+                    Cell: ({ row }) => {
+
+                        return(
+                            <div >
+                                <IndeterminateCheckbox  {...row.getToggleRowSelectedProps()}  />
+                                {}
+                            </div>
+                        )
+                    },
+                },
+                ...columns,
+            ])
+
+        }
+)
+    useEffect(() => {
+        onRowSelect(selectedFlatRows.map(
+            d => d.original
+        ));
+    }, [onRowSelect, selectedFlatRows]);
     // Render the UI for your table
     return (
+        <>
         <table {...getTableProps()}>
             <thead>
             {headerGroups.map(headerGroup => (
@@ -40,7 +100,24 @@ function Table({ columns, data }) {
             })}
             </tbody>
         </table>
+
+    <pre>
+        <code>
+          {JSON.stringify(
+              {
+                  selectedRowIds: selectedRowIds,
+                  'selectedFlatRows[].original': selectedFlatRows.map(
+                      d => d.original
+                  ),
+              },
+              null,
+              2
+          )}
+        </code>
+
+      </pre>
+        </>
     )
 }
+export default Table
 
-export default Table;

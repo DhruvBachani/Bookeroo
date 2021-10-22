@@ -3,8 +3,13 @@ package com.rmit.sept.ordermicroservices.web;
 import com.rmit.sept.ordermicroservices.model.PurchasedBook;
 import com.rmit.sept.ordermicroservices.model.Transaction;
 import com.rmit.sept.ordermicroservices.payload.CheckoutRequest;
+import com.rmit.sept.ordermicroservices.security.JwtTokenProvider;
+import com.rmit.sept.ordermicroservices.services.CartService;
+import com.rmit.sept.ordermicroservices.services.MapValidationErrorService;
 import com.rmit.sept.ordermicroservices.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,7 +22,13 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
+    private MapValidationErrorService mapValidationErrorService;
+
+    @Autowired
     OrderService orderService;
+
+    @Autowired
+    CartService cartService;
 
     @PostMapping("/checkout")
     public void saveOrder(@Valid @RequestBody CheckoutRequest checkoutRequest) throws IOException {
@@ -53,5 +64,37 @@ public class OrderController {
     @PatchMapping("/checkout/{orderId}")
     public void updateOrder(@PathVariable String orderId) {
 
+    }
+
+
+    @PostMapping("/addToCart")
+    private ResponseEntity<?> addToCart(@Valid @RequestBody List<Long> ads, BindingResult result){
+        JwtTokenProvider.validateToken();
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if(errorMap != null) return errorMap;
+        System.out.println("====================");
+
+        System.out.println(ads);
+
+        cartService.saveCart(1L, ads);
+        return null;
+//        cartService.saveCart(1L, adIds);
+    }
+
+    @DeleteMapping("/deleteCartItem")
+    private ResponseEntity<?> deleteCartItem(@Valid @RequestBody Long ad, BindingResult result){
+
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if(errorMap != null) return errorMap;
+
+
+        cartService.deleteItem(1L, ad);
+        return null;
+//        cartService.saveCart(1L, adIds);
+    }
+
+    @GetMapping("/cartItems")
+    private List<Long> getCartItems(){
+        return cartService.getCartItems(1L);
     }
 }

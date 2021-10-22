@@ -16,7 +16,6 @@ class Header extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state.searchBy)
     const searchRequest = {
       searchFor: this.state.searchFor,
       searchBy: this.state.searchBy
@@ -27,7 +26,6 @@ class Header extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    debugger
   }
   render() {
     return (

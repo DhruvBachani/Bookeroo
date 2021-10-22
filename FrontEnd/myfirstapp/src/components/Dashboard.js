@@ -105,9 +105,10 @@ Dashboard.propTypes = {
     security: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     security: state.security,
-    errors: state.errors
+    errors: state.errors,
+    selectedAds: state.ad
 });
 
 export default connect(

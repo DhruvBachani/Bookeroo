@@ -14,6 +14,6 @@ export default combineReducers({
   book: bookReducer,
   review: bookReviewReducer,
   requests: userRequestReducer,
-  order: orderReducer
+  order: orderReducer,
 });
 

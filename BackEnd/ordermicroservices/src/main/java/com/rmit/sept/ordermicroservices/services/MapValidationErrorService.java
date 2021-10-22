@@ -1,4 +1,4 @@
-package com.rmit.sept.checkoutmicroservices.services;
+package com.rmit.sept.ordermicroservices.services;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
