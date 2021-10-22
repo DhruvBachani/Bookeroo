@@ -113,9 +113,9 @@ public class UserController {
 
     // Updates the ban on user model
     @PostMapping("/ban")
-    public List<User> banUser(@Valid @RequestBody UserID id){
+    public void banUser(@Valid @RequestBody UserID id){
         userService.banUser(id);
-        return userService.getAllUnapprovedUsers();
+//        return userService.getAllUnapprovedUsers();
     }
 
     // Retrieves all the unapproved users for frontend

@@ -96,7 +96,7 @@ public class UserService {
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
-            if (!user.getUserType().equals("Admin")) {
+            if ((!user.getUserType().equals("Admin")) && (!user.getBanned())) {
                 allUsers.add(user);
             }
         });
