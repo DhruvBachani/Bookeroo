@@ -24,12 +24,18 @@ class Cart extends Component{
 
     render() {
         return(
-            <div>
-                {this.props.cartItems.map((item)=>{
-                    return <CartItem item={item} key={item.id} onRemove={this.onRemove}/>
-                })}
-                <div>Total: {this.props.cartTotal}</div>
+            <div>{this.props.cartItems.length>0 ?
+       ( <div>
+            {this.props.cartItems.map((item) => {
+                return <CartItem item={item} key={item.id} onRemove={this.onRemove}/>
+            })}
+            <div>Total: {this.props.cartTotal}</div>
+        </div>) :(
+            <div style={{textAlign:"center"}}>
+                <h3>Your Cart is empty ! Go get shopping :)</h3>
             </div>
+                    )
+            }</div>
         )
     }
 

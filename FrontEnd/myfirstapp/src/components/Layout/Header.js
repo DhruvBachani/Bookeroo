@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { search } from "../../actions/bookActions";
 import { connect } from "react-redux";
 import * as PropTypes from "prop-types";
+import {AiOutlineShoppingCart} from "react-icons/all";
 
 class Header extends Component {
   constructor() {
@@ -42,6 +43,11 @@ class Header extends Component {
                   Dashboard
                 </a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link " href="/manageBooks">
+                  Manage Books
+                </a>
+              </li>
             </ul>
             <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
               <select name="searchBy" className="form-control" onChange={this.onChange}>
@@ -63,11 +69,13 @@ class Header extends Component {
               </button>
             </form>
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <a className="nav-link " href="/manageBooks">
-                  Manage Books
+
+
+              {this.props.security.validToken && <li className="nav-item">
+                <a className="nav-link" href="/cart">
+                  <AiOutlineShoppingCart size={"25px"}/>
                 </a>
-              </li>
+              </li>}
               {/* Changes the sign up/login button to user's full name if the user is logged in. */}
               {!this.props.security.validToken ? (
                 <>
@@ -89,6 +97,7 @@ class Header extends Component {
                   </a>
                 </li>
               )}
+
             </ul>
           </div>
         </nav>
