@@ -32,6 +32,7 @@ class PostAd extends Component{
     }
 
     onChange(e) {
+
         this.setState({ [e.target.name]: e.target.value });
     }
 
@@ -58,7 +59,7 @@ class PostAd extends Component{
                             <hr />
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-group">
-                                    <select className="form-control" onChange={this.onChange}>
+                                    <select className="form-control" onChange={this.onChange} name="isbn">
                                         {
                                             this.props.books.map((value)=>{
                                                 return <option value={value.isbn} key={value.isbn}>{value.isbn}-{value.name}</option>

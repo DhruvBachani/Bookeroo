@@ -61,7 +61,7 @@ public class DataLoader implements ApplicationRunner {
         publisher.setShopName("We only sell the bible");
         publisher.setPhoneNumber("04777777");
         publisher.setUsername("jesus@gmail.com");
-        publisher.setApproved(false);
+        publisher.setApproved(true);
 
         User publisher1 = new User();
         publisher1.setFullName("Finn");

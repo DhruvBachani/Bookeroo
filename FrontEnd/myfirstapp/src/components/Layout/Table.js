@@ -71,7 +71,7 @@ function Table({ columns, data, onRowSelect }) {
 )
     useEffect(() => {
         onRowSelect(selectedFlatRows.map(
-            d => d.original
+            d => d.original.id
         ));
     }, [onRowSelect, selectedFlatRows]);
     // Render the UI for your table
@@ -100,22 +100,6 @@ function Table({ columns, data, onRowSelect }) {
             })}
             </tbody>
         </table>
-
-    <pre>
-        <code>
-          {JSON.stringify(
-              {
-                  selectedRowIds: selectedRowIds,
-                  'selectedFlatRows[].original': selectedFlatRows.map(
-                      d => d.original
-                  ),
-              },
-              null,
-              2
-          )}
-        </code>
-
-      </pre>
         </>
     )
 }

@@ -13,7 +13,7 @@ public class CartService {
     @Autowired
     CartRepository cartRepository;
 
-    public void saveCart(Long user_id, List<Long> adIds){
+    public Cart saveCart(Long user_id, List<Long> adIds){
         Cart cart = cartRepository.findByUserId(user_id);
         if(cart!=null){
 
@@ -34,7 +34,8 @@ public class CartService {
             cart.setAds(adIds);
             cart.setUserId(user_id);
         }
-        cartRepository.save(cart);
+        Cart newCart = cartRepository.save(cart);
+        return  newCart;
     }
 
     public List<Long> getCartItems(Long userId){

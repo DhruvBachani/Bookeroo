@@ -1,24 +1,56 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button} from "react-bootstrap";
 import axios from "axios";
+import {connect} from "react-redux";
+import {getShoppingCart} from "../../actions/orderActions";
+import {getBook} from "../../actions/bookActions";
+import {Link} from "react-router-dom";
 
-function deleteItem(id){
-    alert(id)
-    axios.delete("http://localhost:8081/api/books/deleteCartItem", {data: {id}})
-}
 
-function CartItem ({item}){
 
+function CartItem ({item, onRemove}){
+
+    const[book, setBook] = useState()
+
+    function deleteItem(id){
+        axios.delete("http://localhost:8084/api/orders/deleteCartItem/"+id)
+        onRemove()
+    }
+
+    useEffect(()=>{
+        axios.get(`http://localhost:8081/api/books/`+item.isbn).then((res)=>(setBook(res.data)));
+    })
     return(
-        <div className="card" style={{flexDirection: "row",alignItems: "center", justifyContent:"space-around"}}>
+        <div className="card" style={{textDecoration:'none', flexDirection: "row",alignItems: "center", justifyContent:"space-around"}}>
 
-            <div>
-            <div>Ad-id: {item.id}</div>
-            <div>Price: {item.price}</div>
-            </div>
+                <div>
+                    {book && <Link to={`/bookPage/${book.isbn}`} >
+                    <img
+                        className="img-class"
+                        src={book.image}
+                        alt="Image not found"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "/default.jpg";
+                        }}
+                    />
+                    </Link>}
+
+                </div>
+                <div>
+                    <div>Ad-id: {item.id}</div>
+
+                    {book && <div>Name: {book.name}</div>}
+
+                    <div>Seller Id: {item.userId}</div>
+
+                    <div>Condition: {item.condition}</div>
+
+                    <div>Price: {item.price}</div>
+                </div>
             <Button  onClick={()=>deleteItem(item.id)}/>
         </div>
     )
 }
 
-export default CartItem
+export default CartItem;

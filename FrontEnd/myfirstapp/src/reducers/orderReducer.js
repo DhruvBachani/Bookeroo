@@ -1,9 +1,17 @@
-import {GET_USER_TRANSACTIONS, GET_ALL_TRANSACTIONS, GET_ALL_BOOK_TRANSACTIONS} from "../actions/types";
+import {
+    GET_USER_TRANSACTIONS,
+    GET_ALL_TRANSACTIONS,
+    GET_ALL_BOOK_TRANSACTIONS,
+    GET_CART_ITEMS,
+    GET_CART_TOTAL
+} from "../actions/types";
 
 export const initialState = {
     userTransactions: [],
     allTransactions: [],
-    purchasedBooks: []
+    purchasedBooks: [],
+    cartItems: [],
+    cartTotal: 0
 };
 
 export default function(state = initialState, action) {
@@ -23,6 +31,18 @@ export default function(state = initialState, action) {
                 ...state,
                 purchasedBooks: action.payload
             };
+        case GET_CART_ITEMS:
+
+            return {
+                ...state,
+                cartItems: action.payload
+            }
+        case GET_CART_TOTAL:
+            return{
+                ...state,
+                cartTotal: action.payload
+
+            }
         default:
             return state;
     }

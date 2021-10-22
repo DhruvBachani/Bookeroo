@@ -34,7 +34,7 @@ class Sellers extends Component {
     }
 
     addToCart(e) {
-        const res = axios.post(`http://localhost:8081/api/books/addToCart`, this.state.selectedAds).then(() => {
+        const res = axios.post(`http://localhost:8084/api/orders/addToCart`, this.state.selectedAds).then(() => {
             this.props.history.push("/cart")
         });
     }
@@ -64,9 +64,6 @@ class Sellers extends Component {
                     <option value="new">New</option>
                     <option value="old">Old</option>
                 </select>
-                {/*{this.state.sellers.map((value)=>{*/}
-                {/*    return <div key={value.userId}>Seller's user id-{value.userId} Seller's price-{value.price}</div>*/}
-                {/*})}*/}
 
                 <Table columns={this.columns} data={this.state.sellers}
                        onRowSelect={rows => this.state.selectedAds = rows}/>

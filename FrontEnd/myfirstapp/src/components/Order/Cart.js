@@ -1,44 +1,48 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import CartItem from "./CartItem";
+import {connect} from "react-redux";
+import {getSellers, getShoppingCart, saveOrder} from "../../actions/orderActions";
 
 class Cart extends Component{
     constructor(props) {
         super(props);
-
-        this.state = {
-            cartItems: [],
-            total: 0
+        this.state ={
+            updated: false
         }
+        this.onRemove = this.onRemove.bind(this)
+    }
+
+    componentDidMount() {
+        this.props.getShoppingCart()
 
     }
-    componentDidMount() {
-        axios.get("http://localhost:8081/api/books/cartItems").then((res) => {
-            this.setState({cartItems:res.data})
-            var total  = 0;
-            this.state.cartItems.map((item)=>{
-                total+= item.price;
-            })
-            this.setState({total:total })
 
-        })
-
+    onRemove(){
+        window.location.reload()
     }
 
     render() {
         return(
             <div>
-                {this.state.cartItems.map((item)=>{
-                    return <CartItem item={item} />
-                    }
-
-                )}
-
-                <div>Total: {this.state.total}</div>
+                {this.props.cartItems.map((item)=>{
+                    return <CartItem item={item} key={item.id} onRemove={this.onRemove}/>
+                })}
+                <div>Total: {this.props.cartTotal}</div>
             </div>
         )
     }
 
 }
 
-export default Cart;
+const mapStateToProps = (state) => {
+    return{
+        cartItems: state.order.cartItems,
+        cartTotal: state.order.cartTotal
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    {getShoppingCart }
+)(Cart);
