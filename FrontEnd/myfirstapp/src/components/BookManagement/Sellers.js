@@ -4,6 +4,7 @@ import Table from "../Layout/Table"
 import {connect} from "react-redux";
 import {login} from "../../actions/securityActions";
 import {Button} from "react-bootstrap";
+import {getShoppingCart} from "../../actions/orderActions";
 
 
 class Sellers extends Component {
@@ -21,9 +22,12 @@ class Sellers extends Component {
 
 
     componentDidMount() {
-        axios.get("http://localhost:8081/api/books/" + this.state.isbn + "/allAds?condition=" + this.state.condition).then((res) => {
-            this.setState({sellers: res.data})
-        })
+
+            axios.get("http://localhost:8081/api/books/" + this.state.isbn + "/allAds?condition=" + this.state.condition).then((res) => {
+                this.setState({sellers: res.data})
+            })
+
+
     }
 
     async onChange(e) {
@@ -34,9 +38,15 @@ class Sellers extends Component {
     }
 
     addToCart(e) {
+    if(this.props.security.validToken)
+    {
         const res = axios.post(`http://localhost:8084/api/orders/addToCart`, this.state.selectedAds).then(() => {
             this.props.history.push("/cart")
         });
+    }
+    else{
+        alert("Please Login to continue.")
+    }
     }
 
     columns = [{
@@ -76,5 +86,15 @@ class Sellers extends Component {
 }
 
 
-export default Sellers;
+const mapStateToProps = (state) => {
+    return {
+        security: state.security
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    {}
+)(Sellers);
+
 
