@@ -46,7 +46,7 @@ public class CartService {
 
     public void deleteCart(Long userId){
         Cart cart = cartRepository.findByUserId(userId);
-        List<Long> list = ((cart!=null)?cart.getAds(): null);
+        List<Long> list = ((cart!=null)?new ArrayList<>(cart.getAds()): null);
         if(list != null) {
             List<Long> tmpList = new ArrayList<>(list);
             for (Long item : tmpList) {
@@ -57,7 +57,7 @@ public class CartService {
 
     public void deleteItem(Long userId, Long adId){
         Cart cart =cartRepository.findByUserId(userId);
-        List<Long> tmp = cart.getAds();
+        List<Long> tmp = new ArrayList<>(cart.getAds());
         int removingIndex = 0;
         boolean matchFound = false;
         for(int i=0; i<tmp.size(); i++){
