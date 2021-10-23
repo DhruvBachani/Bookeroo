@@ -96,7 +96,6 @@ class App extends Component {
             <SecuredRoute exact path="/addBook" component={AddBook}/>
             <SecuredRoute exact path="/addPerson" component={AddPerson} />
             <SecuredRoute exact path="/checkout" component={CheckOut} />
-            <SecuredRoute exact path="/orders" component={UserOrders} />
             <SecuredRoute exact path="/requests" component={Requests} />
             <SecuredRoute exact path="/cart" component={Cart} />
             <SecuredRoute exact path="/all-books" component={AllBooks}/>

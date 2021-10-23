@@ -130,8 +130,7 @@ public class OrderService {
         return allTransactions;
     }
 
-    public String refundOrder(String orderID, boolean debug) throws IOException {
-
+    public String refundOrder(String orderID) {
         Transaction order = transactionRepository.getById(Long.parseLong(orderID,10));
 
         // Check if 2 hours have passed since ordering
