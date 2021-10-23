@@ -5,6 +5,8 @@ import com.rmit.sept.bk_bookcatalogservices.services.AdService;
 import com.rmit.sept.bk_bookcatalogservices.services.BookService;
 import com.rmit.sept.bk_bookcatalogservices.services.MapValidationErrorService;
 import com.rmit.sept.bk_bookcatalogservices.validator.AdValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
+
+    private final Logger log = LoggerFactory.getLogger(BookController.class);
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;

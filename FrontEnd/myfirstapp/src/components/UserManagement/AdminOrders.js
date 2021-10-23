@@ -37,7 +37,6 @@ class AdminOrders extends Component {
 
     componentDidMount() {
         this.props.getAllTransactions()
-        this.props.getAllPurchasedBooks()
     }
 
     // Change value of the id based on which button was pressed
@@ -87,7 +86,7 @@ class AdminOrders extends Component {
                     <div className="row">
                         {this.props.allTransactions.map((transaction) => {
                             return (
-                                <div key={transaction.id} className="col mb-4">
+                                <div key={transaction.id} className="col">
                                     <div className="card">
                                         <div className="card-body">
                                             <h5 className="card-title">UserID: {transaction.userId} </h5>
@@ -138,14 +137,13 @@ class AdminOrders extends Component {
 const mapStateToProps = (state) => {
     return{
         allTransactions: state.order.allTransactions,
-        purchasedBooks: state.order.purchasedBooks,
         security: state.security
     }
 };
 
 export default connect(
     mapStateToProps,
-    { getAllTransactions, getAllPurchasedBooks }
+    { getAllTransactions }
 )(AdminOrders);
 
 

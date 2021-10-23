@@ -38,19 +38,6 @@ class CheckOut extends Component {
         }
     }
 
-    onSubmit(e) {
-        e.preventDefault();
-        const address = {
-            address_line_1: this.state.address_line_1,
-            address_line_2: this.state.address_line_2,
-            admin_area_2: this.state.admin_area_2,
-            postal_code: this.state.postal_code,
-            country_code: this.state.country_code
-        };
-
-        this.props.createNewUser(address, this.props.history);
-    }
-
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }

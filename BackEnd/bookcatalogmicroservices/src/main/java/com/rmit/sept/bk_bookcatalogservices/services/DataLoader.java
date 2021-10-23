@@ -2,6 +2,8 @@ package com.rmit.sept.bk_bookcatalogservices.services;
 
 import com.rmit.sept.bk_bookcatalogservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DataLoader implements ApplicationRunner {
+
+    private final Logger log = LoggerFactory.getLogger(DataLoader.class);
 
     private BookRepository bookRepository;
 
@@ -111,6 +115,7 @@ public class DataLoader implements ApplicationRunner {
         book8.setImage("https://sept-bookcatalog.s3.ap-southeast-2.amazonaws.com/hitchhiker.jpg");
 
         bookRepository.save(book8);
+        log.info("Book data loaded");
     }
 }
 

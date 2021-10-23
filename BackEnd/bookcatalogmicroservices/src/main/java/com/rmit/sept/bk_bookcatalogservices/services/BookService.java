@@ -4,6 +4,8 @@ import com.rmit.sept.bk_bookcatalogservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookcatalogservices.exceptions.InvalidIsbnException;
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
 import com.rmit.sept.bk_bookcatalogservices.model.SearchForm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ import java.util.List;
 
 @Service
 public class BookService {
+    
+    private final Logger log = LoggerFactory.getLogger(BookService.class);
+
     @Autowired
     BookRepository bookrepository;
 

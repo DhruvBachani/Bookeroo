@@ -9,6 +9,8 @@ import com.rmit.sept.bk_loginservices.security.JwtTokenProvider;
 import com.rmit.sept.bk_loginservices.services.MapValidationErrorService;
 import com.rmit.sept.bk_loginservices.services.UserService;
 import com.rmit.sept.bk_loginservices.validator.UserValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,8 @@ import static com.rmit.sept.bk_loginservices.security.SecurityConstant.TOKEN_PRE
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+
+    private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;

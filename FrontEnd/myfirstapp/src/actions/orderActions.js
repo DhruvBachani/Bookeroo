@@ -44,23 +44,6 @@ export const getAllTransactions = () => async dispatch => {
   }
 };
 
-export const getAllPurchasedBooks = () => async dispatch => {
-  try{
-    const res = await axios.get("http://localhost:8084/api/orders/book/all");
-    dispatch({
-      type: GET_ALL_BOOK_TRANSACTIONS,
-      payload: res.data
-    });
-  }
-  catch (err){
-    dispatch ({
-      type: GET_ERRORS,
-      payload: err.response.data
-    });
-
-  }
-};
-
 export const refundOrder = (orderId) => async dispatch => {
   try{
     const res = await axios.post("http://localhost:8084/api/orders/refund", orderId);
@@ -104,8 +87,3 @@ export const getShoppingCart = () => async dispatch => {
   }
 };
 
-export const getSellers = () => async dispatch => {
-};
-
-export const saveOrder = () => async dispatch => {
-};

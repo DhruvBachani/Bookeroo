@@ -8,6 +8,8 @@ import com.rmit.sept.bk_bookcatalogservices.model.Ad;
 
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
 import com.rmit.sept.bk_bookcatalogservices.model.Condition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ import java.util.Locale;
 
 @Service
 public class AdService {
+
+    private final Logger log = LoggerFactory.getLogger(AdService.class);
+
     @Autowired
     AdRepository adRepository;
 
