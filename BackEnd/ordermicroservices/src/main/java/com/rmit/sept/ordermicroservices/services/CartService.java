@@ -6,6 +6,7 @@ import com.rmit.sept.ordermicroservices.model.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,8 +47,11 @@ public class CartService {
     public void deleteCart(Long userId){
         Cart cart = cartRepository.findByUserId(userId);
         List<Long> list = ((cart!=null)?cart.getAds(): null);
-        for (Long item : list) {
-            deleteItem(userId, item);
+        if(list != null) {
+            List<Long> tmpList = new ArrayList<>(list);
+            for (Long item : tmpList) {
+                deleteItem(userId, item);
+            }
         }
     }
 

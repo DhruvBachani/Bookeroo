@@ -1,9 +1,6 @@
 import axios from "axios";
 import React, {Component, useEffect, useState} from "react";
 import ReactDOM from "react-dom";
-import {connect} from "react-redux";
-import {saveOrder, getShoppingCart, getSellers} from "../../actions/orderActions";
-import PropTypes from "prop-types";
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
@@ -99,7 +96,7 @@ function PayPalCheckout(props) {
                 createOrder={(data, actions) => _createOrder(data, actions)}
                 onApprove={(data, actions) => _onApprove(data, actions)}
                 onCancel={() => _onError("Payment has been cancelled")}
-                onError={(err) => _onError("Something wrong with the order details, Incorrect address?", err)}
+                onError={(err) => _onError("Something wrong with the order details!", err)}
             />
         </div>
     );
