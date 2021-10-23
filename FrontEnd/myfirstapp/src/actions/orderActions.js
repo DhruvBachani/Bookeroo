@@ -11,7 +11,7 @@ import {getBook} from "./bookActions";
 
 export const getUserTransactions = (userId) => async dispatch => {
   try{
-    const res = await axios.get(`http://localhost:8083/api/orders/user/${userId}`);
+    const res = await axios.get(`http://localhost:8084/api/orders/user/${userId}`);
     console.log(res);
     dispatch({
       type: GET_USER_TRANSACTIONS,
@@ -29,7 +29,7 @@ export const getUserTransactions = (userId) => async dispatch => {
 
 export const getAllTransactions = () => async dispatch => {
   try{
-    const res = await axios.get("http://localhost:8083/api/orders/user/all");
+    const res = await axios.get("http://localhost:8084/api/orders/user/all");
     dispatch({
       type: GET_ALL_TRANSACTIONS,
       payload: res.data
@@ -46,7 +46,7 @@ export const getAllTransactions = () => async dispatch => {
 
 export const getAllPurchasedBooks = () => async dispatch => {
   try{
-    const res = await axios.get("http://localhost:8083/api/orders/book/all");
+    const res = await axios.get("http://localhost:8084/api/orders/book/all");
     dispatch({
       type: GET_ALL_BOOK_TRANSACTIONS,
       payload: res.data
@@ -63,7 +63,7 @@ export const getAllPurchasedBooks = () => async dispatch => {
 
 export const refundOrder = (orderId) => async dispatch => {
   try{
-    const res = await axios.post("http://localhost:8083/api/orders/refund", orderId);
+    const res = await axios.post("http://localhost:8084/api/orders/refund", orderId);
     alert(res.data);
     window.location.reload(false);
 

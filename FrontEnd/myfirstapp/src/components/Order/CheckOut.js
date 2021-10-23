@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import PayPalCheckout from "./PayPalCheckout";
 import {saveOrder, getShoppingCart, getSellers} from "../../actions/orderActions";
 import classnames from "classnames";
+import CartItem from "./CartItem";
+import {Link} from "react-router-dom";
 
 
 class CheckOut extends Component {
@@ -14,13 +16,17 @@ class CheckOut extends Component {
             address_line_1: "",
             address_line_2: "",
             admin_area_2: "", // city
-            admin_area_1: "", // state
+            admin_area_1: "Australian Capital Territory", // state
             postal_code: "",
-            country_code: "",
+            country_code: "AU",
             errors: {}
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.getShoppingCart()
     }
 
     componentWillReceiveProps(nextProps){
@@ -127,11 +133,24 @@ class CheckOut extends Component {
                                 />
                             </div>
                             <br/>
-                            <PayPalCheckout checkout={this.props}/>
+                            <PayPalCheckout checkout={this.props} address={this.state}/>
                     </div>
                     <div className="col">
                         <h2 className="display-5 text-center">Order Information</h2>
-                            Get order information from the cart, chuck to props send to paypal
+                        <div>{this.props.cartItems.length>0 ?
+                            ( <div>
+                                {this.props.cartItems.map((item) => {
+                                    return <CartItem item={item} key={item.id} onRemove={this.onRemove}/>
+                                })}
+                                <hr/>
+                                <div>Total Cost: ${this.props.cartTotal}</div>
+                                <hr/>
+                            </div>) :(
+                                <div style={{textAlign:"center"}}>
+                                    <h3>Order empty!</h3>
+                                </div>
+                            )
+                        }</div>
                     </div>
                 </div>
             </div>
@@ -142,20 +161,21 @@ class CheckOut extends Component {
 CheckOut.propTypes = {
     createProject: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
-    security: PropTypes.object.isRequired
+    security: PropTypes.object.isRequired,
+    cartItems: PropTypes.object.isRequired,
+    cartTotal: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => {
     return{
         security: state.security,
-        buyer: state.user,
-        seller: state.seller,
-        shoppingCart: state.shoppingCart,
+        cartItems: state.order.cartItems,
+        cartTotal: state.order.cartTotal,
         errors: state.errors
     }
 };
 
 export default connect(
     mapStateToProps,
-    {saveOrder, getShoppingCart, getSellers}
+    {saveOrder, getShoppingCart}
 )(CheckOut);
