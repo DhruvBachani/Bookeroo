@@ -58,23 +58,13 @@ public class BookController {
         return bookservice.getBookByIsbn(isbn);
     }
 
-    @DeleteMapping("/books/{isbn}")
-    private void deleteBook(@PathVariable("isbn") Long isbn) {
-        bookservice.deleteBook(isbn);
-    }
 
     @RequestMapping(value = "/create")
     public Long saveBook(@RequestBody Book book) {
-//        book.setCategory(Category.valueOf(book.getCategory()).toString());
         bookservice.saveBook(book);
         return book.getId();
     }
 
-    @PutMapping("/books")
-    private Book updateBook(@RequestBody Book book) {
-        bookservice.updateBook(book, book.getId());
-        return book;
-    }
 
     @PostMapping("/search")
     private List<Book> searchFor(@Valid @RequestBody SearchForm searchForm){
