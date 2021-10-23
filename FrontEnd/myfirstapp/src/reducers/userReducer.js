@@ -1,7 +1,8 @@
-import { GET_USER_REQUESTS } from "../actions/types";
+import { GET_USER_REQUESTS, GET_ALL_USERS } from "../actions/types";
 
-const initialState = {
-    userRequests: []
+export const initialState = {
+    userRequests: [],
+    allUsers: []
 };
 
 export default function(state = initialState, action) {
@@ -11,6 +12,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 userRequests: action.payload
+            };
+        case GET_ALL_USERS:
+
+            return {
+                ...state,
+                allUsers: action.payload
             };
         default:
             return state;

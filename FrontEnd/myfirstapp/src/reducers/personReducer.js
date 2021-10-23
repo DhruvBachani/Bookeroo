@@ -1,6 +1,6 @@
 import { GET_PERSONS, GET_PERSON} from "../actions/types";
 
-const initialState = {
+export const initialState = {
   persons: [],
   person: {}
 };

@@ -14,13 +14,13 @@ class SearchResults extends Component {
         return (
             <div>
                 <h1>Search Results</h1>
-                {(this.props.books.length!==0) && <div className="search-grid">
+                {(this.props.books.length!==0) && !this.props.books.includes(null) && <div className="search-grid">
                     {this.props.books.map((value) => {
                         return <div><BookCard book={value}/></div>
                     })}
                 </div>}
 
-                {(this.props.books.length===0) && <div>
+                {((this.props.books.length===0)||this.props.books.includes(null)) && <div>
                     <h3>No Results found</h3>
                 </div>}
             </div>

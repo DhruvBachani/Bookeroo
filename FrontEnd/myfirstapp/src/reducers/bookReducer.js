@@ -1,6 +1,6 @@
 import {GET_BOOK, GET_BOOKS, GET_CATEGORIES} from "../actions/types";
 
-const initialState = {
+export const initialState = {
     books: [],
     allCategories: [],
     book: []

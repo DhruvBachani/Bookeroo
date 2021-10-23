@@ -9,6 +9,8 @@ import com.rmit.sept.bk_loginservices.security.JwtTokenProvider;
 import com.rmit.sept.bk_loginservices.services.MapValidationErrorService;
 import com.rmit.sept.bk_loginservices.services.UserService;
 import com.rmit.sept.bk_loginservices.validator.UserValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,8 @@ import static com.rmit.sept.bk_loginservices.security.SecurityConstant.TOKEN_PRE
 @RequestMapping("/api/users")
 public class UserController {
 
+    private final Logger log = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
@@ -41,7 +45,9 @@ public class UserController {
 
     @GetMapping("/{userId}")
     private User getUserInfo(@PathVariable("userId") Long userId) {
+        log.info("GET Request to /"+ userId);
         return userService.retreiveUserbyUserId(userId);
+
     }
 
     @PostMapping("/register")
@@ -54,6 +60,7 @@ public class UserController {
 
         User newUser = userService.saveUser(user);
 
+        log.info("POST Request to /register" + user.getUsername());
         return  new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
@@ -83,6 +90,7 @@ public class UserController {
              // An invalid jwt is created.
              SecurityContextHolder.getContext().setAuthentication(badAuthentication);
              String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(badAuthentication);
+            log.info("POST Request to /login"+ loginRequest.getUsername());
              return ResponseEntity.ok(new JWTLoginSucessReponse(true, jwt));
 
          } else {
@@ -96,6 +104,7 @@ public class UserController {
             // Depending on the authentication, an invalid or valid jwt is returned
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(authentication);
+            log.info("POST Request to /login"+ loginRequest.getUsername());
             return ResponseEntity.ok(new JWTLoginSucessReponse(true, jwt));
         }
 
@@ -104,6 +113,7 @@ public class UserController {
     @PostMapping("/requests")
     public List<User> approveUser(@Valid @RequestBody UserID id){
         userService.setApproval(id);
+        log.info("POST Request to /requests"+ "User ID =" + id);
         return userService.getAllUnapprovedUsers();
     }
 
@@ -111,19 +121,24 @@ public class UserController {
     @PostMapping("/ban")
     public List<User> banUser(@Valid @RequestBody UserID id){
         userService.banUser(id);
+        log.info("POST Request to /ban"+ "User ID =" + id);
         return userService.getAllUnapprovedUsers();
+
     }
 
     // Retrieves all the unapproved users for frontend
     @RequestMapping("/requests")
     public List<User> getAllUnapprovedUsers(){
+        log.info("GET Request to /requests" );
         return userService.getAllUnapprovedUsers();
     }
 
     // Retrieves all users for frontend
     @RequestMapping("/all")
     public List<User> getAllUser(){
+        log.info("GET Request to /all" );
         return userService.getAllUsers();
     }
+
 
 }

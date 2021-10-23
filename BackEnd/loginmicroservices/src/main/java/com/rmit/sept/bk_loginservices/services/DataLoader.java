@@ -2,6 +2,8 @@ package com.rmit.sept.bk_loginservices.services;
 
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
 import com.rmit.sept.bk_loginservices.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DataLoader implements ApplicationRunner {
+
+    private final Logger log = LoggerFactory.getLogger(DataLoader.class);
 
     private UserRepository userRepository;
 
@@ -61,7 +65,7 @@ public class DataLoader implements ApplicationRunner {
         publisher.setShopName("We only sell the bible");
         publisher.setPhoneNumber("04777777");
         publisher.setUsername("jesus@gmail.com");
-        publisher.setApproved(false);
+        publisher.setApproved(true);
 
         User publisher1 = new User();
         publisher1.setFullName("Finn");
@@ -79,5 +83,7 @@ public class DataLoader implements ApplicationRunner {
         userRepository.save(shopOwner);
         userRepository.save(publisher);
         userRepository.save(publisher1);
+
+        log.info("User data loaded");
     }
 }
