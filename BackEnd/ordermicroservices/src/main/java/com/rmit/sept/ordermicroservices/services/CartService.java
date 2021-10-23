@@ -43,6 +43,14 @@ public class CartService {
         return ((cart!=null)?cart.getAds(): null);
     }
 
+    public void deleteCart(Long userId){
+        Cart cart = cartRepository.findByUserId(userId);
+        List<Long> list = ((cart!=null)?cart.getAds(): null);
+        for (Long item : list) {
+            deleteItem(userId, item);
+        }
+    }
+
     public void deleteItem(Long userId, Long adId){
         Cart cart =cartRepository.findByUserId(userId);
         List<Long> tmp = cart.getAds();

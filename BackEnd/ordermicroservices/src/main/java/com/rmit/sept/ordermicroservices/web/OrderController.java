@@ -38,8 +38,8 @@ public class OrderController {
 
     @PostMapping("/checkout")
     public void saveOrder(@Valid @RequestBody CheckoutRequest checkoutRequest) throws IOException {
-        System.out.println(checkoutRequest.getPaypalOrderId() + " " + checkoutRequest.getUserId());
         orderService.saveOrder(checkoutRequest.getPaypalOrderId(), checkoutRequest.getUserId());
+        cartService.deleteCart(Long.parseLong(checkoutRequest.getUserId()));
     }
 
     @GetMapping("/checkout/{orderId}")
@@ -60,15 +60,6 @@ public class OrderController {
     @GetMapping("/user/{userId}")
     public List<Transaction> getUserTransactions(@PathVariable String userId) {
         return orderService.getTransactionsByUserId(userId);
-    }
-
-    @DeleteMapping("/checkout/{orderId}")
-    public void deleteOrder(@PathVariable String orderId) {
-
-    }
-
-    @PatchMapping("/checkout/{orderId}")
-    public void updateOrder(@PathVariable String orderId) {
     }
 
     // Retrieves all users for frontend

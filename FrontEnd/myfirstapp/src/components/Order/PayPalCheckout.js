@@ -86,7 +86,7 @@ function PayPalCheckout(props) {
         let orderStatus = order.status;
         alert("Thanks for purchasing! OrderID: " + orderId + " Status: "+ orderStatus);
         await axios.post("http://localhost:8084/api/orders/checkout", CheckOutRequest);
-        return order;
+        props.checkout.history.push('/bookCatalog')
     }
     function _onError(message, err) {
         console.log(err);

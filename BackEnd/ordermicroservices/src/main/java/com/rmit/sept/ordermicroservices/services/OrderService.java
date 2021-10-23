@@ -88,7 +88,7 @@ public class OrderService {
     public List<Transaction> getTransactionsByUserId(String userId) {
         List<Transaction> userTransactions = new ArrayList<>();
         transactionRepository.findAll().forEach(transaction -> {
-            if (!transaction.getId().equals(userId)) {
+            if (!transaction.getUserId().equals(userId)) {
                 userTransactions.add(transaction);
             }
         });
@@ -100,7 +100,6 @@ public class OrderService {
         transactionRepository.findAll().forEach(transaction -> allTransactions.add(transaction));
         return allTransactions;
     }
-
 
     public List<PurchasedBook> getAllBookTransactions() {
         List<PurchasedBook> allPurchasedBooks = new ArrayList<>();
