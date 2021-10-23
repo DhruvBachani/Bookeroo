@@ -35,46 +35,51 @@ public class UserService {
             Make sure that password and confirmPassword match
             We don't persist or show the confirmPassword
         */
-        newUser.setFullName(newUser.getFullName());
-        newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-        newUser.setAddress(newUser.getAddress());
-        newUser.setUserType(newUser.getUserType());
+        User userToSave = new User();
+        userToSave.setFullName(newUser.getFullName());
+        userToSave.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+        userToSave.setAddress(newUser.getAddress());
+        userToSave.setUserType(newUser.getUserType());
 
         // Make sure that password and confirmPassword match
         // We don't persist or show the confirmPassword
-        newUser.setConfirmPassword("");
+        userToSave.setConfirmPassword("");
 
 
         // Setting the user to get approval for admin if they are a publisher or shop publisher
         if (newUser.getUserType().equals("Publisher") || newUser.getUserType().equals("Shop owner")) {
-            newUser.setApproved(false);
+            userToSave.setApproved(false);
         } else {
-            newUser.setApproved(true);
+            userToSave.setApproved(true);
         }
 
         // ABN has to be unique (exception)
         // Phone number has to be unique (exception)
-        newUser.setUsername(newUser.getUsername());
+        userToSave.setUsername(newUser.getUsername());
         userRepository.findAll().forEach(user -> {
             if (user.getUsername().equals(newUser.getUsername())) {
                 throw new UsernameAlreadyExistsException("Username '" + newUser.getUsername() + "' already exists");
             }
         });
-        newUser.setPhoneNumber(newUser.getPhoneNumber());
+        userToSave.setPhoneNumber(newUser.getPhoneNumber());
         userRepository.findAll().forEach(user -> {
             if (user.getPhoneNumber() != null && newUser.getPhoneNumber() != null && user.getPhoneNumber().equals(newUser.getPhoneNumber())) {
                 throw new UsernameAlreadyExistsException("Phone Number '" + newUser.getPhoneNumber() + "' already exists");
             }
         });
-        newUser.setAbn_number(newUser.getAbnNumber());
-        userRepository.findAll().forEach(user -> {
-            if (user.getAbnNumber() != null && newUser.getAbnNumber() != null && user.getAbnNumber().equals(newUser.getAbnNumber())) {
-                throw new UsernameAlreadyExistsException("ABN Number '" + newUser.getAbnNumber() + "' already exists");
-            }
-        });
+        if (!newUser.getAbnNumber().equals("")) {
+            userToSave.setAbn_number(newUser.getAbnNumber());
+            userRepository.findAll().forEach(user -> {
+                if (user.getAbnNumber() != null && newUser.getAbnNumber() != null && user.getAbnNumber().equals(newUser.getAbnNumber())) {
+                    throw new UsernameAlreadyExistsException("ABN Number '" + newUser.getAbnNumber() + "' already exists");
+                }
+            });
+        } else {
+            userToSave.setAbn_number(null);
+        }
 
         try {
-            return userRepository.save(newUser);
+            return userRepository.save(userToSave);
         }catch (Exception e) {
             throw new UsernameAlreadyExistsException("Something went wrong");
         }
@@ -96,7 +101,7 @@ public class UserService {
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
-            if ((!user.getUserType().equals("Admin")) && (!user.getBanned())) {
+            if (!user.getUserType().equals("Admin")) {
                 allUsers.add(user);
             }
         });

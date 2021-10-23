@@ -66,16 +66,11 @@ class Dashboard extends Component {
                                 <>
                                     <CreateUserOrderButton/>
                                     {/*<button className={"btn btn-lg btn-info"}> Orders </button>*/}
-                                    <button className={"btn btn-lg btn-info"}> Sell </button>
-                                    <button className={"btn btn-lg btn-info"}> Share </button>
-                                    <button className={"btn btn-lg btn-info"}> Books </button>
-                                    <button className={"btn btn-lg btn-info"}> Reviews </button>
-
+                                    <Link className="btn btn-lg btn-info " to="/newAd">
+                                        Post an ad
+                                    </Link>
                                 </>
                             }
-                            <Link className="btn btn-lg btn-secondary mr-2" to="/newAd">
-                                Post an ad
-                            </Link>
                                 <span style={{float:"right"}}>
                                     <form onSubmit={this.onSubmit}><button className="btn btn-lg btn-info"> Log out </button></form>
                                 </span>
@@ -106,9 +101,10 @@ Dashboard.propTypes = {
     security: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     security: state.security,
-    errors: state.errors
+    errors: state.errors,
+    selectedAds: state.ad
 });
 
 export default connect(

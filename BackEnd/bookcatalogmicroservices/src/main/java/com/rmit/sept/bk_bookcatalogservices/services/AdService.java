@@ -43,8 +43,12 @@ public class AdService {
         return adRepository.findAllByConditionAndIsbn(condition.toUpperCase(), isbn);
     }
 
-    //helper methods
-    private boolean validCondition(String testingCondition){
+    public Ad getAdById(Long ad_id){
+        Ad ad =  adRepository.getAdById(ad_id);
+        return ad;
+    }
+
+    public boolean validCondition(String testingCondition){
         for(Condition condition: Condition.values()){
             if(condition.toString().equalsIgnoreCase(testingCondition)){
                 return true;
@@ -53,7 +57,7 @@ public class AdService {
         return false;
     }
 
-    private boolean validIsbn(Long testingIsbn){
+    public boolean validIsbn(Long testingIsbn){
         List<Book> allBooks = (List<Book>) bookRepository.findAll();
         for(Book book: allBooks){
             if(testingIsbn.equals(book.getIsbn())){

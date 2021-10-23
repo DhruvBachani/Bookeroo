@@ -115,7 +115,6 @@ public class UserController {
     @PostMapping("/ban")
     public void banUser(@Valid @RequestBody UserID id){
         userService.banUser(id);
-//        return userService.getAllUnapprovedUsers();
     }
 
     // Retrieves all the unapproved users for frontend

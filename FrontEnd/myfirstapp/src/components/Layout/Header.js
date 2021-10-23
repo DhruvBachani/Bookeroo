@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { search } from "../../actions/bookActions";
 import { connect } from "react-redux";
 import * as PropTypes from "prop-types";
+import {AiOutlineShoppingCart} from "react-icons/all";
 
 class Header extends Component {
   constructor() {
@@ -16,7 +17,6 @@ class Header extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state.searchBy)
     const searchRequest = {
       searchFor: this.state.searchFor,
       searchBy: this.state.searchBy
@@ -27,7 +27,6 @@ class Header extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    debugger
   }
   render() {
     return (
@@ -42,6 +41,11 @@ class Header extends Component {
               <li className="nav-item">
                 <a className="nav-link" href="/dashboard">
                   Dashboard
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link " href="/manageBooks">
+                  Manage Books
                 </a>
               </li>
             </ul>
@@ -65,11 +69,13 @@ class Header extends Component {
               </button>
             </form>
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <a className="nav-link " href="/manageBooks">
-                  Manage Books
+
+
+              {this.props.security.validToken && <li className="nav-item">
+                <a className="nav-link" href="/cart">
+                  <AiOutlineShoppingCart size={"25px"}/>
                 </a>
-              </li>
+              </li>}
               {/* Changes the sign up/login button to user's full name if the user is logged in. */}
               {!this.props.security.validToken ? (
                 <>
@@ -91,6 +97,7 @@ class Header extends Component {
                   </a>
                 </li>
               )}
+
             </ul>
           </div>
         </nav>

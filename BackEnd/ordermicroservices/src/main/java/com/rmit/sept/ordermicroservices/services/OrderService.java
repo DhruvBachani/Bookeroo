@@ -115,7 +115,7 @@ public class OrderService {
     public List<Transaction> getTransactionsByUserId(String userId) {
         List<Transaction> userTransactions = new ArrayList<>();
         transactionRepository.findAll().forEach(transaction -> {
-            if (transaction.getUserId() == userId) {
+            if (!transaction.getUserId().equals(userId)) {
                 userTransactions.add(transaction);
             }
         });
@@ -130,8 +130,7 @@ public class OrderService {
         return allTransactions;
     }
 
-    public String refundOrder(String orderID){
-
+    public String refundOrder(String orderID) {
         Transaction order = transactionRepository.getById(Long.parseLong(orderID,10));
 
         // Check if 2 hours have passed since ordering

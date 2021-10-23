@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 import ReactDOM from "react-dom";
 import {connect} from "react-redux";
 import {saveOrder, getShoppingCart, getSellers} from "../../actions/orderActions";
@@ -8,107 +8,75 @@ import PropTypes from "prop-types";
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 function PayPalCheckout(props) {
-    console.log(props)
-    function _createOrder(data, actions) {
+        function _createOrder(data, actions) {
+            let arr = [];
+            let sameSeller = [];
+            props.checkout.cartItems.map(item => {
+                if((sameSeller.indexOf(item.userId) > -1) == false) {
+                    let items = [];
+                    let cost = 0;
+                    props.checkout.cartItems.map(item2 => {
+                        if(item2.userId == item.userId) {
+                            items.push({
+                                name: "Book",
+                                description: item2.condition,
+                                sku: item2.isbn,
+                                unit_amount: {
+                                    currency_code: "AUD",
+                                    value: item2.price
+                                },
+                                quantity: "1"
+                            });
+                            cost = cost + item2.price;
+                        };
+                    });
+                    arr.push({
+                        reference_id : item.userId,
+                        amount: {
+                            currency_code: "AUD",
+                            value: cost,
+                            breakdown: {
+                                item_total: {
+                                    currency_code: "AUD",
+                                    value: cost
+                                }
+                            }
+                        },
+                        items: items
+                    })
+                    sameSeller.push(item.userId);
+                }
+            });
         return actions.order.create({
-            //   how do I bring data here..
             intent: 'CAPTURE',
             payer: {
                 name: {
-                    given_name: "John",
-                    surname: "Doe"
+                    given_name: props.checkout.security.user.fullName.split(" ")[0],
+                    surname: props.checkout.security.user.fullName.split(" ")[1]
 
                 },
                 address: {
-                    address_line_1: "123 McHigh Street", // etc "[[${user.addressLine1}]]"
-                    address_line_2: "",
-                    admin_area_2: "Melbourne",
-                    admin_area_1: "VIC",
-                    postal_code: "3011",
-                    country_code: "AU"
+                    address_line_1: props.address.address_line_1, // etc "[[${user.addressLine1}]]"
+                    address_line_2: props.address.address_line_2,
+                    admin_area_2: props.address.admin_area_2,
+                    admin_area_1: props.address.admin_area_1,
+                    postal_code: props.address.postal_code,
+                    country_code: props.address.country_code
                 },
-                email_address: "sb-tazxs7384333@personal.example.com",
+                email_address:  props.checkout.security.user.username,
                 phone: {
                     phone_type: "MOBILE",
                     phone_number: {
-                        national_number: "0412345667"
+                        national_number:  props.checkout.security.user.phoneNumber
                     }
 
                 }
             },
-
-            purchase_units: [
-                {
-                    reference_id : "1",
-                    // payee: { // probably wont have, hassle to link sellers to paypal
-                    //     email_address: "",
-                    //     merchant_id: "",
-                    // },
-                    amount: {
-                        currency_code: "AUD",
-                        value: "200",
-                        breakdown: {
-                            item_total: {  /* Required when including the `items` array */
-                                currency_code: "AUD",
-                                value: "200" // values need to equal
-                            }
-                        }
-                    },
-                    items: [
-                        {
-                            name: "Book 1",
-                            description: "New",
-                            sku: "1234", // The stock keeping unit (SKU) for the item. In our case, the book id
-                            unit_amount: {
-                                currency_code: "AUD",
-                                value: "50"
-                            },
-                            quantity: "2"
-                        },
-                        {
-                            name: "Book 2",
-                            description: "New",
-                            sku: "1234",
-                            unit_amount: {
-                                currency_code: "AUD",
-                                value: "50"
-                            },
-                            quantity: "2"
-                        }
-                    ]
-                },
-                {
-                    reference_id : "2",
-                    amount: {
-                        currency_code: "AUD",
-                        value: "50",
-                        breakdown: {
-                            item_total: {  /* Required when including the `items` array */
-                                currency_code: "AUD",
-                                value: "50" // values need to equal
-                            }
-                        }
-                    },
-                    items: [
-                        {
-                            name: "Book 3",
-                            description: "Old",
-                            sku: "1234", // The stock keeping unit (SKU) for the item. In our case, the book id
-                            unit_amount: {
-                                currency_code: "AUD",
-                                value: "50"
-                            },
-                            quantity: "1"
-                        }
-                    ]
-                }
-            ],
-
+            purchase_units: arr
         });
     }
     async function _onApprove(data, actions) {
         let order = await actions.order.capture();
-
         console.log(order);
         let orderId = order.id;
         const CheckOutRequest = {
@@ -117,8 +85,8 @@ function PayPalCheckout(props) {
         };
         let orderStatus = order.status;
         alert("Thanks for purchasing! OrderID: " + orderId + " Status: "+ orderStatus);
-        await axios.post("http://localhost:8083/api/orders/checkout", CheckOutRequest);
-        return order;
+        await axios.post("http://localhost:8084/api/orders/checkout", CheckOutRequest);
+        props.checkout.history.push('/bookCatalog')
     }
     function _onError(message, err) {
         console.log(err);
@@ -131,7 +99,7 @@ function PayPalCheckout(props) {
                 createOrder={(data, actions) => _createOrder(data, actions)}
                 onApprove={(data, actions) => _onApprove(data, actions)}
                 onCancel={() => _onError("Payment has been cancelled")}
-                onError={(err) => _onError("Something wrong with the order details", err)}
+                onError={(err) => _onError("Something wrong with the order details, Incorrect address?", err)}
             />
         </div>
     );
