@@ -74,16 +74,15 @@ function PayPalCheckout(props) {
     }
     async function _onApprove(data, actions) {
         let order = await actions.order.capture();
-        console.log(order);
         let orderId = order.id;
         const CheckOutRequest = {
             paypalOrderId: order.id,
             userId: props.checkout.security.user.id
         };
-        let orderStatus = order.status;
-        alert("Thanks for purchasing! OrderID: " + orderId + " Status: "+ orderStatus);
         await axios.post("http://localhost:8084/api/orders/checkout", CheckOutRequest);
-        props.checkout.history.push('/bookCatalog')
+        props.checkout.history.push('/bookCatalog');
+        alert("Thanks for purchasing! OrderID: " + orderId + " Status: Processing");
+        return order;
     }
     function _onError(message, err) {
         console.log(err);
