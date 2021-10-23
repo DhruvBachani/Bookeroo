@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reviewActions creates GET_ERRORS when a review cannot be created 1`] = `
+Array [
+  Object {
+    "type": "GET_ERRORS",
+  },
+]
+`;

@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`orderReducer should handle GET_ALL_BOOK_TRANSACTIONS 1`] = `
+Object {
+  "book": Object {
+    "allCategories": Array [],
+    "book": Array [],
+    "books": Array [],
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": Array [],
+    "cartItems": Array [],
+    "cartTotal": 0,
+    "purchasedBooks": undefined,
+    "userTransactions": Array [],
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;
+
+exports[`orderReducer should handle GET_ALL_TRANSACTIONS 1`] = `
+Object {
+  "book": Object {
+    "allCategories": Array [],
+    "book": Array [],
+    "books": Array [],
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": undefined,
+    "cartItems": Array [],
+    "cartTotal": 0,
+    "purchasedBooks": Array [],
+    "userTransactions": Array [],
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;
+
+exports[`orderReducer should handle GET_CART_ITEMS 1`] = `
+Object {
+  "book": Object {
+    "allCategories": Array [],
+    "book": Array [],
+    "books": Array [],
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": Array [],
+    "cartItems": undefined,
+    "cartTotal": 0,
+    "purchasedBooks": Array [],
+    "userTransactions": Array [],
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;
+
+exports[`orderReducer should handle GET_CART_TOTAL 1`] = `
+Object {
+  "book": Object {
+    "allCategories": Array [],
+    "book": Array [],
+    "books": Array [],
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": Array [],
+    "cartItems": Array [],
+    "cartTotal": undefined,
+    "purchasedBooks": Array [],
+    "userTransactions": Array [],
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;
+
+exports[`orderReducer should handle GET_USER_TRANSACTIONS 1`] = `
+Object {
+  "book": Object {
+    "allCategories": Array [],
+    "book": Array [],
+    "books": Array [],
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": Array [],
+    "cartItems": Array [],
+    "cartTotal": 0,
+    "purchasedBooks": Array [],
+    "userTransactions": undefined,
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;
+
+exports[`orderReducer should return the initial state 1`] = `
+Object {
+  "book": Object {
+    "allCategories": Array [],
+    "book": Array [],
+    "books": Array [],
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": Array [],
+    "cartItems": Array [],
+    "cartTotal": 0,
+    "purchasedBooks": Array [],
+    "userTransactions": Array [],
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;

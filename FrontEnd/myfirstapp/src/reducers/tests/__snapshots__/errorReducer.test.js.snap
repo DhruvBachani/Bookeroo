@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`errorReducer should return the initial state 1`] = `
+Object {
+  "book": Object {
+    "allCategories": Array [],
+    "book": Array [],
+    "books": Array [],
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": Array [],
+    "cartItems": Array [],
+    "cartTotal": 0,
+    "purchasedBooks": Array [],
+    "userTransactions": Array [],
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;

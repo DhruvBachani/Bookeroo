@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`bookReducer should handle GET_BOOK 1`] = `
+Object {
+  "book": Object {
+    "book": undefined,
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": Array [],
+    "cartItems": Array [],
+    "cartTotal": 0,
+    "purchasedBooks": Array [],
+    "userTransactions": Array [],
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;
+
+exports[`bookReducer should handle GET_BOOKS 1`] = `
+Object {
+  "book": Object {
+    "books": undefined,
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": Array [],
+    "cartItems": Array [],
+    "cartTotal": 0,
+    "purchasedBooks": Array [],
+    "userTransactions": Array [],
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;
+
+exports[`bookReducer should handle GET_CATEGORIES 1`] = `
+Object {
+  "book": Object {
+    "allCategories": undefined,
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": Array [],
+    "cartItems": Array [],
+    "cartTotal": 0,
+    "purchasedBooks": Array [],
+    "userTransactions": Array [],
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;
+
+exports[`bookReducer should return the initial state 1`] = `
+Object {
+  "book": Object {
+    "allCategories": Array [],
+    "book": Array [],
+    "books": Array [],
+  },
+  "errors": Object {},
+  "order": Object {
+    "allTransactions": Array [],
+    "cartItems": Array [],
+    "cartTotal": 0,
+    "purchasedBooks": Array [],
+    "userTransactions": Array [],
+  },
+  "person": Object {
+    "person": Object {},
+    "persons": Array [],
+  },
+  "review": Object {
+    "bookReviews": Array [],
+  },
+  "security": Object {
+    "user": Object {},
+    "validToken": false,
+  },
+  "user": Object {
+    "allUsers": Array [],
+    "userRequests": Array [],
+  },
+}
+`;

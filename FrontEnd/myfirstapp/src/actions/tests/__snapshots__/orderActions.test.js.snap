@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`orderActions creates GET_ERRORS when a refund is unable to be executed 1`] = `
+Array [
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+]
+`;
+
+exports[`orderActions creates GET_ERRORS when all transactions cannot be retrieved 1`] = `
+Array [
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+]
+`;
+
+exports[`orderActions creates GET_ERRORS when orders are unable to be saved 1`] = `
+Array [
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+]
+`;
+
+exports[`orderActions creates GET_ERRORS when sellers are unable to be retrieved 1`] = `
+Array [
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+]
+`;
+
+exports[`orderActions creates GET_ERRORS when the shopping cart is unable to be retrieved 1`] = `
+Array [
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_ERRORS",
+  },
+]
+`;
+
+exports[`orderActions creates GET_ERRORS when user transactions cannot be retrieved 1`] = `
+Array [
+  Object {
+    "type": "GET_ERRORS",
+  },
+]
+`;

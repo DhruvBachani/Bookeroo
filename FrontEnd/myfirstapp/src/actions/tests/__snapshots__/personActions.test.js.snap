@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`personActions creates GET_ERRORS when a person cannot be created 1`] = `
+Array [
+  Object {
+    "type": "GET_ERRORS",
+  },
+]
+`;
+
+exports[`personActions creates GET_PERSON when it is called successfully 1`] = `
+Array [
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_PERSONS",
+  },
+  Object {
+    "type": "GET_PERSON",
+  },
+]
+`;
+
+exports[`personActions creates GET_PERSONS when it is called successfully 1`] = `
+Array [
+  Object {
+    "type": "GET_ERRORS",
+  },
+  Object {
+    "type": "GET_PERSONS",
+  },
+]
+`;
