@@ -81,12 +81,14 @@ public class UserService {
     }
 
     public void updateUser(User user) {
+        log.info("User "+ user.getUsername() + " Successfully updated");
         userRepository.save(user);
     }
 
 
     // Returns a specific user by their username(email)
     public User retrieveUserUsername(String username) {
+        log.info("User successfully retrieved");
         return  userRepository.findByUsername(username);
     }
 
@@ -112,6 +114,7 @@ public class UserService {
                 unapprovedUsers.add(user);
             }
         });
+        log.info("Returning all the unapproved user");
         return unapprovedUsers;
     }
 
@@ -119,10 +122,12 @@ public class UserService {
     public boolean setApproval(@Valid @RequestBody UserID id) {
         User user = userRepository.getById(id.getId());
         if (user == null) {
+            log.info("User is null");
             return false;
         } else if (!user.getApproved()) {
             user.setApproved(true);
             updateUser(user);
+            log.info("User approved successfully");
         }
         return true;
     }
@@ -131,10 +136,12 @@ public class UserService {
     public boolean setUnapproval(long id) {
         User user = userRepository.getById(id);
         if (user == null) {
+            log.info("User is null");
             return false;
         } else if (user.getApproved()) {
             user.setApproved(false);
             updateUser(user);
+            log.info("User unapproved successfully");
         }
         return true;
     }
@@ -143,10 +150,12 @@ public class UserService {
     public boolean banUser(@Valid UserID id) {
         User user = userRepository.getById(id.getId());
         if (user == null) {
+            log.info("User is null");
             return false;
         } else {
             user.setBanned(true);
             updateUser(user);
+            log.info("User ban successfully");
         }
         return true;
     }
@@ -155,14 +164,15 @@ public class UserService {
     public boolean unbanUser(long id) {
         User user = userRepository.getById(id);
         if (user == null) {
+            log.info("User is null");
             return false;
         } else {
             user.setBanned(false);
             updateUser(user);
+            log.info("User unban successfully");
         }
         return true;
     }
-
-
+    
 
 }
