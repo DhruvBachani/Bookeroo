@@ -38,6 +38,11 @@ public class AdService {
         return adRepository.findAllByConditionAndIsbn(condition.toUpperCase(), isbn);
     }
 
+    public Ad getAdById(Long ad_id){
+        Ad ad =  adRepository.getAdById(ad_id);
+        return ad;
+    }
+
     public boolean validCondition(String testingCondition){
         for(Condition condition: Condition.values()){
             if(condition.toString().equalsIgnoreCase(testingCondition)){

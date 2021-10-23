@@ -48,6 +48,7 @@ export const getAllCategories = () => async dispatch => {
 };
 
 export const getBook = (isbn, history) => async dispatch => {
+
         const res = await axios.get(`http://localhost:8081/api/books/${isbn}`);
         dispatch({
             type: GET_BOOK,
@@ -86,3 +87,4 @@ export const addNewReview = (review) => async dispatch => {
 
     }
 };
+
