@@ -1,4 +1,4 @@
-package com.rmit.sept.bk_loginservices.security;
+package com.rmit.sept.ordermicroservices.security;
 
 public class SecurityConstant {
 

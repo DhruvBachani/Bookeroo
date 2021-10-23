@@ -1,6 +1,19 @@
 import React, { Component } from 'react'
+import {Link} from "react-router-dom";
+
+
+
 
 export default class ContactUs extends Component {
+    constructor() {
+        super();
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        window.location.reload(false);
+    }
     render() {
         return (
             <div>
@@ -15,7 +28,7 @@ export default class ContactUs extends Component {
         
       </div>
       <div className="w3-col m6">
-        <form action="/action_page.php" target="_blank">
+        <form>
           <div className="w3-row-padding" style={{margin:'0 -16px 8px -16px'}}>
             <div className="w3-half">
               <input className="w3-input w3-border" type="text" placeholder="Name" required name="Name"/>
@@ -26,6 +39,8 @@ export default class ContactUs extends Component {
           </div>
           <input className="w3-input w3-border" type="text" placeholder="Message" required name="Message"/>
           <button className="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
+
+
         </form>
       </div>
     </div>

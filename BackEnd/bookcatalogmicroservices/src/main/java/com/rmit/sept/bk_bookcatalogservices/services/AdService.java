@@ -8,8 +8,6 @@ import com.rmit.sept.bk_bookcatalogservices.model.Ad;
 
 import com.rmit.sept.bk_bookcatalogservices.model.Book;
 import com.rmit.sept.bk_bookcatalogservices.model.Condition;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +17,6 @@ import java.util.Locale;
 
 @Service
 public class AdService {
-
-    private final Logger log = LoggerFactory.getLogger(AdService.class);
-
     @Autowired
     AdRepository adRepository;
 
@@ -43,8 +38,12 @@ public class AdService {
         return adRepository.findAllByConditionAndIsbn(condition.toUpperCase(), isbn);
     }
 
-    //helper methods
-    private boolean validCondition(String testingCondition){
+    public Ad getAdById(Long ad_id){
+        Ad ad =  adRepository.getAdById(ad_id);
+        return ad;
+    }
+
+    public boolean validCondition(String testingCondition){
         for(Condition condition: Condition.values()){
             if(condition.toString().equalsIgnoreCase(testingCondition)){
                 return true;
@@ -53,7 +52,7 @@ public class AdService {
         return false;
     }
 
-    private boolean validIsbn(Long testingIsbn){
+    public boolean validIsbn(Long testingIsbn){
         List<Book> allBooks = (List<Book>) bookRepository.findAll();
         for(Book book: allBooks){
             if(testingIsbn.equals(book.getIsbn())){
