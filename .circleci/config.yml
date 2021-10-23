@@ -1,15 +1,12 @@
 version: 2.1
 jobs: # steps
-  build-login:
+  build-and-test-login-microservice:
     working_directory: ~/repo/BackEnd/loginmicroservices
-
-    docker: # run the steps with Docker
+    docker:
       - image: circleci/openjdk:8-jdk-stretch
-
-    steps: # a collection of executable commands
+    steps:
       - checkout:
           path: ~/repo
-
       - restore_cache:
           key: circleci-loginmicroservices-{{ checksum "pom.xml" }}
       - run: mvn dependency:go-offline
@@ -17,76 +14,96 @@ jobs: # steps
           paths:
             - ~/.m2
           key: circleci-loginmicroservices-{{ checksum "pom.xml" }}
-
       - run: mvn package
-
       - store_test_results:
           path: target/surefire-reports
       - store_artifacts:
           path: target/loginmicroservices-0.0.1.jar
-
-    build-book:
-      working_directory: ~/repo/BackEnd/bookcatalogmicroservices
-
-      docker: # run the steps with Docker
-        - image: circleci/openjdk:8-jdk-stretch
-
-      steps: # a collection of executable commands
-        - checkout:
-            path: ~/repo
-
-        - restore_cache:
-            key: circleci-bookcatalogmicroservices-{{ checksum "pom.xml" }}
-        - run: mvn dependency:go-offline
-        - save_cache:
-            paths:
-              - ~/.m2
-            key: circleci-bookcatalogmicroservices-{{ checksum "pom.xml" }}
-
-        - run: mvn package
-
-        - store_test_results:
-            path: target/surefire-reports
-        - store_artifacts:
-            path: target/bookcatalogmicroservices-0.0.1.jar
-
-      build-review:
-        working_directory: ~/repo/BackEnd/reviewmicroservices
-
-        docker: # run the steps with Docker
-          - image: circleci/openjdk:8-jdk-stretch
-
-        steps: # a collection of executable commands
-          - checkout:
-              path: ~/repo
-
-          - restore_cache:
-              key: circleci-reviewmicroservices-{{ checksum "pom.xml" }}
-          - run: mvn dependency:go-offline
-          - save_cache:
-              paths:
-                - ~/.m2
-              key: circleci-reviewmicroservices-{{ checksum "pom.xml" }}
-
-          - run: mvn package
-
-          - store_test_results:
-              path: target/surefire-reports
-          - store_artifacts:
-              path: target/reviewmicroservices-0.0.1.jar
-  workflows:
-    version: 2
-    build:
-      jobs:
-        - build-login:
-            filters:
-              branches:
-                only: testing
-        - build-book:
-            filters:
-              branches:
-                only: testing
-        - build-review:
-            filters:
-              branches:
-                only: testing
+  build-and-test-book-microservice:
+    working_directory: ~/repo/BackEnd/bookcatalogmicroservices
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
+    steps:
+      - checkout:
+          path: ~/repo
+      - restore_cache:
+          key: circleci-bookcatalogmicroservices-{{ checksum "pom.xml" }}
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-bookcatalogmicroservices-{{ checksum "pom.xml" }}
+      - run: mvn package
+      - store_test_results:
+          path: target/surefire-reports
+      - store_artifacts:
+          path: target/bookcatalogmicroservices-0.0.1.jar
+  build-and-test-review-microservice:
+    working_directory: ~/repo/BackEnd/reviewmicroservices
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
+    steps:
+      - checkout:
+          path: ~/repo
+      - restore_cache:
+          key: circleci-reviewmicroservices-{{ checksum "pom.xml" }}
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-reviewmicroservices-{{ checksum "pom.xml" }}
+      - run: mvn package
+      - store_test_results:
+          path: target/surefire-reports
+      - store_artifacts:
+          path: target/reviewmicroservices-0.0.1.jar
+  build-and-test-order-microservice:
+    working_directory: ~/repo/BackEnd/ordermicroservices
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
+    steps:
+      - checkout:
+          path: ~/repo
+      - restore_cache:
+          key: circleci-ordermicroservices-{{ checksum "pom.xml" }}
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-ordermicroservices-{{ checksum "pom.xml" }}
+      - run: mvn package
+      - store_test_results:
+          path: target/surefire-reports
+      - store_artifacts:
+          path: target/ordermicroservices-0.0.1.jar
+  build-frontend:
+    working_directory: ~/repo/Frontend/myfirstapp
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run: "npm install"
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-and-test-login-microservice:
+          filters:
+            branches:
+              only: testing
+      - build-and-test-book-microservice:
+          filters:
+            branches:
+              only: testing
+      - build-and-test-review-microservice:
+          filters:
+            branches:
+              only: testing
+      - build-and-test-order-microservice:
+          filters:
+            branches:
+              only: testing
+      - build-frontend:
+          filters:
+            branches:
+              only: testing

@@ -31,8 +31,6 @@ public class BookController {
     @Autowired
     private AdService adService;
 
-
-
     @Autowired
     private AdValidator adValidator;
 
@@ -60,14 +58,9 @@ public class BookController {
         return bookservice.getBookByIsbn(isbn);
     }
 
-    @DeleteMapping("/books/{isbn}")
-    private void deleteBook(@PathVariable("isbn") Long isbn) {
-        // bookservice.deleteBook(isbn);
-    }
 
     @RequestMapping(value = "/create")
     public Long saveBook(@RequestBody Book book) {
-//        book.setCategory(Category.valueOf(book.getCategory()).toString());
         bookservice.saveBook(book);
         return book.getId();
     }

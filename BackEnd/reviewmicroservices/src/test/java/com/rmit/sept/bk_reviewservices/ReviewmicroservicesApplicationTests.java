@@ -56,9 +56,13 @@ class ReviewmicroservicesApplicationTests {
     @Test
     @Order(3)
     void testGetReviewsByISBN() {
-        Long isbn = (long) 123456;
+        Long isbn = (long) 99798;
         List<Review> allReviews = new ArrayList<>();
-        reviewrepository.findAll().forEach(reviewTemp -> allReviews.add(reviewTemp));
+        reviewrepository.findAll().forEach(reviewTemp -> {
+            if (reviewTemp.getBookISBN() == isbn) {
+                allReviews.add(reviewTemp);
+            }
+        });
         for (Review rev : allReviews) {
             assertEquals(isbn, rev.getBookISBN());
         }

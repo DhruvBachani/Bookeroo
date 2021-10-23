@@ -133,6 +133,7 @@ public class BookServiceUnitTests {
     public void searchBooks_returnListOfFoundBooks_IfBooksTitleContainsString(){
         SearchForm searchForm = new SearchForm();
         searchForm.searchFor = searchingString;
+        searchForm.searchBy = "name";
         List<Book> searchResult = bookService.searchBooks(searchForm);
         assertEquals(3, searchResult.size());
     }

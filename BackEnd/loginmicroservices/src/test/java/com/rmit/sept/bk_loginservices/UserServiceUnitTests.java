@@ -170,11 +170,9 @@ public class UserServiceUnitTests {
     @Test
     public void unapprovedUser_ReturnTrue_IfUnapprovedValidUser()
     {
-        UserID id = new UserID();
         long customerID = 2;
-        id.setId(customerID);
 
-        assertTrue(userService.setUnapproval(id));
+        assertTrue(userService.setUnapproval(customerID));
         assertEquals(userRepository.getById(customerID).getApproved(), false);
 
     }
@@ -213,11 +211,9 @@ public class UserServiceUnitTests {
     @Test
     public void unbanUser_ReturnTrue_IfUnbanValidUser()
     {
-        UserID id = new UserID();
         long customerID = 1;
-        id.setId(customerID);
 
-        assertTrue(userService.unbanUser(id));
+        assertTrue(userService.unbanUser(customerID));
         assertEquals(userRepository.getById(customerID).getBanned(), false);
 
     }
@@ -225,11 +221,9 @@ public class UserServiceUnitTests {
     @Test
     public void unbanUser_ReturnFalse_IfUnbanNonExistingUser()
     {
-        UserID id = new UserID();
         long customerID = 9999;
-        id.setId(customerID);
 
-        assertFalse(userService.unbanUser(id));
+        assertFalse(userService.unbanUser(customerID));
     }
 
     @Test

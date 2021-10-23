@@ -57,7 +57,7 @@ public class AdService {
         return false;
     }
 
-    private boolean validIsbn(Long testingIsbn){
+    public boolean validIsbn(Long testingIsbn){
         List<Book> allBooks = (List<Book>) bookRepository.findAll();
         for(Book book: allBooks){
             if(testingIsbn.equals(book.getIsbn())){

@@ -83,7 +83,6 @@ public class UserService {
         }catch (Exception e) {
             throw new UsernameAlreadyExistsException("Something went wrong");
         }
-
     }
 
     public void updateUser(User user) {
@@ -139,8 +138,8 @@ public class UserService {
     }
 
     // Changes the approval to false, in the case the admin made a mistake
-    public boolean setUnapproval(@Valid @RequestBody UserID id) {
-        User user = userRepository.getById(id.getId());
+    public boolean setUnapproval(long id) {
+        User user = userRepository.getById(id);
         if (user == null) {
             log.info("User is null");
             return false;
@@ -167,8 +166,8 @@ public class UserService {
     }
 
     // Changes the ban boolean of a user to false in the case the admin makes a mistake
-    public boolean unbanUser(@Valid UserID id) {
-        User user = userRepository.getById(id.getId());
+    public boolean unbanUser(long id) {
+        User user = userRepository.getById(id);
         if (user == null) {
             log.info("User is null");
             return false;

@@ -3,6 +3,8 @@ package com.rmit.sept.ordermicroservices.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -17,24 +19,31 @@ public class Transaction {
     private Long id;
 
     // Paypal Payee
+    @NotBlank
+    @Column(unique = true)
     private String payPalOrderId;
+    @NotBlank
     private String payPalEmail;
 
     // User
+    @NotBlank
     private String userId;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "transaction", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<PurchasedBook> purchases;
-
+    @NotNull
     private double totalCost;
+    @NotBlank
     private String currency;
-
+    @NotBlank
     private String shippingName;
+    @NotBlank
     private String address;
-
+    @NotNull
     private Date create_At;
+
     private Date update_At;
 
     public Long getId() {

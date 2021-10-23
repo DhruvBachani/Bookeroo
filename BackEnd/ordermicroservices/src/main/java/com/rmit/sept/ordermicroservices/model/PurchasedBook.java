@@ -3,6 +3,8 @@ package com.rmit.sept.ordermicroservices.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -13,12 +15,19 @@ public class PurchasedBook {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String isbn;
+    @NotBlank
     private String seller;
+    @NotBlank
     private String condition;
+    @NotNull
     private int quantity;
+    @NotNull
     private double cost;
+    @NotBlank
     private String currency;
+    @NotBlank
     private String deliveryStatus;
 
     @JsonBackReference

@@ -93,7 +93,6 @@ public class OrderService {
             }
             userTransaction.setTotalCost(totalCost);
             userTransaction.setCurrency(paypalOrder.purchaseUnits().get(0).items().get(0).unitAmount().currencyCode());
-
             // Concatenating the address
             userTransaction.setShippingName(paypalOrder.purchaseUnits().get(0).shippingDetail().name().fullName());
             String address = paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().addressLine1() +  " " +
@@ -110,6 +109,7 @@ public class OrderService {
             }
             log.info("Successfully stored the transaction to database");
         }
+
     }
 
     public List<Transaction> getTransactionsByUserId(String userId) {
