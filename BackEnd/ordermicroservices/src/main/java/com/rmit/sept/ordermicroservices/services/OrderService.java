@@ -93,7 +93,6 @@ public class OrderService {
             }
             userTransaction.setTotalCost(totalCost);
             userTransaction.setCurrency(paypalOrder.purchaseUnits().get(0).items().get(0).unitAmount().currencyCode());
-
             // Concatenating the address
             userTransaction.setShippingName(paypalOrder.purchaseUnits().get(0).shippingDetail().name().fullName());
             String address = paypalOrder.purchaseUnits().get(0).shippingDetail().addressPortable().addressLine1() +  " " +
@@ -115,9 +114,8 @@ public class OrderService {
 
     public List<Transaction> getTransactionsByUserId(String userId) {
         List<Transaction> userTransactions = new ArrayList<>();
-        long id = Long.parseLong(userId);
         transactionRepository.findAll().forEach(transaction -> {
-            if (transaction.getId() == id) {
+            if (transaction.getUserId() == userId) {
                 userTransactions.add(transaction);
             }
         });

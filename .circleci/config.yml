@@ -57,6 +57,25 @@ jobs: # steps
           path: target/surefire-reports
       - store_artifacts:
           path: target/reviewmicroservices-0.0.1.jar
+  build-and-test-order-microservice:
+    working_directory: ~/repo/BackEnd/ordermicroservices
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
+    steps:
+      - checkout:
+          path: ~/repo
+      - restore_cache:
+          key: circleci-ordermicroservices-{{ checksum "pom.xml" }}
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-ordermicroservices-{{ checksum "pom.xml" }}
+      - run: mvn package
+      - store_test_results:
+          path: target/surefire-reports
+      - store_artifacts:
+          path: target/ordermicroservices-0.0.1.jar
   build-frontend:
     working_directory: ~/repo/Frontend/myfirstapp
     docker:
@@ -77,6 +96,10 @@ workflows:
             branches:
               only: testing
       - build-and-test-review-microservice:
+          filters:
+            branches:
+              only: testing
+      - build-and-test-order-microservice:
           filters:
             branches:
               only: testing
