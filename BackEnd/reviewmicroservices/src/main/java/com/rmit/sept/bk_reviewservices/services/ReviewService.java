@@ -2,6 +2,8 @@ package com.rmit.sept.bk_reviewservices.services;
 
 import com.rmit.sept.bk_reviewservices.Repositories.ReviewRepository;
 import com.rmit.sept.bk_reviewservices.model.Review;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,9 @@ import java.util.List;
 
 @Service
 public class ReviewService {
+
+    private final Logger log = LoggerFactory.getLogger(ReviewService.class);
+
     @Autowired
     ReviewRepository reviewrepository;
 
@@ -20,11 +25,11 @@ public class ReviewService {
         return reviews;
     }
 
-    public List<Review> getAllReviewsByBookId(Long BookId) {
+    public List<Review> getAllReviewsByBookISBN(Long BookISBN) {
         List<Review> temp = getAllReviews();
         List<Review> reviews = new ArrayList<>();
         for (Review rev : temp) {
-            if (rev.getBookId() == BookId) {
+            if (rev.getBookISBN().equals(BookISBN)) {
                 reviews.add(rev);
             }
         }
@@ -32,11 +37,6 @@ public class ReviewService {
     }
 
     public Review saveReview(Review newReview) {
-        newReview.setReview(newReview.getReview());
-        newReview.setBookId(newReview.getBookId());
-        newReview.setUserName(newReview.getUserName());
-        newReview.setRating(newReview.getRating());
-
         return reviewrepository.save(newReview);
     }
 

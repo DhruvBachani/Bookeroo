@@ -20,16 +20,10 @@ public class Book {
     @NotNull
     private Long isbn;
 
+    private String image;
+
     public Book() {
     }
-
-    // public Book(String name, String author, String category, String description, int isbn) {
-    //     this.name = name;
-    //     this.author = author;
-    //     this.category = category;
-    //     this.description = description;
-    //     this.isbn = isbn;
-    // }
 
     public Long getId() { return this.id; }
 
@@ -52,4 +46,12 @@ public class Book {
     public Long getIsbn() { return isbn; }
 
     public void setIsbn(Long isbn) { this.isbn = isbn; }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

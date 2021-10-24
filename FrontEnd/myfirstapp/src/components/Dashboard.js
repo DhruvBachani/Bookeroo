@@ -4,6 +4,10 @@ import {logout} from "../actions/securityActions";
 import CreateRequestButton from "./UserManagement/CreateRequestButton";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import CreateAllBooksButton from "./UserManagement/CreateAllBooksButton";
+import CreateUserOrderButton from "./UserManagement/CreateUserOrderButton";
+import CreateAllTransactionsButton from "./UserManagement/CreateAllTransactionsButton";
+import CreateAllUsersButton from "./UserManagement/CreateAllUsersButton";
 
 
 class Dashboard extends Component {
@@ -47,12 +51,12 @@ class Dashboard extends Component {
                         <br />
                         {/* Admin buttons - others beside requests to be implemented */}
                         <div>
-                            <button className={"btn btn-lg btn-info"}> Profile </button>
                             {
                                 this.state.showAdmin &&
                                 <>
-                                    <button className={"btn btn-lg btn-info"}> All Orders </button>
-                                    <button className={"btn btn-lg btn-info"}> All Books </button>
+                                    <CreateAllUsersButton/>
+                                    <CreateAllTransactionsButton/>
+                                    <CreateAllBooksButton/>
                                     <CreateRequestButton/>
                                 </>
                             }
@@ -60,17 +64,13 @@ class Dashboard extends Component {
                             {
                                 this.state.showUser &&
                                 <>
-                                    <button className={"btn btn-lg btn-info"}> Orders </button>
-                                    <button className={"btn btn-lg btn-info"}> Sell </button>
-                                    <button className={"btn btn-lg btn-info"}> Share </button>
-                                    <button className={"btn btn-lg btn-info"}> Books </button>
-                                    <button className={"btn btn-lg btn-info"}> Reviews </button>
-
+                                    <CreateUserOrderButton/>
+                                    {/*<button className={"btn btn-lg btn-info"}> Orders </button>*/}
+                                    <Link className="btn btn-lg btn-info " to="/newAd">
+                                        Post an ad
+                                    </Link>
                                 </>
-                                }
-                            <Link className="btn btn-lg btn-secondary mr-2" to="/newAd">
-                                Post an ad
-                            </Link>
+                            }
                                 <span style={{float:"right"}}>
                                     <form onSubmit={this.onSubmit}><button className="btn btn-lg btn-info"> Log out </button></form>
                                 </span>
@@ -101,9 +101,10 @@ Dashboard.propTypes = {
     security: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     security: state.security,
-    errors: state.errors
+    errors: state.errors,
+    selectedAds: state.ad
 });
 
 export default connect(

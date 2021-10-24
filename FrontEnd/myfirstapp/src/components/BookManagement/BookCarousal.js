@@ -6,7 +6,7 @@ import "react-multi-carousel/lib/styles.css";
 const responsive = {
     desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 1,
+        items: 4,
         slidesToSlide: 1 // optional, default to 1.
     },
     tablet: {
@@ -16,7 +16,7 @@ const responsive = {
     },
     mobile: {
         breakpoint: { max: 464, min: 0 },
-        items: 1,
+        items: 2,
         slidesToSlide: 1 // optional, default to 1.
     }
 };

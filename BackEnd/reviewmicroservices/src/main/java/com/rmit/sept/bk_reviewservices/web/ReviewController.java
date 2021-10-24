@@ -2,6 +2,8 @@ package com.rmit.sept.bk_reviewservices.web;
 
 import com.rmit.sept.bk_reviewservices.model.Review;
 import com.rmit.sept.bk_reviewservices.services.ReviewService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,9 @@ import javax.validation.Valid;
 @RequestMapping("/api/reviews")
 public class ReviewController {
 
+    private final Logger log = LoggerFactory.getLogger(ReviewController.class);
+
+
     @Autowired
     ReviewService reviewService;
 
@@ -28,9 +33,9 @@ public class ReviewController {
         return reviewService.getAllReviews();
     }
 
-    @GetMapping("/review_by_id/{BookId}")
-    private List<Review> getReviewsByBookId(@PathVariable("BookId") long id) {
-        return reviewService.getAllReviewsByBookId(id);
+    @GetMapping("/review_by_ISBN/{ISBN}")
+    private List<Review> getReviewsByBookISBN(@PathVariable("ISBN") long ISBN) {
+        return reviewService.getAllReviewsByBookISBN(ISBN);
     }
 
     @DeleteMapping("/books/{BookId}/{id}")
