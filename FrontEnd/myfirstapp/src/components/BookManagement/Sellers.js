@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {login} from "../../actions/securityActions";
 import {Button} from "react-bootstrap";
 import {getShoppingCart} from "../../actions/orderActions";
+import {Styles} from "../Layout/TableStyles";
 
 
 class Sellers extends Component {
@@ -69,15 +70,18 @@ class Sellers extends Component {
 
     render() {
         return (
-            <div>
+            <div >
                 <select className="form-control" onChange={this.onChange}>
                     <option value="new">New</option>
                     <option value="old">Old</option>
                 </select>
-
+                <Styles>
                 <Table columns={this.columns} data={this.state.sellers}
                        onRowSelect={rows => this.state.selectedAds = rows}/>
-                <Button onClick={this.addToCart}>Add to cart</Button>
+                </Styles>
+                <div style={{display:"flex", justifyContent:"flex-end"}}>
+                <Button style={{marginRight:"60px"}} onClick={this.addToCart}>Add to cart</Button>
+                </div>
             </div>
         )
     }
